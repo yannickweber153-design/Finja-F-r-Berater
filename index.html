@@ -72,10 +72,11 @@
   }
   .nav-dot{
     width:6px; height:6px; border-radius:9999px;
-    background:var(--ink-faint); opacity:.5;
+    background:#fff; opacity:.4;
+    mix-blend-mode:difference;
     transition:all .6s cubic-bezier(.16,1,.3,1); cursor:pointer;
   }
-  .nav-dot.active{ background:var(--ink); opacity:1; transform:scale(1.4); }
+  .nav-dot.active{ opacity:1; transform:scale(1.4); }
 
   /* Slide chrome */
   .chrome{
@@ -91,9 +92,10 @@
   .chrome-mark{
     font-family:'Inter',sans-serif; font-weight:600;
     font-size:14px; letter-spacing:-0.025em;
-    color:var(--ink);
+    color:#fff;
+    mix-blend-mode:difference;
   }
-  .chrome-mark .dot{ color:var(--ink); }
+  .chrome-mark .dot{ color:inherit; }
 
   /* Reveal helpers */
   .reveal{ opacity:0; transform:translateY(10px); }
@@ -147,64 +149,80 @@
   /* WhatsApp header */
   .wa-header{
     background:#F6F6F6;
-    border-bottom:1px solid rgba(0,0,0,.05);
-    padding:8px 14px 10px;
-    display:flex; align-items:center; gap:10px;
+    border-bottom:1px solid rgba(0,0,0,.06);
+    padding:9px 14px 11px;
+    display:flex; align-items:center; gap:11px;
     position:relative; z-index:5;
   }
-  .wa-back{ color:#3a86c8; font-size:22px; line-height:1; margin-right:-2px; }
+  .wa-back{ color:#3a86c8; font-size:24px; line-height:1; margin-right:-2px; }
   .wa-avatar{
-    width:34px; height:34px; border-radius:9999px;
+    width:38px; height:38px; border-radius:9999px;
     background:#0A0A0A;
     display:flex; align-items:center; justify-content:center;
-    font-family:'Inter',sans-serif; font-weight:600; font-size:14px; color:#fff;
-    letter-spacing:-0.02em;
+    flex-shrink:0;
   }
   .wa-meta{ display:flex; flex-direction:column; flex:1; }
-  .wa-name{ font-size:14px; font-weight:600; color:#111; letter-spacing:.005em; }
-  .wa-status{ font-size:10.5px; color:#7a7a7a; letter-spacing:.01em; }
+  .wa-name{ font-size:15.5px; font-weight:600; color:#111; letter-spacing:-0.01em; line-height:1.1; }
+  .wa-status{ font-size:11.5px; color:#7a7a7a; letter-spacing:0; margin-top:2px; }
   .wa-status .online{ color:var(--wa-green); }
 
-  /* WhatsApp body */
+  /* WhatsApp body — real iOS background, scrollable */
   .wa-body{
-    flex:1; padding:14px 12px 18px;
-    overflow:hidden;
-    background:
-      linear-gradient(180deg, rgba(236,229,220,1), rgba(236,229,220,1)),
-      repeating-linear-gradient(45deg, rgba(0,0,0,.012) 0 2px, transparent 2px 6px);
-    display:flex; flex-direction:column; gap:6px;
+    flex:1; padding:14px 10px 16px;
+    overflow-y:auto;
+    overflow-x:hidden;
+    background:#ECE5DC;
+    display:flex; flex-direction:column; gap:3px;
     position:relative;
+    scroll-behavior:smooth;
+    scrollbar-width:none;
   }
+  .wa-body::-webkit-scrollbar{ display:none; }
   .wa-date{
     align-self:center;
-    background:rgba(225,217,205,.85);
-    color:#5b574e;
-    font-size:10px; padding:3px 10px; border-radius:9999px;
-    margin:4px 0 10px;
-    letter-spacing:.02em;
+    background:rgba(229,222,210,.95);
+    color:#54504a;
+    font-size:11.5px; padding:4px 12px; border-radius:9999px;
+    margin:2px 0 12px;
+    font-weight:500;
+    letter-spacing:0;
   }
+  .wa-enc{
+    align-self:center;
+    background:#FEF4C5;
+    color:#34322c;
+    font-size:10px; padding:5px 14px; border-radius:7px;
+    margin:2px 0 8px; max-width:88%;
+    text-align:center; line-height:1.4;
+    box-shadow:0 1px 1px rgba(0,0,0,.04);
+  }
+  .wa-enc .lock{ display:inline-block; margin-right:5px; transform:translateY(1px); }
+
   .bubble{
-    max-width:80%;
-    padding:7px 10px 6px;
-    border-radius:12px;
-    font-size:12.5px; line-height:1.35;
+    max-width:84%;
+    padding:9px 12px 8px;
+    border-radius:16px;
+    font-size:14.5px; line-height:1.42;
     color:#1a1a1a;
-    box-shadow:0 1px 0 rgba(0,0,0,.05);
+    box-shadow:0 1px 1px rgba(0,0,0,.05);
     position:relative;
     word-wrap:break-word;
-    opacity:0; transform:translateY(6px) scale(.985);
+    letter-spacing:-0.005em;
+    opacity:0; transform:translateY(4px);
+    margin-bottom:2px;
   }
-  .bubble.in{ opacity:1; transform:none; transition:opacity .6s ease, transform .7s cubic-bezier(.16,1,.3,1); }
+  .bubble.in{ opacity:1; transform:none; transition:opacity .55s ease, transform .65s cubic-bezier(.16,1,.3,1); }
   .bubble .time{
-    display:inline-block; font-size:9.5px; color:#8a8a8a;
-    margin-left:8px; transform:translateY(2px);
+    display:inline-block; font-size:10.5px; color:#8d8a85;
+    margin-left:8px; float:right;
+    margin-top:6px; line-height:1;
   }
-  .bubble .time .read{ color:#4a89c0; margin-left:2px; }
-  .b-me{ align-self:flex-end; background:var(--wa-me); border-top-right-radius:4px; }
-  .b-them{ align-self:flex-start; background:#fff; border-top-left-radius:4px; }
-  .b-them.thinking{ display:flex; gap:4px; padding:10px 12px; }
+  .bubble .time .read{ color:#4a89c0; margin-left:2px; font-weight:500; }
+  .b-me{ align-self:flex-end; background:#DCFCC7; border-bottom-right-radius:5px; }
+  .b-them{ align-self:flex-start; background:#fff; border-bottom-left-radius:5px; }
+  .b-them.thinking{ display:flex; gap:4px; padding:11px 14px; }
   .b-them.thinking span{
-    width:6px; height:6px; border-radius:9999px; background:#b8b1a3;
+    width:7px; height:7px; border-radius:9999px; background:#b8b1a3;
     animation:dot 1.2s infinite ease-in-out;
   }
   .b-them.thinking span:nth-child(2){ animation-delay:.15s; }
@@ -490,11 +508,16 @@
     margin:16px 0 14px;
   }
   .acq-card .acq-row{
-    display:flex; justify-content:space-between;
-    font-size:12.5px; line-height:1.6;
+    display:flex; justify-content:space-between; gap:10px;
+    font-size:12.5px; line-height:1.5;
+    padding:3px 0;
   }
-  .acq-card .acq-row .k{ color:var(--ink-muted); }
-  .acq-card .acq-row .v{ color:var(--ink); font-weight:500; font-family:'JetBrains Mono',monospace; font-size:11.5px; }
+  .acq-card .acq-row .k{ color:var(--ink-muted); flex-shrink:0; }
+  .acq-card .acq-row .v{
+    color:var(--ink); font-weight:500;
+    font-family:'JetBrains Mono',monospace; font-size:11px;
+    text-align:right; line-height:1.45;
+  }
 
   /* Stat band */
   .stat-band{
@@ -604,6 +627,110 @@
   }
   .src-card.show{ opacity:1; transform:translateY(0); }
 
+  /* ===== Dark sections / closing ===== */
+  .dark-closing{
+    background:#0E0E10;
+    color:#fff;
+    border-radius:24px;
+    padding:32px 48px;
+    text-align:center;
+    max-width:560px;
+    width:auto;
+    box-shadow:0 30px 60px -30px rgba(10,10,16,.25), 0 12px 28px -20px rgba(10,10,16,.15);
+  }
+  .hairline-dark{
+    height:1px; background:rgba(255,255,255,.10);
+    width:60%; margin:0 auto;
+  }
+
+  /* Full dark slide treatment (S4) */
+  .slide.dark{ background:#0E0E10; color:#fff; }
+  .slide.dark .chrome-label{ color:rgba(255,255,255,.45); }
+  .slide.dark .connect-line{ stroke:rgba(255,255,255,.22); }
+  .slide.dark .node{
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.12);
+    color:rgba(255,255,255,.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .slide.dark .node .dot{ background:#fff; }
+  .slide.dark .label-eyebrow{ color:rgba(255,255,255,.5); }
+  .slide.dark .iphone{
+    box-shadow:
+      0 60px 120px -30px rgba(0,0,0,.6),
+      0 0 80px rgba(255,255,255,.06),
+      0 0 0 1.5px rgba(255,255,255,.06),
+      inset 0 0 0 1.5px rgba(255,255,255,.06);
+  }
+
+  /* Score panel — dark contained card on slide 6 */
+  .score-dark{
+    background:#0E0E10;
+    border-radius:28px;
+    padding:40px 36px;
+    color:#fff;
+    position:relative;
+  }
+  .score-dark .score-ring .track{ stroke:rgba(255,255,255,.12); }
+  .score-dark .score-ring .progress{ stroke:#fff; }
+  .score-dark .label-eyebrow{ color:rgba(255,255,255,.5); }
+  .score-dark .quiet{ color:rgba(255,255,255,.55); }
+  .score-dark .ink-dot{ background:rgba(255,255,255,.5); }
+
+  /* WhatsApp input bar (bottom of iPhone) */
+  .wa-input{
+    background:#F6F6F6;
+    padding:10px 14px 14px;
+    display:flex; align-items:center; gap:8px;
+    border-top:1px solid rgba(0,0,0,.06);
+  }
+  .wa-input-plus{
+    width:30px; height:30px; border-radius:9999px;
+    background:transparent;
+    display:flex; align-items:center; justify-content:center;
+    font-size:24px; color:#3a86c8; font-weight:300; line-height:1;
+    flex-shrink:0;
+  }
+  .wa-input-field{
+    flex:1; height:32px; border-radius:18px;
+    background:#fff;
+    border:1px solid rgba(0,0,0,.10);
+  }
+  .wa-input-mic{
+    width:28px; height:28px; border-radius:9999px;
+    color:#6e6e6e; font-size:14px;
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+  }
+  .wa-input-cam{
+    width:28px; height:28px; border-radius:9999px;
+    color:#6e6e6e; font-size:14px;
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+  }
+
+  /* Hero dark backdrop — Slide 1, diagonal clip */
+  .hero-dark-band{
+    position:absolute; right:0; top:0; bottom:0;
+    width:62%; background:#0E0E10;
+    opacity:0;
+    z-index:0;
+    clip-path: polygon(0% 0, 100% 0, 100% 100%, 22% 100%);
+  }
+  @media (max-width: 768px){
+    .hero-dark-band{ display:none; }
+  }
+
+  /* iPhone glow when sitting on Hero dark band */
+  #s1c-phone-wrap .iphone{
+    box-shadow:
+      0 60px 120px -30px rgba(0,0,0,.55),
+      0 0 80px rgba(255,255,255,.05),
+      0 0 0 1.5px rgba(255,255,255,.06),
+      inset 0 0 0 1.5px rgba(255,255,255,.06);
+  }
+
   /* utility */
   .max-content{ max-width:1280px; margin-left:auto; margin-right:auto; }
 
@@ -666,9 +793,13 @@
       </div>
     </div>
 
-    <!-- Phase C — Julie + iPhone -->
-    <div id="s1-c" class="absolute inset-0 grid grid-cols-1 md:grid-cols-2 items-center max-content px-10 md:px-16 opacity-0 gap-10">
-      <div>
+    <!-- Phase C — Julie + iPhone with editorial dark right backdrop -->
+    <div id="s1-c" class="absolute inset-0 opacity-0">
+      <!-- Dark backdrop on right half -->
+      <div class="hero-dark-band" id="s1c-band"></div>
+      <!-- Content grid -->
+      <div class="absolute inset-0 grid grid-cols-1 md:grid-cols-12 items-center max-content px-10 md:px-16 gap-6" style="z-index:1;">
+      <div class="md:col-span-5">
         <p class="label-eyebrow mb-7" id="s1c-eye" style="opacity:0">Was wäre wenn</p>
         <h2 class="font-display leading-[0.92]" id="s1c-h2"
             style="font-size:clamp(3.8rem,9vw,8.5rem); opacity:0">
@@ -683,11 +814,10 @@
             <span class="lc-pill"><span class="pdot"></span>DATEV</span>
             <span class="lc-pill"><span class="pdot"></span>WhatsApp</span>
             <span class="lc-pill"><span class="pdot"></span>Echtzeit</span>
-            <span class="lc-pill ghost">+ 12&nbsp;Quellen</span>
           </div>
         </div>
       </div>
-      <div class="flex justify-center md:justify-end" id="s1c-phone-wrap" style="opacity:0">
+      <div class="md:col-span-7 flex justify-center md:justify-start md:pl-2 lg:pl-6" id="s1c-phone-wrap" style="opacity:0">
         <!-- iPhone -->
         <div class="iphone">
           <div class="iphone-island"></div>
@@ -702,7 +832,7 @@
             </div>
             <div class="wa-header">
               <span class="wa-back">‹</span>
-              <div class="wa-avatar">J</div>
+              <div class="wa-avatar"></div>
               <div class="wa-meta">
                 <span class="wa-name">Julie</span>
                 <span class="wa-status"><span class="online">●</span> online</span>
@@ -710,18 +840,28 @@
             </div>
             <div class="wa-body" id="s1-wa">
               <span class="wa-date">Heute</span>
+              <div class="wa-enc">
+                <span class="lock">🔒</span>Ende-zu-Ende-verschlüsselt
+              </div>
               <div class="bubble b-me" data-msg="1">
-                Warum ist unser Cashflow diesen Monat schlechter?
+                Wie sehen meine Zahlen für dieses Quartal aus?
                 <span class="time">14:23 <span class="read">✓✓</span></span>
               </div>
               <div class="bubble b-them thinking" data-msg="2" style="width:fit-content;">
                 <span></span><span></span><span></span>
               </div>
             </div>
+            <div class="wa-input">
+              <span class="wa-input-plus">+</span>
+              <div class="wa-input-field"></div>
+              <span class="wa-input-cam">📷</span>
+              <span class="wa-input-mic">🎤</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    </div><!-- /inner grid wrapper -->
 
   </div>
 
@@ -743,17 +883,17 @@
   <div class="absolute inset-0 max-content px-10 md:px-16 flex flex-col items-center justify-center gap-7 py-14">
 
     <!-- Header -->
-    <div class="text-center" style="max-width:48ch;">
+    <div class="text-center" style="max-width:60ch;">
       <p class="label-eyebrow" id="s2-eye" style="opacity:0">Finanzielle Opazität</p>
       <h2 class="font-display mt-5" id="s2-h2"
-          style="font-size:clamp(1.6rem,2.6vw,2.6rem); line-height:1.2; letter-spacing:-0.035em;">
+          style="font-size:clamp(1.4rem,2.1vw,2.1rem); line-height:1.25; letter-spacing:-0.03em;">
         <span class="block" data-line="1" style="opacity:0">Monate ohne Buchungen.</span>
         <span class="block" data-line="2" style="opacity:0; color:var(--ink-muted)">Keine Transparenz. Keine Echtzeit.</span>
         <span class="block" data-line="3" style="opacity:0">
           Margen zwischen
-          <span style="color:var(--ink); font-family:'JetBrains Mono',monospace; font-size:.86em;">−80%</span>
+          <span style="color:var(--ink); font-family:'JetBrains Mono',monospace; font-size:.88em;">−80%</span>
           <span style="color:var(--ink-muted);">und</span>
-          <span style="color:var(--ink); font-family:'JetBrains Mono',monospace; font-size:.86em;">+150%</span>.
+          <span style="color:var(--ink); font-family:'JetBrains Mono',monospace; font-size:.88em;">+150%</span>.
         </span>
       </h2>
     </div>
@@ -842,22 +982,6 @@
       </div>
     </div>
 
-    <!-- Stat Band -->
-    <div class="stat-band w-full" id="s2-stats" style="opacity:0; max-width:1080px;">
-      <div>
-        <div class="sb-num">3–9</div>
-        <div class="sb-lbl">Monate Verzug<br/>im Reporting</div>
-      </div>
-      <div>
-        <div class="sb-num">31<span style="font-size:22px; color:var(--ink-muted);">%</span></div>
-        <div class="sb-lbl">Ø Datenqualität<br/>in der Buchhaltung</div>
-      </div>
-      <div>
-        <div class="sb-num">0</div>
-        <div class="sb-lbl">Mittelständler mit<br/>Echtzeit-Cashflow</div>
-      </div>
-    </div>
-
   </div>
 </section>
 
@@ -889,30 +1013,6 @@
         die im Nebel getroffen werden.
       </p>
 
-      <!-- Timeline -->
-      <div class="mt-12 reveal" id="s3-tl">
-        <div class="flex items-center gap-6">
-          <div class="flex flex-col items-center" data-tl="1">
-            <div class="w-2 h-2 rounded-full" style="background:var(--ink)"></div>
-            <span class="text-[10px] font-mono mt-3 tracking-[0.18em] uppercase quiet">Übernahme</span>
-          </div>
-          <div class="h-px flex-1" style="background:var(--line);"></div>
-          <div class="flex flex-col items-center" data-tl="2">
-            <div class="w-2 h-2 rounded-full" style="background:var(--ink)"></div>
-            <span class="text-[10px] font-mono mt-3 tracking-[0.18em] uppercase quiet">Analyse</span>
-          </div>
-          <div class="h-px flex-1" style="background:var(--line);"></div>
-          <div class="flex flex-col items-center" data-tl="3">
-            <div class="w-2 h-2 rounded-full" style="background:var(--ink-muted)"></div>
-            <span class="text-[10px] font-mono mt-3 tracking-[0.18em] uppercase" style="color:var(--ink-muted)">Chaos entdeckt</span>
-          </div>
-          <div class="h-px flex-1" style="background:var(--line);"></div>
-          <div class="flex flex-col items-center" data-tl="4">
-            <div class="w-2.5 h-2.5 rounded-full" style="background:var(--ink); box-shadow:0 0 0 4px rgba(10,10,10,.10);"></div>
-            <span class="text-[10px] font-mono mt-3 tracking-[0.18em] uppercase" style="color:var(--ink)">Julie entsteht</span>
-          </div>
-        </div>
-      </div>
     </div>
 
     <!-- Right: acquisition portfolio in Luma-style cards -->
@@ -966,8 +1066,8 @@
           <div class="acq-name">Manufacturing</div>
           <div class="acq-meta">Bayern · 41 MA · €&nbsp;9,4 M Umsatz</div>
           <div class="acq-divider"></div>
-          <div class="acq-row"><span class="k">Reporting in</span><span class="v">3 Töchtern getrennt</span></div>
-          <div class="acq-row"><span class="k">Konsolidierung</span><span class="v">Quartalsweise · händisch</span></div>
+          <div class="acq-row"><span class="k">Reporting</span><span class="v">3 Töchter getrennt</span></div>
+          <div class="acq-row"><span class="k">Konsolidierung</span><span class="v">händisch · Q</span></div>
           <div class="acq-row"><span class="k">Marge je Auftrag</span><span class="v">unbekannt</span></div>
         </div>
 
@@ -986,7 +1086,7 @@
 <!-- ==================================================== -->
 <!-- SLIDE 4 — TRANSFORMATION                             -->
 <!-- ==================================================== -->
-<section class="slide" id="s4" data-idx="3" style="background:var(--bg);">
+<section class="slide dark" id="s4" data-idx="3">
   <div class="chrome">
     <span class="chrome-label">004 &nbsp;—&nbsp; Transformation</span>
     <span class="chrome-mark">Julie<span class="dot">.</span>ai</span>
@@ -1000,11 +1100,11 @@
            class="absolute inset-0 w-full h-full" style="opacity:.85;">
         <defs>
           <radialGradient id="halo" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#4B5C4F" stop-opacity=".10"/>
-            <stop offset="100%" stop-color="#4B5C4F" stop-opacity="0"/>
+            <stop offset="0%" stop-color="#FFFFFF" stop-opacity=".09"/>
+            <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
           </radialGradient>
         </defs>
-        <circle cx="640" cy="380" r="240" fill="url(#halo)"/>
+        <circle cx="640" cy="380" r="260" fill="url(#halo)"/>
         <!-- Lines from center to nodes -->
         <path class="connect-line" d="M 640 380 C 540 340, 360 290, 230 240"/>
         <path class="connect-line" d="M 640 380 C 770 320, 940 280, 1060 240"/>
@@ -1030,7 +1130,7 @@
             </div>
             <div class="wa-header">
               <span class="wa-back">‹</span>
-              <div class="wa-avatar">J</div>
+              <div class="wa-avatar"></div>
               <div class="wa-meta">
                 <span class="wa-name">Julie</span>
                 <span class="wa-status"><span class="online">●</span> online</span>
@@ -1043,17 +1143,18 @@
                 <span class="time">9:38 <span class="read">✓✓</span></span>
               </div>
               <div class="bubble b-them" data-msg="2">
-                Drei Faktoren wirken zusammen — ich zeige sie dir.
+                Drei Faktoren spielen zusammen: Forderungen aus Q1 stehen seit
+                <strong style="font-weight:600">48&nbsp;Tagen</strong> offen, Lieferant&nbsp;X hat das Zahlungsziel
+                von 30 auf <strong style="font-weight:600">14&nbsp;Tage</strong> reduziert,
+                und die Marge im Segment&nbsp;A ist um <strong style="font-weight:600">4,2&nbsp;Punkte</strong> gesunken.
                 <span class="time">9:38</span>
               </div>
-              <div class="bubble b-them" data-msg="3" style="max-width:90%;">
-                <strong style="font-weight:500">1.</strong> Forderungen aus Q1
-                stehen seit&nbsp;48 Tagen offen<br/>
-                <strong style="font-weight:500">2.</strong> Lieferant&nbsp;X hat Zahlungsziel
-                von&nbsp;30 auf&nbsp;14&nbsp;Tage&nbsp;reduziert<br/>
-                <strong style="font-weight:500">3.</strong> Marge im Segment&nbsp;A ist um&nbsp;4,2&nbsp;Punkte&nbsp;gesunken
-                <span class="time">9:38</span>
-              </div>
+            </div>
+            <div class="wa-input">
+              <span class="wa-input-plus">+</span>
+              <div class="wa-input-field"></div>
+              <span class="wa-input-cam">📷</span>
+              <span class="wa-input-mic">🎤</span>
             </div>
           </div>
         </div>
@@ -1101,20 +1202,6 @@
         werden sichtbar.
       </p>
 
-      <div class="mt-10 reveal" id="s5-feet">
-        <div class="font-mono text-[10px] uppercase tracking-[.24em] quiet mb-4">Was Mittelständler fragen</div>
-        <div class="flex flex-col gap-2 max-w-[28ch]">
-          <div class="luma-card subtle" style="padding:12px 16px; border-radius:14px;">
-            <span style="font-size:13.5px; color:var(--ink);">„Wie ist unsere Liquidität in 60 Tagen?"</span>
-          </div>
-          <div class="luma-card subtle" style="padding:12px 16px; border-radius:14px;">
-            <span style="font-size:13.5px; color:var(--ink);">„Welcher Kunde zahlt am spätesten?"</span>
-          </div>
-          <div class="luma-card subtle" style="padding:12px 16px; border-radius:14px;">
-            <span style="font-size:13.5px; color:var(--ink);">„Können wir uns die Einstellung leisten?"</span>
-          </div>
-        </div>
-      </div>
     </div>
 
     <div class="lg:col-span-7" id="s5-card">
@@ -1164,19 +1251,6 @@
           </div>
         </div>
 
-        <!-- Mini chart -->
-        <div class="mini-chart mt-6" id="s5-chart">
-          <div class="row">
-            <span style="min-width:90px; color:var(--ink-muted);">Q1 · 2025</span>
-            <span class="bar"><i data-val="40"></i></span>
-            <span class="val">38,4%</span>
-          </div>
-          <div class="row">
-            <span style="min-width:90px; color:var(--ink-muted);">Q1 · 2026</span>
-            <span class="bar"><i data-val="29"></i></span>
-            <span class="val">29,1%</span>
-          </div>
-        </div>
       </div>
     </div>
 
@@ -1229,46 +1303,34 @@
       </div>
     </div>
 
-    <!-- Score panel -->
+    <!-- Score panel — dark contained "instrument" card -->
     <div class="lg:col-span-7 flex justify-center">
-      <div class="relative reveal" id="s6-score" style="width:100%; max-width:560px;">
-        <div class="text-center mb-6">
+      <div class="score-dark reveal" id="s6-score" style="width:100%; max-width:540px;">
+        <div class="text-center mb-7">
           <span class="label-eyebrow">Financial Transparency Score</span>
         </div>
 
-        <div class="relative mx-auto" style="width:340px; height:340px;">
-          <svg class="score-ring" viewBox="0 0 200 200" width="340" height="340">
+        <div class="relative mx-auto" style="width:300px; height:300px;">
+          <svg class="score-ring" viewBox="0 0 200 200" width="300" height="300">
             <circle class="track" cx="100" cy="100" r="86"/>
             <circle class="progress" id="score-prog" cx="100" cy="100" r="86" pathLength="100" stroke-dasharray="0 100"/>
           </svg>
           <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
-            <span class="label-eyebrow" id="score-state" style="color:var(--ink-faint)">vor Julie</span>
-            <div class="font-display mt-3" style="font-size:84px; line-height:1; color:var(--ink);">
-              <span id="score-num">31</span><span style="font-size:36px; color:var(--ink-muted);">%</span>
+            <span class="label-eyebrow" id="score-state">vor Julie</span>
+            <div class="font-display mt-2" style="font-size:80px; line-height:1; color:#fff; letter-spacing:-0.04em;">
+              <span id="score-num">31</span><span style="font-size:34px; color:rgba(255,255,255,.5);">%</span>
             </div>
             <span class="font-mono text-[10px] uppercase tracking-[.22em] quiet mt-3" id="score-sub">unstrukturierte Daten</span>
           </div>
         </div>
 
-        <div class="mt-10 flex items-center justify-center gap-10 quiet text-xs font-mono uppercase tracking-[.2em]">
-          <span><span class="ink-dot" style="background:var(--ink-faint)"></span>&nbsp;&nbsp;vor Julie · 31%</span>
-          <span style="color:var(--ink)"><span class="ink-dot" style="background:var(--ink)"></span>&nbsp;&nbsp;mit Julie · 87%</span>
+        <div class="hairline-dark mt-8 mb-6"></div>
+
+        <div class="flex items-center justify-center gap-10 quiet text-xs font-mono uppercase tracking-[.2em]">
+          <span><span class="ink-dot"></span>&nbsp;&nbsp;vor Julie · 31%</span>
+          <span style="color:#fff"><span class="ink-dot" style="background:#fff;"></span>&nbsp;&nbsp;mit Julie · 87%</span>
         </div>
 
-        <div class="ben-row mt-12" id="s6-ben">
-          <div class="ben-card" data-ben="1">
-            <span class="bc-num">01</span>
-            <span class="bc-lbl">M&amp;A-ready</span>
-          </div>
-          <div class="ben-card" data-ben="2">
-            <span class="bc-num">02</span>
-            <span class="bc-lbl">Bank-ready</span>
-          </div>
-          <div class="ben-card" data-ben="3">
-            <span class="bc-num">03</span>
-            <span class="bc-lbl">Investor-ready</span>
-          </div>
-        </div>
       </div>
     </div>
 
@@ -1284,23 +1346,20 @@
     <span class="chrome-mark">Julie<span class="dot">.</span>ai</span>
   </div>
 
-  <!-- Abstract network grid backdrop (replaces the map) -->
-  <div class="net-grid" id="s7-net">
-    <!-- 14x8 = 112 nodes — script populates -->
-  </div>
-
   <!-- Foreground content -->
-  <div class="absolute inset-0 flex flex-col items-center justify-center px-10 text-center max-content">
-    <p class="label-eyebrow reveal mb-8" id="s7-eye">Was wir bauen</p>
+  <div class="absolute inset-0 flex flex-col items-center justify-center px-10 max-content gap-10 py-16">
 
-    <h2 class="font-display leading-[1.04] reveal"
-        id="s7-h2" style="font-size:clamp(2.4rem,5.4vw,4.8rem); max-width:22ch;">
-      Jedes KMU verdient
-      <span class="block" style="color:var(--ink-muted)">finanzielle&nbsp;Transparenz.</span>
-    </h2>
+    <div class="text-center">
+      <p class="label-eyebrow reveal mb-7" id="s7-eye">Was wir bauen</p>
+      <h2 class="font-display reveal" id="s7-h2"
+          style="font-size:clamp(2rem,3.8vw,3.6rem); line-height:1.1; letter-spacing:-0.04em; max-width:22ch; margin:0 auto;">
+        Jedes KMU verdient
+        <span class="block" style="color:var(--ink-muted)">finanzielle&nbsp;Transparenz.</span>
+      </h2>
+    </div>
 
     <!-- Vision pillars -->
-    <div class="vision-grid mt-14" id="s7-pillars">
+    <div class="vision-grid" id="s7-pillars">
       <div class="vision-card" data-vc="1">
         <span class="vc-num">01</span>
         <div class="vc-title">Tausende KMUs.<br/>Eine Schnittstelle.</div>
@@ -1318,17 +1377,18 @@
       </div>
     </div>
 
-    <div class="mt-16" id="s7-mark" style="opacity:0">
-      <div class="font-display" style="font-size:clamp(2.6rem,6vw,5rem); color:var(--ink); line-height:1; letter-spacing:-0.05em;">
-        Julie<span style="color:var(--ink)">.</span>ai
+    <!-- Dark closing card -->
+    <div class="dark-closing" id="s7-mark" style="opacity:0;">
+      <div class="font-display" style="font-size:clamp(1.8rem,3.4vw,2.6rem); color:#fff; line-height:1; letter-spacing:-0.045em;">
+        Julie<span>.</span>ai
       </div>
-      <p class="quiet mt-5 text-xs font-mono uppercase tracking-[.32em]">Finanzielle Klarheit · Erreichbar · Konversational</p>
-    </div>
-
-    <div class="mt-12 flex items-center gap-5" id="s7-foot" style="opacity:0">
-      <span class="hairline-soft" style="width:60px;"></span>
-      <span class="font-mono text-[10px] uppercase tracking-[.28em] quiet">Made in Germany · For the Mittelstand</span>
-      <span class="hairline-soft" style="width:60px;"></span>
+      <p style="color:rgba(255,255,255,.5); margin-top:12px; font-size:10px; font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:.24em;">
+        Finanzielle Klarheit · Erreichbar · Konversational
+      </p>
+      <div class="hairline-dark mt-5"></div>
+      <p style="color:rgba(255,255,255,.35); margin-top:14px; font-size:9.5px; font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:.24em;">
+        Made in Germany · For the Mittelstand
+      </p>
     </div>
   </div>
 </section>
@@ -1462,6 +1522,7 @@ function toPhaseC(){
     .to('#s1c-eye', { opacity:1, duration:1.0 })
     .to('#s1c-h2', { opacity:1, duration:1.4 }, '-=0.4')
     .to('#s1c-sub', { opacity:1, duration:1.2 }, '-=0.6')
+    .to('#s1c-band', { opacity:1, duration:1.6, ease:'expo.inOut' }, '-=0.7')
     .to('#s1c-phone-wrap', { opacity:1, duration:1.6 }, '-=1.2')
     .fromTo('#s1c-phone-wrap .iphone',
             { y:60, scale:.94 },
@@ -1470,45 +1531,71 @@ function toPhaseC(){
     .to('#s1-hint', { opacity:1, duration:1.2 }, '+=0.4');
 }
 
-function playS1Chat(){
-  const me = document.querySelector('#s1-wa .b-me');
-  const think = document.querySelector('#s1-wa .b-them.thinking');
-  setTimeout(() => me.classList.add('in'), 200);
-  setTimeout(() => think.classList.add('in'), 1100);
+function scrollWaToBottom(waEl){
+  if (!waEl) return;
+  requestAnimationFrame(() => {
+    waEl.scrollTop = waEl.scrollHeight;
+  });
+}
 
-  // After typing, reveal Julie's full answer with mini chart
+function playS1Chat(){
+  const wa = document.getElementById('s1-wa');
+  const me = wa.querySelector('.b-me');
+  const think = wa.querySelector('.b-them.thinking');
+  setTimeout(() => { me.classList.add('in'); scrollWaToBottom(wa); }, 200);
+  setTimeout(() => { think.classList.add('in'); scrollWaToBottom(wa); }, 1100);
+
+  // After typing, swap in Julie's reply (compact)
   setTimeout(() => {
-    // remove thinking, swap in real answer
     think.classList.remove('in');
     setTimeout(() => {
       think.outerHTML = `
-        <div class="bubble b-them in" style="max-width:88%;">
-          Drei Treiber: <strong style="font-weight:500">DSO bei +6 Tagen</strong>, Lieferant&nbsp;X verkürzte Zahlungsziele,
-          Marge Segment&nbsp;A −4,2&nbsp;P.
-          <div class="mini-chart">
-            <div class="row">
-              <span style="min-width:64px; color:#6B6B6B;">Cash IN</span>
-              <span class="bar"><i data-val="62" style="background:#A3A3A3; width:0;"></i></span>
-              <span class="val">62%</span>
-            </div>
-            <div class="row">
-              <span style="min-width:64px; color:#6B6B6B;">Cash OUT</span>
-              <span class="bar"><i data-val="84" style="background:#0A0A0A; width:0;"></i></span>
-              <span class="val">84%</span>
-            </div>
-          </div>
+        <div class="bubble b-them in">
+          Hallo 👋 Q1 schließt solide — Umsatz <strong style="font-weight:600">391&nbsp;K&nbsp;€</strong>,
+          EBITDA <strong style="font-weight:600">45&nbsp;K&nbsp;€</strong>. Liquidität ist gegenüber Februar
+          um <strong style="font-weight:600">22&nbsp;%</strong> gefallen — Hauptursache ist Lieferant&nbsp;X.
           <span class="time">14:24</span>
         </div>
       `;
-      // animate bars
-      setTimeout(() => {
-        document.querySelectorAll('#s1-wa .mini-chart .bar i').forEach(b => {
-          b.style.transition = 'width 1.6s cubic-bezier(.16,1,.3,1)';
-          b.style.width = b.dataset.val + '%';
-        });
-      }, 200);
+      scrollWaToBottom(wa);
+      // Follow-up exchange — conversation continues
+      setTimeout(addS1FollowUp, 3200);
     }, 360);
   }, 2600);
+}
+
+function addS1FollowUp(){
+  const wa = document.getElementById('s1-wa');
+  if (!wa) return;
+
+  // 1) User follow-up question slides in
+  const me2 = document.createElement('div');
+  me2.className = 'bubble b-me';
+  me2.innerHTML = `Sollen wir die Neueinstellungen verschieben? <span class="time">14:25 <span class="read">✓✓</span></span>`;
+  wa.appendChild(me2);
+  setTimeout(() => { me2.classList.add('in'); scrollWaToBottom(wa); }, 80);
+
+  // 2) Julie typing
+  setTimeout(() => {
+    const think2 = document.createElement('div');
+    think2.className = 'bubble b-them thinking';
+    think2.style.width = 'fit-content';
+    think2.innerHTML = '<span></span><span></span><span></span>';
+    wa.appendChild(think2);
+    setTimeout(() => { think2.classList.add('in'); scrollWaToBottom(wa); }, 60);
+
+    // 3) Replace with Julie's reply
+    setTimeout(() => {
+      think2.classList.remove('in');
+      setTimeout(() => {
+        const julie2 = document.createElement('div');
+        julie2.className = 'bubble b-them in';
+        julie2.innerHTML = `Nein, der Cashflow trägt sie. Verhandle mit Lieferant&nbsp;X über die Zahlungsziele — das schafft <strong style="font-weight:600">18&nbsp;K&nbsp;€</strong> Spielraum. <span class="time">14:25</span>`;
+        think2.replaceWith(julie2);
+        scrollWaToBottom(wa);
+      }, 360);
+    }, 2200);
+  }, 1500);
 }
 
 /* ==================================================
@@ -1530,9 +1617,8 @@ function playSlide2(){
     });
   }, 4400);
 
-  // Caption + stats after sources land
+  // Caption after sources land
   gsap.to('#s2-cap', { opacity:1, duration:1.0, delay:5.6 });
-  gsap.to('#s2-stats', { opacity:1, y:0, duration:1.2, delay:6.0 });
 
   // KPI glitch sequence — monochrome
   setTimeout(() => {
@@ -1556,8 +1642,7 @@ function playSlide3(){
   const tl = gsap.timeline({ defaults:{ ease:EASE } });
   tl.fromTo('#s3-eye', { opacity:0, y:8 }, { opacity:1, y:0, duration:1.0 })
     .fromTo('#s3-h2', { opacity:0, y:14 }, { opacity:1, y:0, duration:1.4 }, '-=0.3')
-    .fromTo('#s3-lede', { opacity:0, y:10 }, { opacity:1, y:0, duration:1.2 }, '-=0.4')
-    .fromTo('#s3-tl', { opacity:0, y:10 }, { opacity:1, y:0, duration:1.2 }, '-=0.3');
+    .fromTo('#s3-lede', { opacity:0, y:10 }, { opacity:1, y:0, duration:1.2 }, '-=0.4');
 
   // Acquisition cards — staggered reveal
   document.querySelectorAll('#s3-acq .acq-card').forEach((c, i) => {
@@ -1607,21 +1692,11 @@ function playSlide5(){
   tl.fromTo('#s5-eye', { opacity:0, y:8 }, { opacity:1, y:0, duration:1.0 })
     .fromTo('#s5-h2', { opacity:0, y:14 }, { opacity:1, y:0, duration:1.4 }, '-=0.3')
     .fromTo('#s5-lede', { opacity:0, y:10 }, { opacity:1, y:0, duration:1.2 }, '-=0.5')
-    .fromTo('#s5-feet', { opacity:0 }, { opacity:1, duration:1.2 }, '-=0.4')
     .fromTo('#s5-card .qa-card:first-child',
             { opacity:0, y:20 },
             { opacity:1, y:0, duration:1.2 }, '-=0.8')
     .to('#s5-bridge', { opacity:1, duration:1.0 }, '+=0.6')
-    .to('#s5-answer', { opacity:1, y:0, duration:1.4 }, '+=0.4')
-    .add(animateS5Bars, '-=0.4');
-}
-function animateS5Bars(){
-  document.querySelectorAll('#s5-chart .bar i').forEach((b, i) => {
-    setTimeout(() => {
-      b.style.transition = 'width 1.8s cubic-bezier(.16,1,.3,1)';
-      b.style.width = b.dataset.val + '%';
-    }, i*250);
-  });
+    .to('#s5-answer', { opacity:1, y:0, duration:1.4 }, '+=0.4');
 }
 
 /* ==================================================
@@ -1654,8 +1729,9 @@ function playSlide6(){
     const stateEl = document.getElementById('score-state');
     const subEl = document.getElementById('score-sub');
     stateEl.textContent = 'mit Julie';
-    stateEl.style.color = 'var(--accent-deep)';
-    subEl.textContent = 'transaktionsreife Transparenz';
+    stateEl.style.color = '#fff';
+    stateEl.style.opacity = '1';
+    subEl.textContent = 'transaktionsreif';
     prog.style.strokeDasharray = '87 100';
 
     const start = 31, end = 87, dur = 2200, t0 = performance.now();
@@ -1668,12 +1744,6 @@ function playSlide6(){
     requestAnimationFrame(tick);
   }, 4200);
 
-  // Benefit cards reveal after score lands
-  setTimeout(() => {
-    document.querySelectorAll('#s6-ben .ben-card').forEach((c, i) => {
-      setTimeout(() => c.classList.add('show'), i*240);
-    });
-  }, 6800);
 }
 
 /* ==================================================
@@ -1682,44 +1752,17 @@ function playSlide6(){
 function playSlide7(){
   const tl = gsap.timeline({ defaults:{ ease:EASE } });
   tl.fromTo('#s7-eye', { opacity:0, y:8 }, { opacity:1, y:0, duration:1.0 })
-    .fromTo('#s7-h2', { opacity:0, y:14 }, { opacity:1, y:0, duration:1.6 }, '-=0.3');
+    .fromTo('#s7-h2', { opacity:0, y:14 }, { opacity:1, y:0, duration:1.4 }, '-=0.3');
 
-  // Populate network grid (14 x 8) — abstract "Mittelstand spread"
-  const grid = document.getElementById('s7-net');
-  grid.innerHTML = '';
-  const cols = 14, rows = 8;
-  const hotPositions = [[2,1],[6,2],[11,1],[3,4],[8,5],[12,4],[5,6],[10,6],[1,3],[9,3]];
-  const hotSet = new Set(hotPositions.map(p => `${p[0]},${p[1]}`));
-  for (let r=0; r<rows; r++){
-    for (let c=0; c<cols; c++){
-      const dot = document.createElement('span');
-      dot.className = 'nn';
-      if (hotSet.has(`${c},${r}`)) dot.dataset.hot = '1';
-      grid.appendChild(dot);
-    }
-  }
-  // Distance-based ripple from center
-  const dots = grid.querySelectorAll('.nn');
-  dots.forEach((d, i) => {
-    const c = i % cols, r = Math.floor(i / cols);
-    const dist = Math.hypot(c - cols/2, r - rows/2);
-    const delay = 700 + dist * 70 + Math.random()*120;
-    setTimeout(() => {
-      d.classList.add('on');
-      if (d.dataset.hot){
-        setTimeout(() => d.classList.add('hot'), 500);
-      }
-    }, delay);
-  });
-
-  // Vision pillars
+  // Vision pillars stagger
   document.querySelectorAll('#s7-pillars .vision-card').forEach((c, i) => {
-    setTimeout(() => c.classList.add('show'), 1600 + i*250);
+    setTimeout(() => c.classList.add('show'), 1200 + i*220);
   });
 
-  // Final mark + footer
-  gsap.to('#s7-mark', { opacity:1, duration:1.6, delay:4.0 });
-  gsap.to('#s7-foot', { opacity:1, duration:1.2, delay:5.0 });
+  // Dark closing mark
+  gsap.fromTo('#s7-mark',
+    { opacity:0, y:18 },
+    { opacity:1, y:0, duration:1.6, delay:2.6, ease:EASE_OUT });
 }
 
 /* ==================================================
