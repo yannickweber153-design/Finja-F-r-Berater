@@ -204,6 +204,12 @@
     background:var(--wa-bg);
     overflow:hidden; position:relative;
     display:flex; flex-direction:column;
+    transition: background .5s cubic-bezier(.16,1,.3,1);
+  }
+  /* Locked / home state: extend the dark ocean wallpaper color
+     under the status bar so there is no light seam at the top. */
+  .iphone-screen.is-locked{
+    background:#1d6f80;
   }
   .iphone-island{
     position:absolute; top:10px; left:50%; transform:translateX(-50%);
@@ -698,6 +704,112 @@
     transition: transform .25s cubic-bezier(.16,1,.3,1);
   }
 
+  /* === Summary card variants — one per beat, fly out of chat === */
+
+  /* Frühwarnung — warm amber */
+  .bubble.b-card-frueh .b-card-preview{
+    background: linear-gradient(135deg, #FCEDE5 0%, #F8DBC9 70%, #EFC1A5 100%);
+    padding: 11px 13px 9px;
+  }
+  .bubble.b-card-frueh .b-card-preview-eyebrow{ color:#A8543F; }
+  .bubble.b-card-frueh .b-card-preview-eyebrow .dot{ background:#C0563F; }
+  .b-card-warn-list{ display:flex; flex-direction: column; gap:5px; margin-top: 2px; }
+  .b-card-warn-row{
+    display:flex; align-items:center; justify-content:space-between;
+    gap: 8px;
+  }
+  .b-card-warn-tag{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 8px; letter-spacing: .14em; text-transform: uppercase;
+    color: #A8543F; font-weight: 600;
+    flex-shrink:0;
+  }
+  .b-card-warn-val{
+    font-family:'Inter', sans-serif;
+    font-size: 11px; font-weight: 600;
+    color: #5C2E1F; letter-spacing: -0.012em;
+    text-align:right;
+  }
+
+  /* Fokus — cream */
+  .bubble.b-card-fokus .b-card-preview{
+    background: linear-gradient(135deg, #F4EFE2 0%, #ECE3CA 70%, #DDD2B1 100%);
+    padding: 11px 13px 10px;
+  }
+  .bubble.b-card-fokus .b-card-preview-eyebrow{ color:#7a6e54; }
+  .bubble.b-card-fokus .b-card-preview-eyebrow .dot{ background:#3b3b3b; }
+  .b-card-fokus-hero{
+    display:flex; align-items:center; gap: 10px;
+    padding: 2px 0 4px;
+  }
+  .b-card-fokus-num{
+    font-family:'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 28px;
+    letter-spacing: -0.042em;
+    color: #1a1612;
+    line-height: 0.92;
+    flex-shrink:0;
+  }
+  .b-card-fokus-cap{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 7.5px; letter-spacing: .12em; text-transform: uppercase;
+    color: #7a6e54;
+    line-height: 1.45;
+  }
+  .b-card-fokus-list{
+    display:flex; flex-direction: column;
+    margin-top: 4px;
+    border-top: 1px solid rgba(0,0,0,.08);
+    padding-top: 6px;
+    gap: 3px;
+  }
+  .b-card-fokus-li{
+    display:flex; justify-content:space-between; align-items:baseline;
+    font-family:'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    color: #1a1612;
+  }
+  .b-card-fokus-li .nm{ font-weight: 600; }
+  .b-card-fokus-li .vl{ color: #5e5648; }
+
+  /* Handlung — sage green */
+  .bubble.b-card-handlung .b-card-preview{
+    background: linear-gradient(135deg, #ECF1E9 0%, #D6E2CC 70%, #B7C9A7 100%);
+    padding: 11px 13px 10px;
+  }
+  .bubble.b-card-handlung .b-card-preview-eyebrow{ color:#3F5C2E; }
+  .bubble.b-card-handlung .b-card-preview-eyebrow .dot{ background:#2f7d3f; }
+  .b-card-action-list{ display:flex; flex-direction: column; gap:4px; }
+  .b-card-action-row{
+    display:flex; align-items:center; gap: 7px;
+    font-family:'Inter', sans-serif;
+    font-size: 10.5px; color: #1a3318; line-height: 1.3;
+    letter-spacing: -0.005em;
+  }
+  .b-card-action-ck{
+    display:inline-flex; align-items:center; justify-content:center;
+    width: 13px; height: 13px;
+    background: #2f7d3f; color: #fff;
+    border-radius: 9999px; font-size: 8px; font-weight: 600;
+    flex-shrink: 0;
+  }
+  .b-card-action-impact{
+    display:flex; justify-content:space-between; align-items:center;
+    margin-top: 6px;
+    padding-top: 6px;
+    border-top: 1px solid rgba(0,0,0,.08);
+    font-family:'JetBrains Mono', monospace;
+    font-size: 8.5px; letter-spacing: .14em; text-transform: uppercase;
+    color: #3F5C2E;
+  }
+  .b-card-action-impact .impact-val{
+    font-family:'Inter', sans-serif;
+    font-size: 13px; font-weight: 600;
+    color: #1a3318;
+    letter-spacing: -0.02em;
+  }
+
   /* Tap ripple indicator over the card */
   .tap-indicator{
     position:absolute; width:54px; height:54px;
@@ -1009,6 +1121,913 @@
   @media (max-width:900px){
     #s4-main{ grid-template-columns:1fr; }
     .s4-phone-cage{ display:block; margin:0 auto; }
+  }
+
+  /* ===== Slide 5 — Skill grid (right column) ===== */
+  .s4-skills{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    width: 100%;
+  }
+  .s4-skill{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding: 14px 16px 12px;
+    display:flex; flex-direction:column;
+    gap: 10px;
+    position:relative;
+    min-height: 152px;
+    opacity:0;
+    transform: translateY(14px) scale(.96);
+    transition: opacity .65s cubic-bezier(.16,1,.3,1),
+                transform .75s cubic-bezier(.16,1,.3,1),
+                box-shadow .4s cubic-bezier(.16,1,.3,1);
+    box-shadow: 0 1px 0 rgba(0,0,0,.02);
+  }
+  .s4-skill.show{
+    opacity:1;
+    transform:none;
+    box-shadow: 0 14px 28px -18px rgba(31,29,26,.18),
+                0 4px 10px -6px rgba(31,29,26,.08);
+  }
+  /* Brief "just appeared" flash */
+  .s4-skill.show.just-in{
+    animation: s4SkillIn .8s cubic-bezier(.16,1,.3,1);
+  }
+  @keyframes s4SkillIn{
+    0%   { box-shadow: 0 0 0 0   rgba(10,10,10,.18); }
+    40%  { box-shadow: 0 0 0 10px rgba(10,10,10,.06); }
+    100% { box-shadow: 0 14px 28px -18px rgba(31,29,26,.18),
+                       0 4px 10px -6px rgba(31,29,26,.08); }
+  }
+  .s4-skill.alert{
+    background: linear-gradient(180deg, #fff 0%, #FFF7F4 100%);
+    border-color: rgba(192,86,63,.28);
+  }
+
+  .s4-skill-head{
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .s4-skill-num{
+    font-family:'JetBrains Mono', monospace;
+    font-size:10px; letter-spacing:.20em; text-transform:uppercase;
+    color: var(--ink-muted);
+    font-weight:500;
+  }
+  .s4-skill-tag{
+    font-family:'JetBrains Mono', monospace;
+    font-size:9px; letter-spacing:.20em; text-transform:uppercase;
+    color: var(--ink-muted);
+    padding: 3px 8px;
+    border-radius: 9999px;
+    background: var(--bg-deep);
+  }
+  .s4-skill-tag.warn{
+    color: #C0563F;
+    background: rgba(192,86,63,.08);
+  }
+  .s4-skill-title{
+    font-family:'Inter', sans-serif;
+    font-weight:600; font-size:14.5px;
+    letter-spacing:-0.012em;
+    line-height:1.2;
+    color: var(--ink);
+  }
+  .s4-skill-body{
+    flex:1;
+    display:flex; flex-direction:column; justify-content:center;
+    gap: 7px;
+    min-height:0;
+  }
+  .s4-skill-foot{
+    display:flex; align-items:center; gap:7px;
+    font-family:'JetBrains Mono', monospace;
+    font-size: 9.5px; letter-spacing:.16em; text-transform:uppercase;
+    color: var(--ink-muted);
+    padding-top: 9px;
+    border-top: 1px solid var(--line-soft);
+  }
+  .s4-skill-dot{
+    width:6px; height:6px; border-radius:9999px;
+    background: var(--ink);
+    flex-shrink:0;
+  }
+  .s4-skill-dot.ok{ background:#34C759; }
+  .s4-skill-dot.warn{ background:#E47B65; }
+  .s4-skill-dot.neutral{ background:#0A0A0A; }
+
+  /* Card · 01 Report — KPI strip */
+  .s4-kpi-row{
+    display:grid; grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  /* Card · 01 Report — small "this is a document" preview above the KPIs */
+  .s4-report-mini{
+    display:flex; align-items:center; gap: 10px;
+    padding: 9px 11px;
+    background: var(--bg-deep);
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  .s4-report-mini-thumb{
+    position:relative;
+    width: 30px; height: 40px;
+    background:#fff;
+    border: 1px solid var(--line);
+    border-radius: 2.5px;
+    flex-shrink:0;
+    padding: 4px 4px 5px;
+    display:flex; flex-direction:column;
+    gap: 2px;
+    box-shadow:
+      0 1px 2px rgba(0,0,0,.04),
+      inset 0 0 0 1px rgba(255,255,255,.4);
+  }
+  /* Folded corner accent */
+  .s4-report-mini-thumb::after{
+    content:'';
+    position:absolute;
+    top:0; right:0;
+    width: 6px; height: 6px;
+    background: linear-gradient(225deg, transparent 50%, rgba(0,0,0,.10) 50%);
+  }
+  .s4-report-mini-thumb .rm-band{
+    display:block;
+    width: 80%; height: 3px;
+    background: #0A0A0A;
+    border-radius: 1px;
+    margin-bottom: 1px;
+  }
+  .s4-report-mini-thumb .rm-line{
+    display:block;
+    height: 1.5px;
+    background: var(--line);
+    border-radius: 1px;
+  }
+  .s4-report-mini-thumb .rm-line-1{ width: 70%; }
+  .s4-report-mini-thumb .rm-line-2{ width: 90%; }
+  .s4-report-mini-thumb .rm-bars{
+    display:flex; align-items:flex-end; gap: 1.5px;
+    height: 12px; margin-top:auto;
+  }
+  .s4-report-mini-thumb .rm-bars i{
+    flex: 1;
+    background: var(--ink-faint);
+    border-radius: 1px;
+  }
+  .s4-report-mini-thumb .rm-bars i:nth-child(1){ height: 50%; }
+  .s4-report-mini-thumb .rm-bars i:nth-child(2){ height: 75%; }
+  .s4-report-mini-thumb .rm-bars i:nth-child(3){ height: 35%; }
+  .s4-report-mini-thumb .rm-bars i:nth-child(4){ height: 90%; background:#0A0A0A; }
+
+  .s4-report-mini-meta{
+    flex: 1; min-width:0;
+    display:flex; flex-direction: column;
+    gap: 3px;
+    line-height: 1.2;
+  }
+  .s4-report-mini-title{
+    font-family:'Inter', sans-serif;
+    font-weight: 600; font-size: 11.5px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  .s4-report-mini-sub{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 8.5px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+  .s4-kpi{
+    background: var(--bg-deep);
+    border-radius: 7px;
+    padding: 8px 10px;
+    display:flex; flex-direction:column;
+    gap: 2px;
+  }
+  .s4-kpi .lbl{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 8.5px; letter-spacing:.14em; text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+  .s4-kpi .val{
+    font-family:'Inter', sans-serif;
+    font-weight:600; font-size: 13.5px;
+    color: var(--ink); letter-spacing:-0.02em;
+  }
+
+  /* Card · 02 Lieferanten — bars */
+  .s4-lb-row{
+    display:flex; align-items:center; gap:10px;
+    font-family:'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    color: var(--ink);
+  }
+  .s4-lb-row .nm{ width: 72px; color: var(--ink-medium); }
+  .s4-lb-row .bar{
+    flex:1; height: 8px; background: rgba(0,0,0,.05);
+    border-radius: 2px; overflow:hidden;
+  }
+  .s4-lb-row .bar i{
+    display:block; height:100%;
+    background:#0A0A0A; border-radius:2px;
+    width: calc(var(--w, .5) * 100%);
+    transform: scaleX(0); transform-origin: left center;
+    transition: transform .9s cubic-bezier(.16,1,.3,1) .15s;
+  }
+  .s4-skill.show .s4-lb-row .bar i{ transform: scaleX(1); }
+  .s4-lb-row .vl{
+    width: 32px; text-align: right;
+    color: var(--ink); font-weight: 500;
+  }
+
+  /* Card · 03 Liquidity — sparkline */
+  .s4-spark{
+    position:relative;
+    height: 70px;
+    width:100%;
+  }
+  .s4-spark svg{ width:100%; height:100%; display:block; }
+  .s4-spark-val{
+    position:absolute;
+    right: 4px; top: 28px;
+    background:#0A0A0A; color:#fff;
+    font-family:'Inter', sans-serif;
+    font-weight:600; font-size: 11.5px;
+    letter-spacing:-0.012em;
+    padding: 4px 8px; border-radius: 6px;
+    box-shadow: 0 6px 12px -6px rgba(0,0,0,.32);
+  }
+
+  /* Card · 04 Anomalie */
+  .s4-an-row{
+    display:flex; align-items:baseline; justify-content:space-between;
+    padding: 8px 10px;
+    background: rgba(192,86,63,.06);
+    border: 1px solid rgba(192,86,63,.18);
+    border-radius: 7px;
+  }
+  .s4-an-amt{
+    font-family:'Inter', sans-serif;
+    font-weight:600; font-size: 17px;
+    color: #C0563F;
+    letter-spacing: -0.02em;
+  }
+  .s4-an-meta{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+  .s4-an-flag{
+    font-size: 11.5px;
+    color: var(--ink-medium);
+    line-height: 1.4;
+    padding-left: 2px;
+  }
+
+  /* Card · 05 OPOS */
+  .s4-op-row{
+    display:flex; align-items:center; gap: 10px;
+    padding: 5px 0;
+    font-size: 11.5px;
+    color: var(--ink);
+    border-bottom: 1px dashed var(--line-soft);
+  }
+  .s4-op-row:last-child{ border-bottom: 0; }
+  .s4-op-row .nm{
+    font-weight: 600; flex: 1;
+    letter-spacing: -0.005em;
+  }
+  .s4-op-row .vl{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink);
+  }
+  .s4-op-row .dy{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: #C0563F;
+    letter-spacing: .08em; text-transform: uppercase;
+    min-width: 36px; text-align: right;
+  }
+
+  /* Card · 06 Empfehlungen */
+  .s4-rec-row{
+    display:flex; align-items:flex-start; gap:9px;
+    font-size: 12px; line-height: 1.4;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+  .s4-rec-ck{
+    display:inline-flex; align-items:center; justify-content:center;
+    width: 16px; height: 16px;
+    border-radius: 9999px;
+    background: #0A0A0A; color: #fff;
+    font-size: 10px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* Card · Frueherkennung — risk/anomaly rows */
+  .s4-fr-row{
+    display:flex; align-items:center; gap:10px;
+    padding: 6px 0;
+    border-bottom: 1px dashed var(--line-soft);
+  }
+  .s4-fr-row:last-child{ border-bottom:0; }
+  .s4-fr-pill{
+    flex-shrink:0;
+    font-family:'JetBrains Mono', monospace;
+    font-size: 9px; letter-spacing:.16em; text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 9999px;
+    font-weight: 600;
+    min-width: 60px;
+    text-align: center;
+  }
+  .s4-fr-pill.anom{
+    color:#C0563F;
+    background: rgba(192,86,63,.10);
+  }
+  .s4-fr-pill.risk{
+    color:#7a6e54;
+    background: rgba(122,110,84,.10);
+  }
+  .s4-fr-text{
+    font-size: 11.5px; line-height: 1.4;
+    color: var(--ink); letter-spacing: -0.005em;
+    flex: 1;
+  }
+
+  /* Card · Fokus — hero number + list */
+  .s4-fo-hero{
+    display:flex; align-items:center; gap:14px;
+    padding: 10px 12px;
+    background: #0A0A0A;
+    color: #fff;
+    border-radius: 8px;
+    margin-bottom: 8px;
+  }
+  .s4-fo-num{
+    font-family:'Inter', sans-serif;
+    font-weight: 600; font-size: 28px;
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+  .s4-fo-cap{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase;
+    color: rgba(255,255,255,.78);
+    line-height: 1.4;
+  }
+  .s4-fo-list{ display:flex; flex-direction:column; }
+  .s4-fo-li{
+    display:flex; align-items:center; gap:10px;
+    padding: 5px 0;
+    font-size: 11.5px;
+    border-bottom: 1px dashed var(--line-soft);
+  }
+  .s4-fo-li:last-child{ border-bottom: 0; }
+  .s4-fo-li .nm{ font-weight:600; flex:1; letter-spacing:-0.005em; color: var(--ink); }
+  .s4-fo-li .vl{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px; color: var(--ink);
+  }
+  .s4-fo-li .dy{
+    font-family:'JetBrains Mono', monospace;
+    font-size:10px; color: #C0563F;
+    letter-spacing:.08em; text-transform: uppercase;
+    min-width: 36px; text-align: right;
+  }
+
+  /* Card · Handlungsempfehlungen — impact strip */
+  .s4-rec-impact{
+    margin-top: 10px;
+    display:flex; justify-content:space-between; align-items:center;
+    padding: 9px 12px;
+    background: #F7F1E3;
+    border: 1px solid #E8DEC0;
+    border-radius: 8px;
+  }
+  .s4-rec-impact-lbl{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 9px; letter-spacing:.16em; text-transform: uppercase;
+    color: #7a6a3e;
+    max-width: 16ch; line-height: 1.4;
+  }
+  .s4-rec-impact-val{
+    font-family:'Inter', sans-serif;
+    font-weight: 600; font-size: 18px;
+    color: var(--ink); letter-spacing: -0.028em;
+    line-height: 1;
+  }
+
+  /* Empty-state look before any card has appeared (subtle placeholder) */
+  .s4-skills.is-pristine .s4-skill{
+    background: transparent;
+    border-style: dashed;
+    border-color: var(--line-soft);
+    box-shadow: none;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px){
+    .s4-skills{ grid-template-columns: 1fr; }
+  }
+
+  /* ===== Slide 5 — Monitor scene (Steuerberater · DATEV upload) ===== */
+  .s4-monitor-stage{
+    position:absolute;
+    inset: 0;
+    z-index: 30;
+    display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    gap: 14px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .8s cubic-bezier(.16,1,.3,1);
+  }
+  .s4-monitor-stage.in{
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .s4-monitor-stage.out{
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-6px);
+    transition: opacity .9s cubic-bezier(.16,1,.3,1),
+                transform 1.1s cubic-bezier(.16,1,.3,1);
+  }
+  .s4-monitor-eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing:.22em; text-transform: uppercase;
+    color: var(--ink-medium);
+    font-weight: 500;
+    margin: 0;
+  }
+  /* The monitor itself — a browser-window-style frame */
+  .s4-monitor{
+    width: 780px;
+    max-width: 92%;
+    height: 432px;
+    background: #fff;
+    border-radius: 14px;
+    border: 1px solid var(--line);
+    box-shadow:
+      0 60px 110px -40px rgba(31,29,26,.32),
+      0 24px 48px -20px rgba(31,29,26,.18),
+      0 4px 10px rgba(31,29,26,.06),
+      inset 0 0 0 1px rgba(255,255,255,.4);
+    overflow: hidden;
+    display:flex; flex-direction:column;
+    position: relative;
+  }
+  /* Subtle desk shadow under the monitor */
+  .s4-monitor::after{
+    content:'';
+    position:absolute;
+    left: 8%; right: 8%;
+    bottom: -22px; height: 22px;
+    background: radial-gradient(ellipse at center, rgba(0,0,0,.18) 0%, transparent 65%);
+    filter: blur(8px);
+    z-index: -1;
+  }
+  .s4-monitor-chrome{
+    display:flex; align-items:center;
+    background: #F4F2EE;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--line);
+    gap: 14px;
+    flex-shrink: 0;
+  }
+  .s4-mc-dots{ display:flex; gap:6px; flex-shrink: 0; }
+  .s4-mc-dots i{
+    display:inline-block;
+    width:11px; height:11px; border-radius:9999px;
+    background: #E0DCD3;
+  }
+  .s4-mc-dots i:nth-child(1){ background:#F06755; }
+  .s4-mc-dots i:nth-child(2){ background:#F1BE40; }
+  .s4-mc-dots i:nth-child(3){ background:#50CB42; }
+  .s4-mc-title{
+    flex:1; text-align:center;
+    font-family:'Inter', sans-serif;
+    font-size: 12px; font-weight: 500;
+    color: var(--ink-medium);
+    letter-spacing: -0.005em;
+  }
+  .s4-monitor-body{
+    flex: 1; min-height: 0;
+    position: relative;
+    overflow: hidden;
+    background: #fff;
+  }
+  /* Mail + Upload views stack and crossfade */
+  .s4-mail-view,
+  .s4-upload-view{
+    position: absolute;
+    inset: 0;
+    display:flex;
+    transition: opacity .55s cubic-bezier(.16,1,.3,1),
+                transform .65s cubic-bezier(.16,1,.3,1);
+  }
+  .s4-mail-view{ opacity: 1; transform: none; z-index: 2; }
+  .s4-upload-view{ opacity: 0; transform: translateX(20px); z-index: 1; flex-direction: column; padding: 18px 24px; gap: 14px; }
+  .s4-monitor.is-uploading .s4-mail-view{ opacity: 0; transform: translateX(-20px); pointer-events: none; }
+  .s4-monitor.is-uploading .s4-upload-view{ opacity: 1; transform: none; z-index: 3; }
+
+  /* Mail list (left pane) */
+  .s4-mail-list{
+    width: 200px;
+    flex-shrink: 0;
+    border-right: 1px solid var(--line);
+    background: #FBFAF7;
+    display:flex; flex-direction:column;
+    padding: 8px 0;
+    overflow: hidden;
+  }
+  .s4-mail-item{
+    padding: 11px 14px;
+    display:flex; flex-direction:column; gap: 3px;
+    border-bottom: 1px solid var(--line-soft);
+    position: relative;
+    cursor: default;
+  }
+  .s4-mail-item.active{
+    background: #fff;
+    border-left: 2px solid #0A0A0A;
+  }
+  .s4-mail-from{
+    font-family:'Inter', sans-serif;
+    font-weight: 600; font-size: 11.5px;
+    color: var(--ink);
+    letter-spacing: -0.008em;
+  }
+  .s4-mail-sub{
+    font-size: 10.5px; color: var(--ink-muted);
+    letter-spacing: -0.005em;
+    line-height: 1.35;
+  }
+  .s4-mail-dot{
+    position: absolute;
+    top: 14px; right: 12px;
+    width: 7px; height: 7px;
+    border-radius: 9999px;
+    background: #0A6FFF;
+  }
+
+  /* Mail content (right pane) */
+  .s4-mail-content{
+    flex: 1; min-width: 0;
+    display:flex; flex-direction:column;
+    padding: 18px 24px;
+    gap: 12px;
+    overflow: hidden;
+  }
+  .s4-mail-head{
+    display:flex; align-items:center; gap: 11px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .s4-mail-avatar{
+    width: 34px; height: 34px;
+    border-radius: 9999px;
+    background: #0A0A0A;
+    color: #fff;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Inter', sans-serif;
+    font-weight: 600; font-size: 14px;
+    letter-spacing: -0.02em;
+    flex-shrink: 0;
+  }
+  .s4-mail-meta{ flex: 1; min-width: 0; display:flex; flex-direction: column; line-height: 1.25; }
+  .s4-mail-meta-from{
+    font-family:'Inter', sans-serif;
+    font-weight: 600; font-size: 12px;
+    color: var(--ink); letter-spacing: -0.008em;
+  }
+  .s4-mail-meta-to{
+    font-size: 11px; color: var(--ink-muted);
+    letter-spacing: -0.005em; margin-top: 1px;
+  }
+  .s4-mail-time{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 10px; color: var(--ink-muted);
+    letter-spacing: .12em; text-transform: uppercase;
+    flex-shrink: 0;
+  }
+  .s4-mail-subject{
+    font-family:'Inter', sans-serif;
+    font-weight: 600; font-size: 14px;
+    color: var(--ink);
+    letter-spacing: -0.012em;
+    line-height: 1.3;
+  }
+  .s4-mail-body{
+    font-size: 12.5px; line-height: 1.55;
+    color: var(--ink-medium);
+    letter-spacing: -0.005em;
+  }
+  .s4-mail-cta-wrap{
+    margin-top: auto;
+    display:flex; flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .s4-mail-cta{
+    background: #0A0A0A;
+    color: #fff;
+    border: none;
+    border-radius: 9999px;
+    padding: 11px 22px;
+    font-family:'Inter', sans-serif;
+    font-size: 13px; font-weight: 500;
+    letter-spacing: -0.008em;
+    display:inline-flex; align-items:center; gap: 9px;
+    cursor: pointer;
+    position: relative;
+    box-shadow: 0 6px 14px -8px rgba(10,10,10,.4);
+    transition: transform .22s cubic-bezier(.16,1,.3,1);
+  }
+  .s4-mail-cta .arrow{
+    display:inline-block;
+    transition: transform .35s cubic-bezier(.16,1,.3,1);
+  }
+  .s4-mail-cta.is-hover .arrow{ transform: translateX(2px); }
+  .s4-mail-cta.is-pressing{
+    transform: scale(0.96);
+  }
+  .s4-mail-cta-foot{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 9.5px; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  /* Animated cursor that "clicks" the CTA */
+  .s4-cursor{
+    position: absolute;
+    width: 22px; height: 22px;
+    pointer-events: none;
+    opacity: 0;
+    z-index: 10;
+    transition: opacity .35s ease,
+                transform .9s cubic-bezier(.4,0,.2,1);
+  }
+  .s4-cursor svg{ width: 100%; height: 100%; display:block;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,.35)); }
+  .s4-cursor.in{ opacity: 1; }
+  .s4-cursor.click::after{
+    content: '';
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 24px; height: 24px;
+    border-radius: 9999px;
+    border: 2px solid rgba(10,10,10,.45);
+    transform: translate(-50%, -50%) scale(.3);
+    opacity: 0;
+    animation: s4CursorClick .55s cubic-bezier(.16,1,.3,1);
+  }
+  @keyframes s4CursorClick{
+    0%   { opacity: 0; transform: translate(-50%,-50%) scale(.3); }
+    30%  { opacity: 1; transform: translate(-50%,-50%) scale(1); }
+    100% { opacity: 0; transform: translate(-50%,-50%) scale(1.7); }
+  }
+
+  /* Upload view */
+  .s4-upload-head{
+    display:flex; align-items:center; gap: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line-soft);
+    flex-shrink: 0;
+  }
+  .s4-upload-back{
+    font-size: 18px; color: var(--ink-muted);
+    line-height: 1;
+  }
+  .s4-upload-title{
+    font-family:'Inter', sans-serif;
+    font-weight: 600; font-size: 13px;
+    color: var(--ink); letter-spacing: -0.012em;
+  }
+  .s4-upload-drop{
+    flex: 1;
+    border: 2px dashed var(--line);
+    border-radius: 12px;
+    display:flex; flex-direction:column;
+    align-items: center; justify-content: center;
+    gap: 8px;
+    background: #FBFAF7;
+    color: var(--ink-muted);
+    min-height: 0;
+    transition: border-color .45s cubic-bezier(.16,1,.3,1),
+                background .45s cubic-bezier(.16,1,.3,1),
+                opacity .45s cubic-bezier(.16,1,.3,1);
+  }
+  .s4-upload-drop.is-active{
+    border-color: #0A0A0A;
+    background: #fff;
+  }
+  .s4-upload-icon{
+    width: 32px; height: 32px;
+    color: var(--ink-muted);
+  }
+  .s4-upload-prompt{
+    font-family:'Inter', sans-serif;
+    font-size: 13px; font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -0.008em;
+  }
+  .s4-upload-or{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+  /* Uploaded file row */
+  .s4-upload-file{
+    display:flex; align-items: center; gap: 14px;
+    padding: 12px 14px;
+    background: var(--bg-deep);
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity .55s cubic-bezier(.16,1,.3,1),
+                transform .55s cubic-bezier(.16,1,.3,1);
+  }
+  .s4-monitor.show-file .s4-upload-file{ opacity: 1; transform: none; }
+  .s4-upload-file-icon{
+    width: 38px; height: 38px;
+    border-radius: 7px;
+    background: #0A0A0A; color: #fff;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'JetBrains Mono', monospace;
+    font-size: 10px; font-weight: 600;
+    letter-spacing: .04em;
+    flex-shrink: 0;
+  }
+  .s4-upload-file-meta{
+    flex: 1; min-width: 0;
+    display:flex; flex-direction: column; gap: 3px;
+  }
+  .s4-upload-file-name{
+    font-family:'Inter', sans-serif;
+    font-weight: 500; font-size: 12.5px;
+    color: var(--ink);
+    letter-spacing: -0.008em;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .s4-upload-file-size{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+  .s4-upload-progress{
+    flex: 1.4;
+    height: 5px;
+    background: rgba(0,0,0,.06);
+    border-radius: 3px;
+    overflow: hidden;
+    position: relative;
+  }
+  .s4-upload-progress-bar{
+    height: 100%;
+    background: #0A0A0A;
+    width: 0;
+    border-radius: 3px;
+    transition: width 2.2s cubic-bezier(.4,0,.2,1);
+  }
+  .s4-upload-percent{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 500;
+    color: var(--ink);
+    min-width: 38px; text-align: right;
+    flex-shrink: 0;
+  }
+  /* "Übertragen" success bar */
+  .s4-upload-done{
+    display:flex; align-items: center; gap: 10px;
+    padding: 10px 14px;
+    background: rgba(52,199,89,.08);
+    border: 1px solid rgba(52,199,89,.32);
+    border-radius: 10px;
+    color: #1E7A3A;
+    font-family:'Inter', sans-serif;
+    font-size: 12.5px;
+    letter-spacing: -0.008em;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity .5s cubic-bezier(.16,1,.3,1),
+                transform .5s cubic-bezier(.16,1,.3,1);
+  }
+  .s4-monitor.is-done .s4-upload-done{ opacity: 1; transform: none; }
+  .s4-upload-done-tick{
+    width: 20px; height: 20px;
+    border-radius: 9999px;
+    background: #34C759;
+    color: #fff;
+    display:inline-flex; align-items:center; justify-content:center;
+    font-size: 11px; font-weight: 600;
+    flex-shrink: 0;
+  }
+  /* Handoff caption beneath the monitor */
+  .s4-monitor-handoff{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--ink-muted);
+    margin: 0;
+    opacity: 0;
+    transition: opacity .6s cubic-bezier(.16,1,.3,1);
+  }
+  .s4-monitor.is-done ~ .s4-monitor-handoff,
+  .s4-monitor-handoff.show{
+    opacity: 1;
+  }
+  @media (max-width: 900px){
+    .s4-monitor{ width: 96%; height: 380px; }
+    .s4-mail-list{ width: 140px; }
+    .s4-mail-content{ padding: 14px 16px; }
+  }
+
+  /* ===== Slide 5 — Step nav (manual control) ===== */
+  .s4-nav{
+    display:flex; align-items:center;
+    justify-content:center;
+    gap: 16px;
+    margin: 26px auto 0;
+    padding: 8px 10px;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:9999px;
+    width: fit-content;
+    box-shadow: 0 8px 22px -16px rgba(31,29,26,.22),
+                0 2px 6px -3px rgba(31,29,26,.08);
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity .6s cubic-bezier(.16,1,.3,1),
+                transform .6s cubic-bezier(.16,1,.3,1);
+  }
+  .s4-nav.show{ opacity: 1; transform: none; }
+  .s4-nav-btn{
+    background: transparent;
+    border: 1px solid transparent;
+    width: 32px; height: 32px;
+    border-radius: 9999px;
+    color: var(--ink);
+    font-family:'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    display:flex; align-items:center; justify-content:center;
+    transition: background .25s ease, color .25s ease, opacity .25s ease, border-color .25s ease;
+    line-height: 1;
+  }
+  .s4-nav-btn:hover{
+    background: var(--bg-deep);
+    border-color: var(--line);
+  }
+  .s4-nav-btn:disabled{
+    opacity: .25; cursor: default;
+  }
+  .s4-nav-btn:disabled:hover{ background: transparent; border-color: transparent; }
+  .s4-nav-stepper{
+    display:flex; flex-direction:column; align-items:center;
+    gap: 4px;
+    min-width: 240px;
+  }
+  .s4-nav-dots{
+    display:flex; gap: 7px; align-items:center;
+    padding: 4px 6px;
+  }
+  .s4-nav-dot{
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: rgba(0,0,0,.14);
+    cursor: pointer;
+    border: 0; padding: 0;
+    transition: all .35s cubic-bezier(.16,1,.3,1);
+  }
+  .s4-nav-dot.is-active{
+    background: #0A0A0A;
+    width: 24px;
+    border-radius: 4px;
+  }
+  .s4-nav-dot.is-done{ background: rgba(0,0,0,.45); }
+  .s4-nav-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 10.5px; letter-spacing:.16em; text-transform:uppercase;
+    color: var(--ink-muted);
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 360px;
+  }
+
+  @media (max-width: 900px){
+    .s4-nav-label{ display:none; }
   }
 
   /* Slide 5 — Two-column merged demo (Chat + Report) */
@@ -2947,7 +3966,7 @@
           <span class="block" style="color:var(--ink-faint);">aus erster Hand.</span>
         </h2>
 
-        <p class="lede reveal" id="s3-lede" style="margin-top:36px; max-width:46ch;">Über drei Jahre haben wir über 10.000 KMU analysiert — und unsere Beteiligungen selbst operativ geführt. In jedem Haus dasselbe Bild: Zahlen, die zu spät kommen. Reportings, die nicht stimmen. Entscheidungen, die im Nebel getroffen werden.</p>
+        <p class="lede reveal" id="s3-lede" style="margin-top:36px; max-width:46ch;">Über drei Jahre haben wir über 400 KMU tiefer analysiert - und unsere Beteiligungen selbst operativ geführt. In jedem Haus dasselbe Bild: Zahlen, die zu spät kommen. Reportings, die nicht stimmen. Entscheidungen, die im Nebel getroffen werden.</p>
 
         <p class="reveal" id="s3-lede2"
            style="margin-top:22px; font-size:17px; line-height:1.55; color:var(--ink-soft); max-width:42ch; font-weight:500;">
@@ -3279,9 +4298,7 @@
         Wer im Blindflug fliegt,
         <span class="block" style="color:var(--ink-muted)">zahlt&nbsp;drauf.</span>
       </h2>
-      <p class="lede mt-5" id="s2b-sub" style="opacity:0; max-width:64ch; margin-left:auto; margin-right:auto;">
-        Intransparenz gibt es nur scheinbar umsonst. Sie kostet — Tag für Tag, in vier Formen.
-      </p>
+      <p class="lede mt-5" id="s2b-sub" style="opacity:0; max-width:64ch; margin-left:auto; margin-right:auto;">Intransparenz gibt es nur scheinbar umsonst. Sie kostet - Tag für Tag, in vier Formen.</p>
     </div>
 
     <!-- Four consequence cards -->
@@ -3294,11 +4311,11 @@
       <div class="problem-card" data-pc="2">
         <div class="problem-num">02</div>
         <div class="problem-title">Marge erodiert unsichtbar</div>
-        <div class="problem-body">Schwund und Kostendruck verstecken sich im Wareneinsatz — bis sie im Jahresabschluss kumuliert auftauchen.</div>
+        <div class="problem-body">Schwund und Kostendruck verstecken sich im Wareneinsatz - bis sie im Jahresabschluss kumuliert auftauchen.</div>
       </div>
       <div class="problem-card" data-pc="3">
         <div class="problem-num">03</div>
-        <div class="problem-title">lliquidität ohne Vorwarnung</div>
+        <div class="problem-title">Liquiditätsklemme ohne Vorwarnung</div>
         <div class="problem-body">Engpässe treffen unvorbereitet. Der Kontostand wird zum&nbsp;Spätwarnsystem.</div>
       </div>
       <div class="problem-card" data-pc="4">
@@ -3325,22 +4342,116 @@
     <!-- One pithy headline with breathing room -->
     <div class="text-center" style="max-width:1080px; margin:0 auto;">
       <p class="label-eyebrow" id="s4-eye" style="opacity:0">Der proaktive Finanzchef</p>
-      <h2 class="font-display mt-4" id="s4-h2"
-          style="opacity:0; font-size:clamp(2.4rem,4.2vw,4rem); line-height:1.06; letter-spacing:-0.038em;">
+      <h2 class="font-display mt-3" id="s4-h2"
+          style="opacity:0; font-size:clamp(2rem,3.4vw,3.4rem); line-height:1.06; letter-spacing:-0.038em;">
         Julie meldet sich. <span style="color:var(--ink-muted)">Du fragst nach.</span>
       </h2>
-      <p class="lede mt-4" id="s4-sub" style="opacity:0; margin-left:auto; margin-right:auto; max-width:64ch;">
-        Julie arbeitet Tag und Nacht, proaktiv, bevor du fragst. Sie liegt Reports vor -
-        und meldet sich, wenn etwas auffällt oder sie Verbesserungsvorschläge hat.
-      </p>
     </div>
 
     <!-- Minimalist demo: iPhone (chat) + Browser (report) -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start" id="s4-demo" style="max-width:1180px; margin:0 auto; width:100%;">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start" id="s4-demo" style="max-width:1180px; margin:0 auto; width:100%; position:relative;">
+
+      <!-- ===== Monitor scene: Steuerberater · monatlicher DATEV-Upload ===== -->
+      <div class="s4-monitor-stage" id="s4-monitor-stage" aria-hidden="true">
+        <p class="s4-monitor-eyebrow">01 &nbsp;—&nbsp; Steuerberater · monatlicher Datenupload</p>
+        <div class="s4-monitor" id="s4-monitor">
+
+          <!-- Browser chrome -->
+          <div class="s4-monitor-chrome">
+            <span class="s4-mc-dots"><i></i><i></i><i></i></span>
+            <span class="s4-mc-title">posteingang.kanzlei-mueller.de</span>
+            <span style="width:60px;"></span>
+          </div>
+
+          <div class="s4-monitor-body">
+
+            <!-- Cursor (animated click target) -->
+            <div class="s4-cursor" id="s4-cursor">
+              <svg viewBox="0 0 24 24" fill="#0A0A0A" stroke="#fff" stroke-width="1.2" stroke-linejoin="round">
+                <path d="M5 3 L5 19 L9.5 15.5 L12 21 L14.5 19.5 L12 14 L18 13 Z"/>
+              </svg>
+            </div>
+
+            <!-- ===== MAIL VIEW ===== -->
+            <div class="s4-mail-view" id="s4-mail-view">
+              <div class="s4-mail-list">
+                <div class="s4-mail-item">
+                  <span class="s4-mail-from">Finanzamt</span>
+                  <span class="s4-mail-sub">USt-Voranmeldung Q4</span>
+                </div>
+                <div class="s4-mail-item active" id="s4-mail-julie">
+                  <span class="s4-mail-from">Julie.ai</span>
+                  <span class="s4-mail-sub">DATEV-Upload Januar fällig</span>
+                  <span class="s4-mail-dot"></span>
+                </div>
+                <div class="s4-mail-item">
+                  <span class="s4-mail-from">Kanzlei-Team</span>
+                  <span class="s4-mail-sub">Mandantenbesprechung</span>
+                </div>
+              </div>
+              <div class="s4-mail-content">
+                <div class="s4-mail-head">
+                  <div class="s4-mail-avatar">J</div>
+                  <div class="s4-mail-meta">
+                    <span class="s4-mail-meta-from">Julie.ai &lt;hello@julie.ai&gt;</span>
+                    <span class="s4-mail-meta-to">an: Stefan Müller · Steuerberater</span>
+                  </div>
+                  <span class="s4-mail-time">heute · 08:12</span>
+                </div>
+                <div class="s4-mail-subject">DATEV-Upload Januar — Werkstatt Müller GmbH</div>
+                <div class="s4-mail-body">
+                  Hallo Stefan, der monatliche Datenupload für Werkstatt Müller ist fällig. Einfach den DATEV-Export hochladen — Julie analysiert automatisch und informiert den Mandanten direkt.
+                </div>
+                <div class="s4-mail-cta-wrap">
+                  <button class="s4-mail-cta" id="s4-mail-cta" type="button">
+                    <span>Daten hochladen</span>
+                    <span class="arrow">→</span>
+                  </button>
+                  <span class="s4-mail-cta-foot">DSGVO · Ende-zu-Ende verschlüsselt</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- ===== UPLOAD VIEW ===== -->
+            <div class="s4-upload-view" id="s4-upload-view">
+              <div class="s4-upload-head">
+                <span class="s4-upload-back">←</span>
+                <span class="s4-upload-title">Sicherer Upload · Werkstatt Müller GmbH</span>
+                <span style="flex:1;"></span>
+                <span class="s4-mail-cta-foot">DSGVO · verschlüsselt</span>
+              </div>
+              <div class="s4-upload-drop" id="s4-upload-drop">
+                <svg class="s4-upload-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 4 L16 22 M9 11 L16 4 L23 11 M5 24 L5 27 A1 1 0 0 0 6 28 L26 28 A1 1 0 0 0 27 27 L27 24"/>
+                </svg>
+                <span class="s4-upload-prompt">DATEV-Export hier ablegen</span>
+                <span class="s4-upload-or">oder Datei auswählen</span>
+              </div>
+              <div class="s4-upload-file" id="s4-upload-file">
+                <span class="s4-upload-file-icon">CSV</span>
+                <div class="s4-upload-file-meta">
+                  <span class="s4-upload-file-name">DATEV_export_2026-01.csv</span>
+                  <span class="s4-upload-file-size">2,4 MB · verschlüsselt übertragen</span>
+                </div>
+                <div class="s4-upload-progress">
+                  <div class="s4-upload-progress-bar" id="s4-upload-progress-bar"></div>
+                </div>
+                <span class="s4-upload-percent" id="s4-upload-percent">0 %</span>
+              </div>
+              <div class="s4-upload-done" id="s4-upload-done">
+                <span class="s4-upload-done-tick">✓</span>
+                <span>Übertragen · Julie startet die Analyse automatisch</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <p class="s4-monitor-handoff" id="s4-monitor-handoff">Analyse läuft &nbsp;·&nbsp; Unternehmer bekommt Bescheid &nbsp;↓</p>
+      </div>
 
       <!-- LEFT — iPhone (interaction) -->
       <div class="lg:col-span-5 flex flex-col items-center" id="s4-phone-wrap" style="opacity:0;">
-        <p class="label-eyebrow" id="s4-eye-1" style="margin-bottom:14px; opacity:0;">01 &nbsp;—&nbsp; Julie meldet sich</p>
+        <p class="label-eyebrow" id="s4-eye-1" style="margin-bottom:14px; opacity:0;">02 &nbsp;—&nbsp; Unternehmer bekommt Insights</p>
         <div class="s4-phone-row">
           <div class="s4-phone-cage">
             <div class="iphone" id="s4-phone">
@@ -3362,11 +4473,11 @@
                   <div class="ios-push-icon">!</div>
                   <div class="ios-push-body">
                     <div class="ios-push-meta">
-                      <span class="ios-push-meta-name">Julie.ai · Anomalie</span>
+                      <span class="ios-push-meta-name">Julie.ai · Frühwarnung</span>
                       <span class="ios-push-meta-time">jetzt</span>
                     </div>
-                    <div class="ios-push-title">Ungewöhnliche Buchung erkannt</div>
-                    <div class="ios-push-text">Sparkasse: 28 K € außerplanmäßiger Abfluss. Bestätigung empfohlen.</div>
+                    <div class="ios-push-title">Liquidität wird in ~7 Wochen knapp</div>
+                    <div class="ios-push-text">Drei Trends rechtzeitig erkannt — lass uns früh gegensteuern.</div>
                   </div>
                 </div>
 
@@ -3460,30 +4571,127 @@
         </div>
       </div>
 
-      <!-- RIGHT — Live report (materialises out of the phone) -->
+      <!-- RIGHT — Skill grid (cards materialise from the chat one by one) -->
       <div class="lg:col-span-7 flex flex-col" id="s4-report-wrap" style="opacity:0;">
-        <p class="label-eyebrow" id="s4-eye-2" style="text-align:center; margin-bottom:14px; opacity:0;">02 &nbsp;—&nbsp; Monatsreport</p>
-        <div class="report-frame" id="s4-report-frame">
-          <div class="report-load-bar"></div>
-          <div class="report-frame-bar">
-            <div class="rf-dots">
-              <span></span><span></span><span></span>
+        <p class="label-eyebrow" id="s4-eye-2" style="text-align:center; margin-bottom:14px; opacity:0;">03 &nbsp;—&nbsp; Was Julie liefert</p>
+        <div class="s4-skills" id="s4-skills">
+
+          <!-- 01 · Transparenz über das Zahlenwerk -->
+          <div class="s4-skill" data-skill="transparenz">
+            <div class="s4-skill-head">
+              <span class="s4-skill-num">01</span>
+              <span class="s4-skill-tag">monatlich</span>
             </div>
-            <div class="rf-title">report_2026-01.html&nbsp;·&nbsp;Julie.ai</div>
-            <a href="report_2026-01.html" target="_blank" class="rf-open">Vollbild&nbsp;↗</a>
-          </div>
-          <div style="position:relative;">
-            <iframe src="report_2026-01.html" class="report-iframe" id="s4-iframe" loading="lazy"
-                    title="Julie.ai · Monatsbericht"></iframe>
-            <div class="report-frame-fade"></div>
-            <div class="report-status" id="s4-report-status">
-              <span class="report-status-dot"></span>
-              <span>Live · zuletzt 9:41</span>
+            <div class="s4-skill-title">Transparenz über das Zahlenwerk</div>
+            <div class="s4-skill-body">
+              <div class="s4-report-mini">
+                <div class="s4-report-mini-thumb" aria-hidden="true">
+                  <span class="rm-band"></span>
+                  <span class="rm-line rm-line-1"></span>
+                  <span class="rm-line rm-line-2"></span>
+                  <span class="rm-bars">
+                    <i></i><i></i><i></i><i></i>
+                  </span>
+                </div>
+                <div class="s4-report-mini-meta">
+                  <span class="s4-report-mini-title">Management-Bericht</span>
+                  <span class="s4-report-mini-sub">Januar 2026 · GuV · Cashflow · OPOS</span>
+                </div>
+              </div>
+              <div class="s4-kpi-row">
+                <div class="s4-kpi"><span class="lbl">Umsatz</span><span class="val">391 K€</span></div>
+                <div class="s4-kpi"><span class="lbl">EBITDA</span><span class="val">45 K€</span></div>
+                <div class="s4-kpi"><span class="lbl">Marge</span><span class="val">11,5%</span></div>
+              </div>
             </div>
+            <div class="s4-skill-foot"><span class="s4-skill-dot ok"></span>Bericht Januar 2026 · automatisch</div>
           </div>
+
+          <!-- 02 · Frühwarnsystem (vorausschauend) -->
+          <div class="s4-skill alert" data-skill="frueh">
+            <div class="s4-skill-head">
+              <span class="s4-skill-num">02</span>
+              <span class="s4-skill-tag warn">prognose</span>
+            </div>
+            <div class="s4-skill-title">Frühwarnsystem · Muster die du sonst übersiehst</div>
+            <div class="s4-skill-body">
+              <div class="s4-fr-row">
+                <span class="s4-fr-pill risk">Müller</span>
+                <span class="s4-fr-text">Große Rechnungen 2 Tage später · Stress-Signal</span>
+              </div>
+              <div class="s4-fr-row">
+                <span class="s4-fr-pill risk">Lieferant X</span>
+                <span class="s4-fr-text">+4,2 % Stückpreise · verdeckt über Mindestabnahmen</span>
+              </div>
+              <div class="s4-fr-row">
+                <span class="s4-fr-pill risk">A12 Lager</span>
+                <span class="s4-fr-text">Umschlag 8× → 5× · still gebundenes Kapital</span>
+              </div>
+            </div>
+            <div class="s4-skill-foot"><span class="s4-skill-dot warn"></span>Proaktiv · was sonst keiner sieht</div>
+          </div>
+
+          <!-- 03 · Fokus auf das Wesentliche -->
+          <div class="s4-skill" data-skill="fokus">
+            <div class="s4-skill-head">
+              <span class="s4-skill-num">03</span>
+              <span class="s4-skill-tag">priorisierung</span>
+            </div>
+            <div class="s4-skill-title">Fokus auf das Wesentliche</div>
+            <div class="s4-skill-body">
+              <div class="s4-fo-hero">
+                <span class="s4-fo-num">71 %</span>
+                <span class="s4-fo-cap">der überfälligen<br>Forderungen auf 3 Kunden</span>
+              </div>
+              <div class="s4-fo-list">
+                <div class="s4-fo-li"><span class="nm">Kunde A</span><span class="vl">42 K€</span><span class="dy">48 d</span></div>
+                <div class="s4-fo-li"><span class="nm">Kunde B</span><span class="vl">28 K€</span><span class="dy">41 d</span></div>
+                <div class="s4-fo-li"><span class="nm">Kunde C</span><span class="vl">19 K€</span><span class="dy">37 d</span></div>
+              </div>
+            </div>
+            <div class="s4-skill-foot"><span class="s4-skill-dot neutral"></span>Hebel konzentriert · adressierbar</div>
+          </div>
+
+          <!-- 04 · Handlungsempfehlungen -->
+          <div class="s4-skill" data-skill="handlung">
+            <div class="s4-skill-head">
+              <span class="s4-skill-num">04</span>
+              <span class="s4-skill-tag">empfehlung</span>
+            </div>
+            <div class="s4-skill-title">Konkrete Handlungsempfehlungen</div>
+            <div class="s4-skill-body">
+              <div class="s4-rec-row"><span class="s4-rec-ck">✓</span><span><strong>Mahnstufe 2</strong> für Kunde A &amp; B</span></div>
+              <div class="s4-rec-row"><span class="s4-rec-ck">✓</span><span><strong>Zahlungsziel</strong> Kunde C nachverhandeln</span></div>
+              <div class="s4-rec-row"><span class="s4-rec-ck">✓</span><span><strong>Volumen-Shift</strong> Lieferant X → Y</span></div>
+              <div class="s4-rec-impact">
+                <span class="s4-rec-impact-lbl">erwarteter Hebel · 30 Tage</span>
+                <span class="s4-rec-impact-val">+38 K€</span>
+              </div>
+            </div>
+            <div class="s4-skill-foot"><span class="s4-skill-dot ok"></span>Vorlagen &amp; Anschreiben liegen bereit</div>
+          </div>
+
         </div>
       </div>
 
+    </div>
+
+    <!-- ===== Inline step nav (manual control) ===== -->
+    <div class="s4-nav" id="s4-nav">
+      <button class="s4-nav-btn" id="s4-prev" type="button" aria-label="Zurück">←</button>
+      <div class="s4-nav-stepper">
+        <div class="s4-nav-dots">
+          <button class="s4-nav-dot" type="button" data-step="0" aria-label="Schritt 1"></button>
+          <button class="s4-nav-dot" type="button" data-step="1" aria-label="Schritt 2"></button>
+          <button class="s4-nav-dot" type="button" data-step="2" aria-label="Schritt 3"></button>
+          <button class="s4-nav-dot" type="button" data-step="3" aria-label="Schritt 4"></button>
+          <button class="s4-nav-dot" type="button" data-step="4" aria-label="Schritt 5"></button>
+          <button class="s4-nav-dot" type="button" data-step="5" aria-label="Schritt 6"></button>
+          <button class="s4-nav-dot" type="button" data-step="6" aria-label="Schritt 7"></button>
+        </div>
+        <span class="s4-nav-label" id="s4-nav-label">Monitor · Mail empfangen</span>
+      </div>
+      <button class="s4-nav-btn" id="s4-next" type="button" aria-label="Weiter">→</button>
     </div>
 
   </div>
@@ -3653,7 +4861,7 @@
           style="opacity:0; font-size:clamp(2.4rem,4.4vw,4.2rem); line-height:1.04; letter-spacing:-0.04em;">
         Bring Julie<span class="fade-soft">.ai</span> zu deinen&nbsp;Mandanten.
       </h2>
-      <p class="lede mt-4" id="s7-sub" style="opacity:0; margin-left:auto; margin-right:auto; max-width:64ch;">Wir öffnen Julie für die Mandanten ausgewählter M&amp;A-Berater. Keine Implementierungskosten, keine Jahresverträge - und für jeden Mandanten ein klarer Vorteil für dich.</p>
+      <p class="lede mt-4" id="s7-sub" style="opacity:0; margin-left:auto; margin-right:auto; max-width:64ch;">Wir öffnen Julie für die Mandanten ausgewählter M&amp;A-Berater. Keine Implementierungskosten, keine Jahresverträge - und neben den Vorteilen für deine Mandanten jeweils auch ein klarer Vorteil für dich.</p>
     </div>
 
     <!-- Two-column: Business Model + Berater-Hook -->
@@ -3665,8 +4873,8 @@
         <div class="cta-title">Keine Eintrittsbarriere.</div>
         <div class="cta-list">
           <div class="cta-row"><span class="cta-num">01</span><div><strong>Keine Implementierungskosten.</strong> Kein Setup-Aufwand, kein IT-Projekt.</div></div>
-          <div class="cta-row"><span class="cta-num">02</span><div><strong>100% flexibel abgerechnet.</strong> Monatlich kündbar, nutzungsbasiert.</div></div>
-          <div class="cta-row"><span class="cta-num">03</span><div>Günstiger als eine Sonderanfrage beim Steuerbüro, viel güstiger und schneller als eine Inhouse-Einstellung.</div></div>
+          <div class="cta-row"><span class="cta-num">02</span><div>100% flexibel abgerechnet. Monatlich kündbar, rein erfolgsabhängig.</div></div>
+          <div class="cta-row"><span class="cta-num">03</span><div>Günstiger als eine Sonderanfrage beim Steuerbüro, viel günstiger und schneller als eine Inhouse-Einstellung.</div></div>
         </div>
       </div>
 
@@ -3674,10 +4882,7 @@
       <div class="cta-col cta-dark" data-cta="2">
         <div class="cta-eyebrow" style="color:rgba(255,255,255,.55);">Dein Vorteil als Berater</div>
         <div class="cta-title" style="color:#fff;">Einen kostenlosen Financial DD Report - pro Mandant.</div>
-        <p style="color:rgba(255,255,255,.78); font-size:15.5px; line-height:1.55; margin-top:14px;">
-          Jeder Mandant, der Julie nutzt, gibt dir Echtzeit-Klarheit
-          zu den Reizthemen, die im Deal Schwung kosten:
-        </p>
+        <p style="color:rgba(255,255,255,.78); font-size:15.5px; line-height:1.55; margin-top:14px;">Jeder Mandant, der Julie nutzt, gibt dir durch eine gratis Financial DD Klarheit zu den Reizthemen, die im Deal Schwung kosten:</p>
         <div class="cta-pills">
           <span class="cta-pill"><span class="cta-pill-dot"></span>Working Capital</span>
           <span class="cta-pill"><span class="cta-pill-dot"></span>Nettofinanzposition</span>
@@ -3694,11 +4899,11 @@
       </div>
       <span class="font-mono uppercase quiet" style="margin-top:2px; font-size:12px; letter-spacing:.20em; color:var(--ink-medium); font-weight:500;">Made in Germany · For the Mittelstand</span>
       <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
-        <a href="/cdn-cgi/l/email-protection#dbb3beb7b7b49bb1aeb7b2bef5bab2e4a8aeb9b1beb8afe68bb2b7b4affee9ebe9ebe9ed" style="display:inline-flex; align-items:center; gap:8px; padding:11px 18px; background:#0A0A0A; color:#fff; border-radius:9999px; font-size:13px; font-weight:500; text-decoration:none; letter-spacing:-0.005em;">
+        <a href="mailto:hello@julie.ai?subject=Pilot%202026" style="display:inline-flex; align-items:center; gap:8px; padding:11px 18px; background:#0A0A0A; color:#fff; border-radius:9999px; font-size:13px; font-weight:500; text-decoration:none; letter-spacing:-0.005em;">
           Als Berater anmelden&nbsp;→
         </a>
-        <a href="/cdn-cgi/l/email-protection#dbb3beb7b7b49bb1aeb7b2bef5bab2e4a8aeb9b1beb8afe69fbeb6b4" style="display:inline-flex; align-items:center; gap:8px; padding:11px 18px; background:transparent; color:var(--ink); border:1px solid var(--line); border-radius:9999px; font-size:13px; font-weight:500; text-decoration:none; letter-spacing:-0.005em;">
-          <span class="__cf_email__" data-cfemail="5d35383131321d3728313438733c34">[email&#160;protected]</span>
+        <a href="mailto:hello@julie.ai?subject=Demo" style="display:inline-flex; align-items:center; gap:8px; padding:11px 18px; background:transparent; color:var(--ink); border:1px solid var(--line); border-radius:9999px; font-size:13px; font-weight:500; text-decoration:none; letter-spacing:-0.005em;">
+          hello@julie.ai
         </a>
       </div>
     </div>
@@ -3708,7 +4913,7 @@
 
 </main>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 /* ==================================================
    ORCHESTRATION
    ================================================== */
@@ -3725,6 +4930,24 @@ dots.forEach(d => d.addEventListener('click', () => {
 /* Keyboard navigation */
 let currentIdx = 0;
 document.addEventListener('keydown', (e) => {
+  // On slide 5 (#s4), arrow keys step through the demo narrative —
+  // unless the user has already stepped past the last beat, in which
+  // case we fall through to the normal slide navigation.
+  const onS4 = currentIdx === 4 && typeof S4 !== 'undefined' && S4.started;
+  if (onS4 && (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ')){
+    if (S4.current < S4.total - 1){
+      e.preventDefault();
+      S4.next(true);
+      return;
+    }
+  }
+  if (onS4 && (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp')){
+    if (S4.current > 0){
+      e.preventDefault();
+      S4.prev(true);
+      return;
+    }
+  }
   if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' '){
     e.preventDefault();
     currentIdx = Math.min(slides.length - 1, currentIdx + 1);
@@ -4050,435 +5273,896 @@ function playSlide3(){
 }
 
 /* ==================================================
-   SLIDE 4 — Stell die Frage. Bekomm den Report.
-   (Merged: iPhone chat demo + live Report preview)
+   SLIDE 5 — Was Julie liefert
+   8-stage manual narrative · Pfeiltasten ↓/↑ navigieren
+   Phase A: Monitor (Steuerberater · DATEV-Upload)
+   Phase B: Handy (Unternehmer · Julie meldet sich)
+   Phase C: 4 themen-orientierte Cards rechts
    ================================================== */
-function playSlide4(){
-  // Cinematic build-up:
-  //   Phase 1  Headline + centred phone on home screen
-  //   Phase 2  Push notification + side hint "Tippe die Nachricht"
-  //   Phase 3  Simulated tap → home screen fades into WhatsApp chat
-  //   Phase 4  Phone slides from centre to left grid position
-  //   Phase 5  Julie's link card flies out of the phone → report
-  //            materialises on the right (chrome → loading bar → content)
-  //   Phase 6  Realistic chat dialogue + a second proactive push (anomaly)
 
-  const phoneWrap  = document.getElementById('s4-phone-wrap');
-  const reportWrap = document.getElementById('s4-report-wrap');
-  const screen     = document.getElementById('s4-screen');
-  const home       = document.getElementById('s4-home');
-  const chat       = document.getElementById('s4-chat');
-  const push       = document.getElementById('s4-push');
-  const hint       = document.getElementById('s4-tap-hint');
-  const eye1       = document.getElementById('s4-eye-1');
-  const eye2       = document.getElementById('s4-eye-2');
-  const reportFrame= document.getElementById('s4-report-frame');
-  const whatsappIcon = document.getElementById('s4-whatsapp-tile');
+const S4 = {
+  current: -1,
+  total: 7,
+  timers: [],
+  started: false,
+  autoTimer: null,
+  autoMode: true,
 
-  // Headline fades in
-  const tl = gsap.timeline({ defaults:{ ease:EASE } });
-  tl.fromTo('#s4-eye', { opacity:0, y:8 },  { opacity:1, y:0, duration:1.0 })
-    .fromTo('#s4-h2',  { opacity:0, y:14 }, { opacity:1, y:0, duration:1.4 }, '-=0.3')
-    .fromTo('#s4-sub', { opacity:0, y:10 }, { opacity:1, y:0, duration:1.2 }, '-=0.6');
+  /* ---- timer helpers ---- */
+  later(ms, fn){
+    const id = setTimeout(fn, ms);
+    this.timers.push(id);
+    return id;
+  },
+  clearTimers(){
+    this.timers.forEach(clearTimeout);
+    this.timers = [];
+    if (this.autoTimer){ clearTimeout(this.autoTimer); this.autoTimer = null; }
+  },
 
-  // ---- Phase 1: phone fades in, visually centred over both columns
-  function centerOffset(){
+  /* ---- public navigation API ---- */
+  start(){
+    if (this.started) return;
+    this.started = true;
+    this.autoMode = true;
+    this.reset();
+    this.goTo(0);
+  },
+  next(fromUser){
+    if (fromUser) this.autoMode = false;
+    if (this.current >= this.total - 1) return;
+    this.goTo(this.current + 1);
+  },
+  prev(fromUser){
+    if (fromUser) this.autoMode = false;
+    if (this.current <= 0) return;
+    this.goTo(this.current - 1);
+  },
+  /* Finalize whatever stage we're leaving — make sure its skill card
+     is visible on the right, and remove any in-flight fly clones so
+     they don't pop up over the new stage. */
+  finalizeStage(idx){
+    const stageCard = { 3:'transparenz', 4:'frueh', 5:'fokus', 6:'handlung' };
+    // Remove fly clones + kill their tweens
+    document.querySelectorAll('body > .bubble.b-card').forEach(el => {
+      gsap.killTweensOf(el);
+      el.remove();
+    });
+    // If a bubble was being hidden during a fly, restore it
+    document.querySelectorAll('#s4-wa .bubble.b-card').forEach(el => {
+      gsap.killTweensOf(el);
+      gsap.set(el, { opacity: 1, scale: 1 });
+    });
+    const name = stageCard[idx];
+    if (name) this.revealCard(name, true);
+  },
+
+  goTo(target){
+    target = Math.max(0, Math.min(this.total - 1, target));
+    if (target === this.current) return; // no-op when already there
+    this.clearTimers();
+
+    if (target === this.current + 1){
+      // single-step forward — finalize the outgoing stage so its card
+      // is definitely revealed (its fly may not have completed yet),
+      // then animate the new stage.
+      this.finalizeStage(this.current);
+      this.current = target;
+      this.runStage(target, false);
+    } else {
+      // multi-jump (any direction) — fully snap, no half-baked animations
+      this.reset();
+      for (let i = 0; i <= target; i++){
+        this.runStage(i, true);
+      }
+      this.current = target;
+    }
+    this.renderNav();
+    this.scheduleAuto();
+  },
+
+  /* Auto-advance unless the user has taken over */
+  scheduleAuto(){
+    if (!this.autoMode) return;
+    if (this.current >= this.total - 1) return;
+    const dwell = this.stageDwell(this.current);
+    this.autoTimer = setTimeout(() => {
+      if (this.autoMode) this.next(false);
+    }, dwell);
+  },
+  stageDwell(i){
+    const dwells = [3800, 7600, 4200, 13500, 18500, 9500, 7500];
+    return dwells[i] || 4500;
+  },
+
+  /* ---- render the inline step nav ---- */
+  renderNav(){
+    const nav = document.getElementById('s4-nav');
+    if (!nav) return;
+    nav.classList.add('show');
+    const dots = nav.querySelectorAll('.s4-nav-dot');
+    dots.forEach((d, idx) => {
+      d.classList.toggle('is-active', idx === this.current);
+      d.classList.toggle('is-done', idx < this.current);
+    });
+    const prevBtn = document.getElementById('s4-prev');
+    const nextBtn = document.getElementById('s4-next');
+    if (prevBtn) prevBtn.disabled = this.current <= 0;
+    if (nextBtn) nextBtn.disabled = this.current >= this.total - 1;
+    const label = document.getElementById('s4-nav-label');
+    if (label){
+      const labels = [
+        'Monitor · Mail empfangen',
+        'Monitor · Daten hochgeladen',
+        'Handy · Benachrichtigung',
+        'Chat · Morgenreport',
+        'Frühwarnsystem · versteckte Muster',
+        'Fokus · die wichtigsten Hebel',
+        'Handlung · konkrete Schritte',
+      ];
+      label.textContent = labels[this.current] || '';
+    }
+  },
+
+  /* ---- full slide reset ---- */
+  reset(){
+    // Kill any in-flight fly animations + remove their cloned fliers
+    document.querySelectorAll('body > .bubble.b-card').forEach(el => {
+      gsap.killTweensOf(el);
+      el.remove();
+    });
+    // Kill any tweens on slide elements so they don't bleed across jumps
+    gsap.killTweensOf(['#s4-phone-wrap','#s4-eye-1','#s4-eye-2','#s4-report-wrap','#s4-push','#s4-push-2']);
+
+    // Monitor
+    const monitor = document.getElementById('s4-monitor');
+    monitor && monitor.classList.remove('is-uploading','show-file','is-done');
+    const cta = document.getElementById('s4-mail-cta');
+    cta && cta.classList.remove('is-hover','is-pressing');
+    const cursor = document.getElementById('s4-cursor');
+    if (cursor){
+      cursor.classList.remove('in','click');
+      cursor.style.transform = '';
+      cursor.style.left = '';
+      cursor.style.top  = '';
+    }
+    const drop = document.getElementById('s4-upload-drop');
+    if (drop){ drop.classList.remove('is-active'); drop.style.opacity = ''; }
+    const bar = document.getElementById('s4-upload-progress-bar');
+    if (bar){
+      bar.style.transition = 'none';
+      bar.style.width = '0';
+      // re-enable transition on next frame
+      requestAnimationFrame(() => { bar.style.transition = ''; });
+    }
+    const percent = document.getElementById('s4-upload-percent');
+    if (percent) percent.textContent = '0 %';
+    const handoff = document.getElementById('s4-monitor-handoff');
+    handoff && handoff.classList.remove('show');
+    const stage = document.getElementById('s4-monitor-stage');
+    stage && stage.classList.remove('in','out');
+
+    // Phone
+    const screen = document.getElementById('s4-screen');
+    screen && screen.classList.add('is-locked');
+    const home = document.getElementById('s4-home');
+    home && home.classList.remove('is-hidden');
+    const chat = document.getElementById('s4-chat');
+    chat && chat.classList.remove('is-visible');
+    const push  = document.getElementById('s4-push');
+    push  && push.classList.remove('in','out');
+    const push2 = document.getElementById('s4-push-2');
+    push2 && push2.classList.remove('in','out');
+    const hint = document.getElementById('s4-tap-hint');
+    hint && hint.classList.remove('is-visible');
+    const waIcon = document.getElementById('s4-whatsapp-tile');
+    waIcon && waIcon.classList.remove('has-badge');
+
+    // Chat bubbles
+    const wa = document.getElementById('s4-wa');
+    if (wa){
+      wa.querySelectorAll('.bubble').forEach(b => {
+        gsap.killTweensOf(b);
+        b.remove();
+      });
+    }
+
+    // Cards
+    document.querySelectorAll('#s4-skills .s4-skill').forEach(c =>
+      c.classList.remove('show','just-in'));
+
+    // Reset opacities / positions
+    gsap.set('#s4-eye-1', { opacity: 0 });
+    gsap.set('#s4-eye-2', { opacity: 0 });
+    gsap.set('#s4-phone-wrap', { opacity: 0, x: 0 });
+    gsap.set('#s4-report-wrap', { opacity: 0, scaleX: 0.88, scaleY: 0.88, transformOrigin: 'left center' });
+  },
+
+  /* ============================================================
+     STAGE DISPATCHER
+     Each stage has an animated path and an instant (snap) path.
+     ============================================================ */
+  runStage(i, instant){
+    switch (i){
+      case 0: this.stageMonitorMail(instant); break;
+      case 1: this.stageMonitorUploadDone(instant); break;
+      case 2: this.stagePhoneArrives(instant); break;
+      case 3: this.stageChatTransparenz(instant); break;
+      case 4: this.stageFrueh(instant); break;
+      case 5: this.stageFokus(instant); break;
+      case 6: this.stageHandlung(instant); break;
+    }
+  },
+
+  /* ============================================================
+     STAGE 0 — Monitor visible, mail open, cursor approaches button
+     ============================================================ */
+  stageMonitorMail(instant){
+    const stage = document.getElementById('s4-monitor-stage');
+    const cursor = document.getElementById('s4-cursor');
+    const cta = document.getElementById('s4-mail-cta');
+    if (!stage || !cursor || !cta) return;
+
+    if (instant){
+      stage.classList.add('in');
+      this.positionCursorAtCTA(true);
+      cta.classList.add('is-hover');
+      return;
+    }
+    this.later(50, () => stage.classList.add('in'));
+    this.later(900, () => this.positionCursorAtCTA(false));
+    this.later(2200, () => cta.classList.add('is-hover'));
+  },
+
+  positionCursorAtCTA(instant){
+    const cursor = document.getElementById('s4-cursor');
+    const cta = document.getElementById('s4-mail-cta');
+    const monitor = document.getElementById('s4-monitor');
+    if (!cursor || !cta || !monitor) return;
+    const body = monitor.querySelector('.s4-monitor-body');
+    if (!body) return;
+    const bRect = body.getBoundingClientRect();
+    const cRect = cta.getBoundingClientRect();
+    const clickX = cRect.left + cRect.width * 0.42 - bRect.left;
+    const clickY = cRect.top + cRect.height * 0.50 - bRect.top;
+    if (instant){
+      cursor.style.left = (clickX - 4) + 'px';
+      cursor.style.top  = (clickY - 3) + 'px';
+      cursor.style.transform = '';
+      cursor.classList.add('in');
+      return;
+    }
+    const startX = clickX + 80, startY = clickY + 36;
+    cursor.style.left = (startX - 4) + 'px';
+    cursor.style.top  = (startY - 3) + 'px';
+    cursor.classList.add('in');
+    requestAnimationFrame(() => {
+      cursor.style.transform = `translate(${clickX - startX}px, ${clickY - startY}px)`;
+    });
+  },
+
+  /* ============================================================
+     STAGE 1 — Click, upload, "Übertragen"
+     ============================================================ */
+  stageMonitorUploadDone(instant){
+    const monitor = document.getElementById('s4-monitor');
+    const cursor  = document.getElementById('s4-cursor');
+    const cta     = document.getElementById('s4-mail-cta');
+    const drop    = document.getElementById('s4-upload-drop');
+    const bar     = document.getElementById('s4-upload-progress-bar');
+    const percent = document.getElementById('s4-upload-percent');
+    const handoff = document.getElementById('s4-monitor-handoff');
+    if (!monitor) return;
+
+    if (instant){
+      cta && cta.classList.remove('is-pressing','is-hover');
+      cursor && cursor.classList.remove('in','click');
+      monitor.classList.add('is-uploading','show-file','is-done');
+      drop && drop.classList.add('is-active');
+      if (drop) drop.style.opacity = '.45';
+      if (bar){ bar.style.transition = 'none'; bar.style.width = '100%'; }
+      if (percent) percent.textContent = '100 %';
+      handoff && handoff.classList.add('show');
+      return;
+    }
+
+    // Click ripple + press
+    this.later(60, () => {
+      cursor && cursor.classList.add('click');
+      cta && cta.classList.add('is-pressing');
+    });
+    this.later(320, () => {
+      cta && cta.classList.remove('is-pressing');
+      monitor.classList.add('is-uploading');
+      cursor && cursor.classList.remove('click','in');
+    });
+    this.later(820, () => drop && drop.classList.add('is-active'));
+    this.later(1500, () => {
+      monitor.classList.add('show-file');
+      if (drop) drop.style.opacity = '.45';
+      // Start progress fill
+      this.later(240, () => {
+        if (bar){ bar.style.transition = ''; bar.style.width = '100%'; }
+        if (percent){
+          const total = 2200, start = performance.now();
+          const step = (now) => {
+            const t = Math.min(1, (now - start) / total);
+            const eased = 1 - Math.pow(1 - t, 3);
+            percent.textContent = Math.round(eased * 100) + ' %';
+            if (t < 1) requestAnimationFrame(step);
+            else percent.textContent = '100 %';
+          };
+          requestAnimationFrame(step);
+        }
+      });
+    });
+    this.later(4100, () => monitor.classList.add('is-done'));
+    this.later(4800, () => handoff && handoff.classList.add('show'));
+  },
+
+  /* ============================================================
+     STAGE 2 — Monitor out, phone in (centered) with push
+     ============================================================ */
+  stagePhoneArrives(instant){
+    const stage = document.getElementById('s4-monitor-stage');
+    const push  = document.getElementById('s4-push');
+    const hint  = document.getElementById('s4-tap-hint');
+    const waIcon = document.getElementById('s4-whatsapp-tile');
+
+    if (instant){
+      stage && stage.classList.remove('in');
+      stage && stage.classList.add('out');
+      const shift = this.getPhoneShift();
+      gsap.set('#s4-phone-wrap', { opacity: 1, x: shift });
+      push && push.classList.remove('out');
+      push && push.classList.add('in');
+      waIcon && waIcon.classList.add('has-badge');
+      hint && hint.classList.add('is-visible');
+      return;
+    }
+
+    this.later(80, () => {
+      stage && stage.classList.remove('in');
+      stage && stage.classList.add('out');
+    });
+    this.later(500, () => {
+      const shift = this.getPhoneShift();
+      gsap.set('#s4-phone-wrap', { x: shift });
+      gsap.to('#s4-phone-wrap', { opacity: 1, duration: 1.0, ease: 'expo.out' });
+    });
+    this.later(1700, () => {
+      push && push.classList.remove('out');
+      push && push.classList.add('in');
+      waIcon && waIcon.classList.add('has-badge');
+    });
+    this.later(2400, () => hint && hint.classList.add('is-visible'));
+  },
+
+  /* ============================================================
+     STAGE 3 — Chat opens + Morning Report (Transparenz)
+     Tap the push → chat takes over the phone, phone slides left
+     to make room for the skill grid, and Julie delivers the
+     morning briefing with the report card flying out.
+     ============================================================ */
+  stageChatTransparenz(instant){
+    const push   = document.getElementById('s4-push');
+    const home   = document.getElementById('s4-home');
+    const chat   = document.getElementById('s4-chat');
+    const screen = document.getElementById('s4-screen');
+    const hint   = document.getElementById('s4-tap-hint');
+    const waIcon = document.getElementById('s4-whatsapp-tile');
+
+    if (instant){
+      push && push.classList.remove('in');
+      push && push.classList.add('out');
+      home && home.classList.add('is-hidden');
+      chat && chat.classList.add('is-visible');
+      screen && screen.classList.remove('is-locked');
+      hint && hint.classList.remove('is-visible');
+      waIcon && waIcon.classList.remove('has-badge');
+      gsap.set('#s4-eye-1', { opacity: 1 });
+      gsap.set('#s4-eye-2', { opacity: 1 });
+      gsap.set('#s4-phone-wrap', { x: 0, opacity: 1 });
+      gsap.set('#s4-report-wrap', { opacity: 1, scaleX: 1, scaleY: 1 });
+
+      this.addBubble({ kind:'them', html:'<strong>Guten Morgen ☀️</strong> Januar ist durch — hier dein Überblick.', time:'07:02' }, true);
+      this.addReportCard({ title:'Management-Bericht · Januar 2026', sub:'GuV · Cashflow · OPOS', time:'07:02' }, true);
+      this.addBubble({ kind:'me', text:'Kurzfassung?', time:'07:14' }, true);
+      this.addBubble({ kind:'them', html:'Solide. Umsatz <strong>391 K€</strong>, Marge stabil bei <strong>11,5 %</strong>, Cashflow <strong>+38 K€</strong>.', time:'07:14' }, true);
+      this.revealCard('transparenz', true);
+      return;
+    }
+
+    // Tap the push notification
+    this.later(80, () => {
+      if (push){
+        const ripple = document.createElement('div');
+        ripple.className = 'tap-indicator';
+        ripple.style.left = '50%'; ripple.style.top = '50%';
+        push.appendChild(ripple);
+        requestAnimationFrame(() => ripple.classList.add('tapping'));
+        setTimeout(() => ripple.remove(), 700);
+        gsap.to(push, { scale: 0.96, duration: 0.18, yoyo: true, repeat: 1, ease: 'power2.out' });
+      }
+      hint && hint.classList.remove('is-visible');
+    });
+    // Chat opens
+    this.later(560, () => {
+      push && push.classList.remove('in');
+      push && push.classList.add('out');
+      home && home.classList.add('is-hidden');
+      chat && chat.classList.add('is-visible');
+      screen && screen.classList.remove('is-locked');
+      waIcon && waIcon.classList.remove('has-badge');
+      gsap.to('#s4-eye-1', { opacity: 1, duration: 0.7 });
+    });
+    // Phone slides left, skill grid unfolds
+    this.later(1300, () => {
+      gsap.to('#s4-phone-wrap', { x: 0, duration: 1.0, ease: 'expo.out' });
+    });
+    this.later(1400, () => {
+      gsap.to('#s4-eye-2', { opacity: 1, duration: 0.6 });
+      gsap.to('#s4-report-wrap', { opacity: 1, scaleX: 1, scaleY: 1, duration: 0.85, ease: 'expo.out' });
+    });
+
+    // Morning briefing
+    this.later(2500, () =>
+      this.addBubble({ kind:'them', html:'<strong>Guten Morgen ☀️</strong> Januar ist durch — hier dein Überblick.', time:'07:02' }));
+    this.later(4400, () => {
+      const card = this.addReportCard({ title:'Management-Bericht · Januar 2026', sub:'GuV · Cashflow · OPOS', time:'07:02' });
+      this.later(2000, () => this.flyCardToSkill(card, 'transparenz'));
+    });
+    this.later(8200, () => this.addBubble({ kind:'me', text:'Kurzfassung?', time:'07:14' }));
+    this.later(8900, () => this.addThinking());
+    this.later(10200, () => {
+      this.removeThinking();
+      this.addBubble({ kind:'them', html:'Solide. Umsatz <strong>391 K€</strong>, Marge stabil bei <strong>11,5 %</strong>, Cashflow <strong>+38 K€</strong>.', time:'07:14' });
+    });
+  },
+
+  /* ============================================================
+     CHAT BUBBLE HELPERS
+     ============================================================ */
+  addBubble(opts, instant){
+    const wa = document.getElementById('s4-wa');
+    if (!wa) return null;
+    const el = document.createElement('div');
+    if (opts.kind === 'me'){
+      el.className = 'bubble b-me';
+      el.innerHTML = `${opts.text} <span class="time">${opts.time} <span class="read">✓✓</span></span>`;
+    } else if (opts.kind === 'them'){
+      el.className = 'bubble b-them';
+      el.innerHTML = `${opts.html} <span class="time">${opts.time}</span>`;
+    } else if (opts.kind === 'alert'){
+      el.className = 'bubble b-them b-alert';
+      el.innerHTML = `
+        <div class="alert-tag"><span class="alert-dot"></span>${opts.tagText}</div>
+        ${opts.html} <span class="time">${opts.time}</span>
+      `;
+    }
+    wa.appendChild(el);
+    if (instant){
+      el.classList.add('in');
+    } else {
+      requestAnimationFrame(() => el.classList.add('in'));
+    }
+    requestAnimationFrame(() => { wa.scrollTop = wa.scrollHeight; });
+    return el;
+  },
+
+  addThinking(){
+    const wa = document.getElementById('s4-wa');
+    if (!wa) return null;
+    const t = document.createElement('div');
+    t.className = 'bubble b-them thinking s4-thinking';
+    t.style.width = 'fit-content';
+    t.innerHTML = '<span></span><span></span><span></span>';
+    wa.appendChild(t);
+    requestAnimationFrame(() => { t.classList.add('in'); wa.scrollTop = wa.scrollHeight; });
+    return t;
+  },
+  removeThinking(){
+    const wa = document.getElementById('s4-wa');
+    if (!wa) return;
+    wa.querySelectorAll('.s4-thinking').forEach(t => t.remove());
+  },
+
+  addActionBubble(opts, instant){
+    const wa = document.getElementById('s4-wa');
+    if (!wa) return null;
+    const b = document.createElement('div');
+    b.className = 'bubble b-them';
+    const actionsHtml = (opts.actions || []).map((a, i) =>
+      `<button class="b-action-btn${a.primary ? ' primary' : ''}" data-idx="${i}">${a.label}</button>`
+    ).join('');
+    b.innerHTML = `${opts.html}<div class="b-actions">${actionsHtml}</div><span class="time">${opts.time}</span>`;
+    wa.appendChild(b);
+    if (instant){
+      b.classList.add('in');
+      // Snap pressed state
+      const pressIdx = (opts.actions || []).findIndex(a => a.press);
+      if (pressIdx >= 0){
+        const btns = b.querySelectorAll('.b-action-btn');
+        btns.forEach((el, j) => {
+          if (j === pressIdx) el.classList.add('pressed');
+          else el.classList.add('dimmed');
+        });
+      }
+    } else {
+      requestAnimationFrame(() => b.classList.add('in'));
+      const pressIdx = (opts.actions || []).findIndex(a => a.press);
+      if (pressIdx >= 0){
+        this.later(opts.pressAt || 1700, () => {
+          const btns = b.querySelectorAll('.b-action-btn');
+          const target = btns[pressIdx];
+          if (target){
+            btns.forEach((el, j) => { if (j !== pressIdx) el.classList.add('dimmed'); });
+            target.classList.add('pressed');
+          }
+        });
+      }
+    }
+    requestAnimationFrame(() => { wa.scrollTop = wa.scrollHeight; });
+    return b;
+  },
+
+  addReportCard(opts, instant){
+    const wa = document.getElementById('s4-wa');
+    if (!wa) return null;
+    const card = document.createElement('div');
+    card.className = 'bubble b-them b-card';
+    card.innerHTML = `
+      <div class="b-card-preview">
+        <div class="b-card-preview-eyebrow">
+          <span><span class="dot"></span>Januar 2026</span>
+          <span>Vorperiode</span>
+        </div>
+        <div class="b-card-kpis">
+          <div class="b-card-kpi"><span class="b-card-kpi-label">Umsatz</span><span class="b-card-kpi-value">391&nbsp;K€</span><span class="b-card-kpi-trend up">↑ 4 %</span></div>
+          <div class="b-card-kpi"><span class="b-card-kpi-label">EBITDA</span><span class="b-card-kpi-value">45&nbsp;K€</span><span class="b-card-kpi-trend up">↑ 8 %</span></div>
+          <div class="b-card-kpi"><span class="b-card-kpi-label">Marge</span><span class="b-card-kpi-value">11,5 %</span><span class="b-card-kpi-trend down">↓ 2 pp</span></div>
+        </div>
+      </div>
+      <div class="b-card-meta">
+        <div class="b-card-title">${opts.title}</div>
+        <div class="b-card-sub">${opts.sub}</div>
+      </div>
+      <span class="b-card-time">${opts.time}</span>
+    `;
+    wa.appendChild(card);
+    if (instant){
+      card.classList.add('in');
+    } else {
+      requestAnimationFrame(() => {
+        card.classList.add('in');
+        setTimeout(() => card.classList.add('pulsing'), 500);
+      });
+    }
+    requestAnimationFrame(() => { wa.scrollTop = wa.scrollHeight; });
+    return card;
+  },
+
+  /* === Summary card (Frühwarnung / Fokus / Handlung) — flies to right slot === */
+  addSummaryCard(opts, instant){
+    const wa = document.getElementById('s4-wa');
+    if (!wa) return null;
+    const card = document.createElement('div');
+    card.className = `bubble b-them b-card b-card-${opts.kind}`;
+
+    let preview = '';
+    if (opts.kind === 'frueh'){
+      preview = `
+        <div class="b-card-preview">
+          <div class="b-card-preview-eyebrow">
+            <span><span class="dot"></span>Frühwarnung</span>
+            <span>3 Muster</span>
+          </div>
+          <div class="b-card-warn-list">
+            <div class="b-card-warn-row"><span class="b-card-warn-tag">Müller</span><span class="b-card-warn-val">Stress-Signal</span></div>
+            <div class="b-card-warn-row"><span class="b-card-warn-tag">Lieferant X</span><span class="b-card-warn-val">+4,2 % verdeckt</span></div>
+            <div class="b-card-warn-row"><span class="b-card-warn-tag">A12 Lager</span><span class="b-card-warn-val">8× → 5×</span></div>
+          </div>
+        </div>
+      `;
+    } else if (opts.kind === 'fokus'){
+      preview = `
+        <div class="b-card-preview">
+          <div class="b-card-preview-eyebrow">
+            <span><span class="dot"></span>Fokus</span>
+            <span>Top 3</span>
+          </div>
+          <div class="b-card-fokus-hero">
+            <span class="b-card-fokus-num">71 %</span>
+            <span class="b-card-fokus-cap">der überfälligen<br>Forderungen<br>auf 3 Kunden</span>
+          </div>
+          <div class="b-card-fokus-list">
+            <div class="b-card-fokus-li"><span class="nm">Kunde A</span><span class="vl">42 K€ · 48&nbsp;d</span></div>
+            <div class="b-card-fokus-li"><span class="nm">Kunde B</span><span class="vl">28 K€ · 41&nbsp;d</span></div>
+            <div class="b-card-fokus-li"><span class="nm">Kunde C</span><span class="vl">19 K€ · 37&nbsp;d</span></div>
+          </div>
+        </div>
+      `;
+    } else if (opts.kind === 'handlung'){
+      preview = `
+        <div class="b-card-preview">
+          <div class="b-card-preview-eyebrow">
+            <span><span class="dot"></span>Freigegeben</span>
+            <span>3 Schritte</span>
+          </div>
+          <div class="b-card-action-list">
+            <div class="b-card-action-row"><span class="b-card-action-ck">✓</span><span><strong>Mahnstufe 2</strong> · Kunde A &amp; B</span></div>
+            <div class="b-card-action-row"><span class="b-card-action-ck">✓</span><span><strong>Zahlungsziel</strong> · Kunde C neu</span></div>
+            <div class="b-card-action-row"><span class="b-card-action-ck">✓</span><span><strong>Volumen-Shift</strong> · Lieferant X → Y</span></div>
+          </div>
+          <div class="b-card-action-impact">
+            <span>Hebel · 30 Tage</span>
+            <span class="impact-val">+38 K€</span>
+          </div>
+        </div>
+      `;
+    }
+
+    card.innerHTML = preview + `
+      <div class="b-card-meta">
+        <div class="b-card-title">${opts.title}</div>
+        <div class="b-card-sub">${opts.sub}</div>
+      </div>
+      <span class="b-card-time">${opts.time}</span>
+    `;
+
+    wa.appendChild(card);
+    if (instant){
+      card.classList.add('in');
+    } else {
+      requestAnimationFrame(() => {
+        card.classList.add('in');
+        setTimeout(() => card.classList.add('pulsing'), 600);
+      });
+    }
+    requestAnimationFrame(() => { wa.scrollTop = wa.scrollHeight; });
+    return card;
+  },
+
+  /* Reveal one of the 4 skill cards */
+  revealCard(name, instant){
+    const card = document.querySelector(`#s4-skills [data-skill="${name}"]`);
+    if (!card) return;
+    if (card.classList.contains('show')) return;
+    if (instant){
+      card.classList.add('show');
+    } else {
+      card.classList.add('show','just-in');
+      setTimeout(() => card.classList.remove('just-in'), 900);
+    }
+  },
+
+  /* Animate: card bubble flies out of phone → lands as a skill card.
+     FLIP-style: measure start/end rects, clone to body, animate the
+     clone with a clean arc into target position+size, then reveal the
+     real target card just before the clone fades out. Robust against
+     navigation: bails cleanly if source/target aren't in layout. */
+  flyCardToSkill(cardEl, name){
+    if (!cardEl || !cardEl.isConnected) { this.revealCard(name, false); return; }
+    const targetCard = document.querySelector(`#s4-skills [data-skill="${name}"]`);
+    if (!targetCard){ return; }
+
+    const startRect = cardEl.getBoundingClientRect();
+    const endRect   = targetCard.getBoundingClientRect();
+    // If layout isn't ready, just snap-reveal — no broken animation.
+    if (!startRect.width || !endRect.width){
+      this.revealCard(name, false);
+      return;
+    }
+
+    // Make sure the right column is fully visible before we land
+    gsap.set('#s4-report-wrap', { opacity: 1, scaleX: 1, scaleY: 1 });
+    gsap.to('#s4-eye-2', { opacity: 1, duration: 0.4, ease: 'power2.out' });
+
+    // Tap feedback on the source bubble
+    cardEl.classList.remove('pulsing');
+    cardEl.classList.add('tapped');
+    setTimeout(() => cardEl.classList.remove('tapped'), 240);
+
+    // Build a clean clone — no time pill, no pulse, no ripples
+    const flier = cardEl.cloneNode(true);
+    flier.classList.remove('pulsing','tapped','in');
+    flier.classList.add('flier');
+    const tm = flier.querySelector('.b-card-time'); if (tm) tm.remove();
+    flier.querySelectorAll('.tap-indicator').forEach(el => el.remove());
+
+    flier.style.position = 'fixed';
+    flier.style.left   = startRect.left + 'px';
+    flier.style.top    = startRect.top + 'px';
+    flier.style.width  = startRect.width + 'px';
+    flier.style.margin = '0';
+    flier.style.zIndex = '500';
+    flier.style.pointerEvents = 'none';
+    flier.style.transformOrigin = 'top left';
+    flier.style.boxShadow = '0 24px 50px rgba(0,0,0,.20), 0 10px 22px rgba(0,0,0,.12)';
+    document.body.appendChild(flier);
+
+    // Fade the source bubble (the clone now represents it)
+    gsap.to(cardEl, { opacity: 0, scale: 0.94, duration: 0.35, ease: 'power2.out' });
+
+    const dx = endRect.left - startRect.left;
+    const dy = endRect.top  - startRect.top;
+    const scale = endRect.width / startRect.width;
+
+    const tl = gsap.timeline({
+      onComplete: () => {
+        if (flier.parentNode) flier.remove();
+        // restore source bubble in case navigation revisits this stage
+        gsap.set(cardEl, { opacity: 1, scale: 1 });
+      }
+    });
+    // 1 · gentle lift with a slight tilt
+    tl.to(flier, {
+      x: dx * 0.42,
+      y: dy * 0.40 - 56,
+      scale: 1 + (scale - 1) * 0.45,
+      rotation: -2.5,
+      duration: 0.55,
+      ease: 'power2.out',
+    });
+    // 2 · arrive precisely on top of the target slot
+    tl.to(flier, {
+      x: dx,
+      y: dy,
+      scale: scale,
+      rotation: 0,
+      duration: 0.50,
+      ease: 'power3.inOut',
+    });
+    // 3 · reveal the real target *just before* the clone fades
+    tl.add(() => this.revealCard(name, false), '-=0.06');
+    // 4 · clone dissolves into the now-visible target
+    tl.to(flier, {
+      opacity: 0,
+      duration: 0.28,
+      ease: 'power2.out',
+    });
+  },
+
+  /* ============================================================
+     STAGE 4 — Frühwarnsystem (proactive · subtle patterns)
+     Julie raises issues organically — no push, no alarm. She
+     surfaces three subtle patterns a human would never spot:
+     payment-timing shifts, hidden price creep, slow inventory.
+     ============================================================ */
+  stageFrueh(instant){
+    if (instant){
+      this.addBubble({ kind:'them', html:'Übrigens — beim Querlesen sind mir <strong>drei Muster</strong> aufgefallen, die du sonst kaum entdeckst.', time:'11:23' }, true);
+      this.addBubble({ kind:'them', html:'<strong>Kunde Müller</strong> · Rechnungen &gt; 10 K€ kommen seit 3 Monaten 2 Tage später als kleine. Klassisches Stress-Signal.', time:'11:23' }, true);
+      this.addBubble({ kind:'them', html:'<strong>Lieferant X</strong> · Stückpreise +4,2 % seit Q4 — versteckt über höhere Mindestabnahmen.', time:'11:24' }, true);
+      this.addBubble({ kind:'them', html:'<strong>Komponente A12</strong> · Lagerumschlag 8× → 5× pro Jahr gefallen. Kapital bindet sich still.', time:'11:24' }, true);
+      this.addSummaryCard({ kind:'frueh', title:'Frühwarnung · 3 Muster', sub:'Proaktiv erkannt · bevor es teuer wird', time:'11:24' }, true);
+      this.addBubble({ kind:'me', text:'Krass. Hätte ich nie gesehen.', time:'11:26' }, true);
+      this.addBubble({ kind:'them', html:'Dafür bin ich da.', time:'11:26' }, true);
+      this.revealCard('frueh', true);
+      return;
+    }
+    // Julie starts typing — no prompt from user
+    this.later(200, () => this.addThinking());
+    this.later(1600, () => {
+      this.removeThinking();
+      this.addBubble({ kind:'them', html:'Übrigens — beim Querlesen sind mir <strong>drei Muster</strong> aufgefallen, die du sonst kaum entdeckst.', time:'11:23' });
+    });
+    this.later(3900, () =>
+      this.addBubble({ kind:'them', html:'<strong>Kunde Müller</strong> · Rechnungen &gt; 10 K€ kommen seit 3 Monaten 2 Tage später als kleine. Klassisches Stress-Signal.', time:'11:23' }));
+    this.later(6500, () =>
+      this.addBubble({ kind:'them', html:'<strong>Lieferant X</strong> · Stückpreise +4,2 % seit Q4 — versteckt über höhere Mindestabnahmen.', time:'11:24' }));
+    this.later(8900, () =>
+      this.addBubble({ kind:'them', html:'<strong>Komponente A12</strong> · Lagerumschlag 8× → 5× pro Jahr gefallen. Kapital bindet sich still.', time:'11:24' }));
+    this.later(11400, () => {
+      const card = this.addSummaryCard({ kind:'frueh', title:'Frühwarnung · 3 Muster', sub:'Proaktiv erkannt · bevor es teuer wird', time:'11:24' });
+      this.later(2000, () => this.flyCardToSkill(card, 'frueh'));
+    });
+    this.later(14600, () => this.addBubble({ kind:'me', text:'Krass. Hätte ich nie gesehen.', time:'11:26' }));
+    this.later(15500, () => this.addThinking());
+    this.later(16500, () => {
+      this.removeThinking();
+      this.addBubble({ kind:'them', html:'Dafür bin ich da.', time:'11:26' });
+    });
+  },
+
+  /* ============================================================
+     STAGE 5 — Fokus auf das Wesentliche
+     User asks where to start → Julie names the priority,
+     a Fokus summary card with 71 % + top-3 customers flies out.
+     ============================================================ */
+  stageFokus(instant){
+    if (instant){
+      this.addBubble({ kind:'me', text:'Wo zuerst ansetzen?', time:'12:08' }, true);
+      this.addBubble({ kind:'them', html:'Klar: <strong>Forderungen</strong>. 71 % deiner Überfälligkeiten liegen bei <strong>drei Kunden</strong>.', time:'12:09' }, true);
+      this.addSummaryCard({ kind:'fokus', title:'Fokus · Top-Hebel heute', sub:'Drei Namen · 71 % des Bestands', time:'12:09' }, true);
+      this.addBubble({ kind:'them', html:'Alles andere ist Rauschen. Hier wirkst du am stärksten.', time:'12:10' }, true);
+      this.revealCard('fokus', true);
+      return;
+    }
+    this.later(100, () => this.addBubble({ kind:'me', text:'Wo zuerst ansetzen?', time:'12:08' }));
+    this.later(900, () => this.addThinking());
+    this.later(2300, () => {
+      this.removeThinking();
+      this.addBubble({ kind:'them', html:'Klar: <strong>Forderungen</strong>. 71 % deiner Überfälligkeiten liegen bei <strong>drei Kunden</strong>.', time:'12:09' });
+    });
+    this.later(4500, () => {
+      const card = this.addSummaryCard({ kind:'fokus', title:'Fokus · Top-Hebel heute', sub:'Drei Namen · 71 % des Bestands', time:'12:09' });
+      this.later(2000, () => this.flyCardToSkill(card, 'fokus'));
+    });
+    this.later(7600, () =>
+      this.addBubble({ kind:'them', html:'Alles andere ist Rauschen. Hier wirkst du am stärksten.', time:'12:10' }));
+  },
+
+  /* ============================================================
+     STAGE 6 — Handlungsempfehlungen (Vorschlag + Freigabe)
+     Julie pitches three concrete actions with an inline approve
+     button. User presses Freigeben → a Handlung summary card
+     flies out as the "Konkrete Handlung" capability.
+     ============================================================ */
+  stageHandlung(instant){
+    if (instant){
+      this.addActionBubble({ html:'Vorschlag fertig: <strong>Mahnstufe 2</strong> für A &amp; B, <strong>neues Zahlungsziel</strong> für C, <strong>Volumen-Shift</strong> Lieferant X → Y. Hebel <strong>~38 K€ in 30 Tagen</strong>.', time:'14:42', actions:[{label:'Freigeben',primary:true,press:true},{label:'Später'}] }, true);
+      this.addSummaryCard({ kind:'handlung', title:'Freigegeben · 3 Schritte', sub:'Anschreiben raus · Vorlage zur Unterschrift', time:'14:43' }, true);
+      this.addBubble({ kind:'them', html:'Erledigt. Mahnungen verschickt, Vorlage liegt bereit.', time:'14:43' }, true);
+      this.revealCard('handlung', true);
+      return;
+    }
+    this.later(100, () =>
+      this.addActionBubble({ html:'Vorschlag fertig: <strong>Mahnstufe 2</strong> für A &amp; B, <strong>neues Zahlungsziel</strong> für C, <strong>Volumen-Shift</strong> Lieferant X → Y. Hebel <strong>~38 K€ in 30 Tagen</strong>.', time:'14:42', pressAt:1800, actions:[{label:'Freigeben',primary:true,press:true},{label:'Später'}] }));
+    this.later(2700, () => this.addThinking());
+    this.later(3900, () => {
+      this.removeThinking();
+      const card = this.addSummaryCard({ kind:'handlung', title:'Freigegeben · 3 Schritte', sub:'Anschreiben raus · Vorlage zur Unterschrift', time:'14:43' });
+      this.later(1500, () => this.flyCardToSkill(card, 'handlung'));
+    });
+    this.later(6200, () =>
+      this.addBubble({ kind:'them', html:'Erledigt. Mahnungen verschickt, Vorlage liegt bereit.', time:'14:43' }));
+  },
+
+  /* ============================================================
+     Helper: compute centering offset for the phone wrap
+     ============================================================ */
+  getPhoneShift(){
+    const phoneWrap = document.getElementById('s4-phone-wrap');
+    const reportWrap = document.getElementById('s4-report-wrap');
     if (!phoneWrap || !reportWrap) return 0;
     const pr = phoneWrap.getBoundingClientRect();
     const rr = reportWrap.getBoundingClientRect();
     const phoneCentre = pr.left + pr.width/2;
     const allCentre   = (pr.left + rr.right) / 2;
     return allCentre - phoneCentre;
+  },
+};
+
+/* Slide 5 entry-point — called by the orchestrator */
+function playSlide4(){
+  // Headline fade in (once, not part of stage machine)
+  const tl = gsap.timeline({ defaults:{ ease:EASE } });
+  tl.fromTo('#s4-eye', { opacity:0, y:8  }, { opacity:1, y:0, duration:1.0 })
+    .fromTo('#s4-h2',  { opacity:0, y:14 }, { opacity:1, y:0, duration:1.3 }, '-=0.3');
+
+  // Wire up the inline nav buttons + dots (idempotent)
+  const prevBtn = document.getElementById('s4-prev');
+  const nextBtn = document.getElementById('s4-next');
+  if (prevBtn && !prevBtn.dataset.bound){
+    prevBtn.dataset.bound = '1';
+    prevBtn.addEventListener('click', () => S4.prev(true));
   }
-  const shift = centerOffset();
-  // Initial state: hide report-wrap (keeps layout for accurate flight target);
-  // shift phone visually to the centre of the demo area
-  gsap.set('#s4-report-wrap', {
-    opacity:0,
-    scaleX:0.88, scaleY:0.88,
-    transformOrigin:'left center'
-  });
-  gsap.set('#s4-phone-wrap', { opacity:0, x: shift });
-
-  gsap.to('#s4-phone-wrap', { opacity:1, duration:1.2, delay:0.8, ease:EASE_OUT });
-
-  // ---- Phase 2: push arrives + side hint
-  setTimeout(() => {
-    if (push) push.classList.add('in');
-    if (whatsappIcon) whatsappIcon.classList.add('has-badge');
-  }, 2400);
-  setTimeout(() => {
-    if (hint) hint.classList.add('is-visible');
-  }, 3200);
-
-  // ---- Phase 3: simulated tap → chat opens
-  setTimeout(() => {
-    // Tap ripple on the push
-    if (push){
-      const ripple = document.createElement('div');
-      ripple.className = 'tap-indicator';
-      ripple.style.left = '50%';
-      ripple.style.top  = '50%';
-      push.appendChild(ripple);
-      requestAnimationFrame(() => ripple.classList.add('tapping'));
-      setTimeout(() => ripple.remove(), 700);
-
-      // Push press feedback
-      gsap.to(push, { scale:0.96, duration:0.18, yoyo:true, repeat:1, ease:'power2.out' });
-    }
-    // Hint fades away
-    if (hint) hint.classList.remove('is-visible');
-  }, 5300);
-
-  setTimeout(() => {
-    // Push dismisses, home screen fades out, chat fades in
-    if (push){ push.classList.remove('in'); push.classList.add('out'); }
-    if (home) home.classList.add('is-hidden');
-    if (chat) chat.classList.add('is-visible');
-    if (screen) screen.classList.remove('is-locked');
-    if (whatsappIcon) whatsappIcon.classList.remove('has-badge');
-    if (eye1) gsap.to(eye1, { opacity:1, duration:0.8, ease:EASE_OUT });
-  }, 5800);
-
-  // ---- Phase 4: phone slides from centre to its left grid position
-  setTimeout(() => {
-    gsap.to('#s4-phone-wrap', { x:0, duration:1.2, ease:'expo.out' });
-  }, 6600);
-
-  // ---- Phase 5: chat begins while the phone is still settling —
-  //   Julie's first greeting types in during the slide, then the link
-  //   card flies out and materialises the report on the right.
-  setTimeout(() => playS4Chat(), 6900);
-}
-
-function playS4Chat(){
-  const wa = document.getElementById('s4-wa');
-  const reportFrame = document.getElementById('s4-report-frame');
-  if (!wa) return;
-
-  // Realistic Julie ↔ Operator conversation, grounded in what
-  // Julie actually does: Monatsreporting, Kunden-/Lieferantenanalyse,
-  // Cashflow, Anomalie-Erkennung, Deep Dives (Mahnwesen).
-  // Julie analysiert, empfiehlt und bereitet vor — sie versendet nichts.
-  const sequence = [
-    {
-      kind:'them',
-      html:'<strong style="font-weight:600">Guten Morgen.</strong> Dein Januar-Bericht ist fertig — inklusive Handlungsempfehlungen.',
-      time:'07:02',
-      delay:200,
-    },
-    // The link card IS the report being handed over
-    {
-      kind:'card',
-      delay:2200,
-      title:'Management-Bericht · Januar 2026',
-      sub:'report.julie.ai · GuV · CashFlow · OPOS',
-      time:'07:02',
-      tapAt:2100,
-      autoLaunch:true,
-      reportFrame,
-    },
-
-    // User reads, then asks the operationally relevant question
-    { kind:'me', text:'Schon mal überflogen. Sieht solide aus.', time:'07:14', delay:8400 },
-    { kind:'me', text:'Was zieht die Rohertragsquote so runter?', time:'07:14', delay:9700 },
-    { kind:'thinking', delay:10500 },
-    {
-      kind:'them',
-      html:'Hauptsächlich Wareneinsatz. <strong style="font-weight:600">Lieferant&nbsp;X</strong> hat 22 % unseres Volumens — bei <strong style="font-weight:600">18 % höheren Stückkosten</strong> als Lieferant&nbsp;Y.',
-      time:'07:15',
-      delay:11900,
-    },
-    {
-      kind:'them-action',
-      html:'Empfehlung: Volumen schrittweise zu&nbsp;Y verschieben. Geschätzter Hebel <strong style="font-weight:600">~8&nbsp;K&nbsp;€ / Monat</strong>. Soll ich einen Deep&nbsp;Dive Lieferantenanalyse anhängen?',
-      time:'07:15',
-      delay:13700,
-      pressAt:1700,
-      actions:[
-        { label:'Ja, gerne', primary:true, press:true },
-        { label:'Später' }
-      ],
-    },
-    { kind:'me', text:'Und wie steht der Cashflow?', time:'07:16', delay:16500 },
-    { kind:'thinking', delay:16900 },
-    {
-      kind:'them',
-      html:'Operativer Cashflow Januar: <strong style="font-weight:600">+38&nbsp;K&nbsp;€</strong>. Working Capital um 12&nbsp;K&nbsp;€ verbessert — Forderungen kommen schneller rein.',
-      time:'07:17',
-      delay:18100,
-    },
-    {
-      kind:'them',
-      html:'Liquiditätsreichweite aktuell <strong style="font-weight:600">4,2 Monate</strong>.',
-      time:'07:17',
-      delay:19800,
-    },
-
-    // Second proactive push later in the day: anomaly detected
-    {
-      kind:'push',
-      delay:22000,
-      pushId:'s4-push-2',
-      duration:2800,
-    },
-    {
-      kind:'alert',
-      delay:25100,
-      tagText:'Anomalie · 11:07',
-      html:'Ungewöhnlicher Mittelabfluss <strong style="font-weight:600">28&nbsp;K&nbsp;€</strong> vom Sparkassen-Konto — außerhalb des typischen Buchungsmusters. War das geplant?',
-      time:'11:07',
-    },
-    { kind:'me', text:'Ja, war Vorauszahlung an Lieferant X.', time:'11:08', delay:27300 },
-    { kind:'thinking', delay:28000 },
-    {
-      kind:'them',
-      html:'Notiert als <em>Vorauszahlung Wareneinkauf</em>. Liquiditätsreichweite jetzt <strong style="font-weight:600">3,8 Monate</strong>.',
-      time:'11:09',
-      delay:29300,
-    },
-    {
-      kind:'them-action',
-      html:'Übrigens: in den OPOS steht <strong style="font-weight:600">Kunde&nbsp;Y</strong> mit 42&nbsp;K&nbsp;€, jetzt 48&nbsp;Tage überfällig. Deep&nbsp;Dive Mahnwesen aufsetzen?',
-      time:'11:09',
-      delay:31100,
-      pressAt:1700,
-      actions:[
-        { label:'Ja, bitte', primary:true, press:true },
-        { label:'Später' }
-      ],
-    },
-    { kind:'thinking', delay:33500 },
-    {
-      kind:'them',
-      html:'Deep&nbsp;Dive steht — Empfehlung: <strong style="font-weight:600">Mahnstufe&nbsp;2 mit Telefonkontakt</strong>. Anschreiben liegt als Vorlage im Entwurf.',
-      time:'11:11',
-      delay:34800,
-    },
-  ];
-
-  let currentThinkingEl = null;
-
-  sequence.forEach((step) => {
-    setTimeout(() => {
-      if (step.kind === 'thinking'){
-        const t = document.createElement('div');
-        t.className = 'bubble b-them thinking';
-        t.style.width = 'fit-content';
-        t.innerHTML = '<span></span><span></span><span></span>';
-        wa.appendChild(t);
-        requestAnimationFrame(() => t.classList.add('in'));
-        currentThinkingEl = t;
-      } else if (step.kind === 'me'){
-        const b = document.createElement('div');
-        b.className = 'bubble b-me';
-        b.innerHTML = `${step.text} <span class="time">${step.time} <span class="read">✓✓</span></span>`;
-        wa.appendChild(b);
-        requestAnimationFrame(() => b.classList.add('in'));
-      } else if (step.kind === 'them'){
-        if (currentThinkingEl){ currentThinkingEl.remove(); currentThinkingEl = null; }
-        const b = document.createElement('div');
-        b.className = 'bubble b-them';
-        b.innerHTML = `${step.html} <span class="time">${step.time}</span>`;
-        wa.appendChild(b);
-        requestAnimationFrame(() => b.classList.add('in'));
-      } else if (step.kind === 'card'){
-        // Rich link-preview card sent by Julie with KPI teaser
-        const card = document.createElement('div');
-        card.className = 'bubble b-them b-card';
-        card.innerHTML = `
-          <div class="b-card-preview">
-            <div class="b-card-preview-eyebrow">
-              <span><span class="dot"></span>Januar 2026</span>
-              <span>Vorperiode</span>
-            </div>
-            <div class="b-card-kpis">
-              <div class="b-card-kpi">
-                <span class="b-card-kpi-label">Umsatz</span>
-                <span class="b-card-kpi-value">391&nbsp;K€</span>
-                <span class="b-card-kpi-trend up">↑ 4 %</span>
-              </div>
-              <div class="b-card-kpi">
-                <span class="b-card-kpi-label">EBITDA</span>
-                <span class="b-card-kpi-value">45&nbsp;K€</span>
-                <span class="b-card-kpi-trend up">↑ 8 %</span>
-              </div>
-              <div class="b-card-kpi">
-                <span class="b-card-kpi-label">Marge</span>
-                <span class="b-card-kpi-value">11,5 %</span>
-                <span class="b-card-kpi-trend down">↓ 2 pp</span>
-              </div>
-            </div>
-          </div>
-          <div class="b-card-meta">
-            <div class="b-card-title">${step.title}</div>
-            <div class="b-card-sub">${step.sub}</div>
-          </div>
-          <span class="b-card-time">${step.time}</span>
-        `;
-        wa.appendChild(card);
-        requestAnimationFrame(() => {
-          card.classList.add('in');
-          // Subtle pulse before auto-launch
-          setTimeout(() => card.classList.add('pulsing'), 600);
-        });
-        // Auto-launch the card → report materialises on the right
-        setTimeout(
-          () => launchCardToReport(card, step.reportFrame, !!step.autoLaunch),
-          step.tapAt || 2100
-        );
-      } else if (step.kind === 'push'){
-        const p = document.getElementById(step.pushId);
-        if (p){
-          p.classList.remove('out');
-          p.classList.add('in');
-          setTimeout(() => {
-            p.classList.remove('in');
-            p.classList.add('out');
-          }, step.duration || 2400);
-        }
-      } else if (step.kind === 'them-action'){
-        // Julie message with inline action buttons (Ja / Später / ...)
-        if (currentThinkingEl){ currentThinkingEl.remove(); currentThinkingEl = null; }
-        const b = document.createElement('div');
-        b.className = 'bubble b-them';
-        const actionsHtml = (step.actions || []).map((a, i) => {
-          return `<button class="b-action-btn${a.primary ? ' primary' : ''}" data-idx="${i}">${a.label}</button>`;
-        }).join('');
-        b.innerHTML = `
-          ${step.html}
-          <div class="b-actions">${actionsHtml}</div>
-          <span class="time">${step.time}</span>
-        `;
-        wa.appendChild(b);
-        requestAnimationFrame(() => b.classList.add('in'));
-        // Simulate user pressing the primary button after a beat
-        const pressIdx = (step.actions || []).findIndex(a => a.press);
-        if (pressIdx >= 0){
-          setTimeout(() => {
-            const btns = b.querySelectorAll('.b-action-btn');
-            const target = btns[pressIdx];
-            if (target){
-              btns.forEach((el, j) => { if (j !== pressIdx) el.classList.add('dimmed'); });
-              target.classList.add('pressed');
-            }
-          }, step.pressAt || 1600);
-        }
-      } else if (step.kind === 'alert'){
-        if (currentThinkingEl){ currentThinkingEl.remove(); currentThinkingEl = null; }
-        const b = document.createElement('div');
-        b.className = 'bubble b-them b-alert';
-        b.innerHTML = `
-          <div class="alert-tag"><span class="alert-dot"></span>${step.tagText}</div>
-          ${step.html}
-          <span class="time">${step.time}</span>
-        `;
-        wa.appendChild(b);
-        requestAnimationFrame(() => b.classList.add('in'));
-      }
-      // Auto-scroll chat to bottom
-      requestAnimationFrame(() => {
-        wa.scrollTop = wa.scrollHeight;
-      });
-    }, step.delay);
-  });
-}
-
-/* ==================================================
-   Slide 4 helpers — the link card auto-launches out
-   of the phone, flies through the air, and the report
-   materialises on the right where it lands.
-   ================================================== */
-function launchCardToReport(cardEl, reportFrame, autoLaunch){
-  if (!cardEl) return;
-
-  // Optional tap ripple (only when triggered by a "tap")
-  if (!autoLaunch){
-    const ripple = document.createElement('div');
-    ripple.className = 'tap-indicator';
-    ripple.style.left = '50%';
-    ripple.style.top  = '50%';
-    cardEl.appendChild(ripple);
-    requestAnimationFrame(() => ripple.classList.add('tapping'));
-    setTimeout(() => ripple.remove(), 720);
+  if (nextBtn && !nextBtn.dataset.bound){
+    nextBtn.dataset.bound = '1';
+    nextBtn.addEventListener('click', () => S4.next(true));
   }
-
-  // Card press feedback
-  cardEl.classList.remove('pulsing');
-  cardEl.classList.add('tapped');
-  setTimeout(() => cardEl.classList.remove('tapped'), 260);
-
-  // Fly the clone after the press feedback
-  setTimeout(() => flyCardToReport(cardEl, reportFrame), autoLaunch ? 180 : 240);
-}
-
-function flyCardToReport(cardEl, reportFrame){
-  if (!cardEl || !reportFrame) return;
-
-  const reportWrap = document.getElementById('s4-report-wrap');
-  const eye2       = document.getElementById('s4-eye-2');
-  const cardRect   = cardEl.getBoundingClientRect();
-  const reportRect = reportWrap.getBoundingClientRect();
-
-  // Build the flying clone — visually the report leaving the phone
-  const flier = cardEl.cloneNode(true);
-  flier.style.position = 'fixed';
-  flier.style.left   = cardRect.left + 'px';
-  flier.style.top    = cardRect.top  + 'px';
-  flier.style.width  = cardRect.width + 'px';
-  flier.style.height = cardRect.height + 'px';
-  flier.style.margin = '0';
-  flier.style.zIndex = '200';
-  flier.style.pointerEvents = 'none';
-  flier.style.transformOrigin = 'center center';
-  flier.style.boxShadow = '0 36px 70px rgba(0,0,0,.28), 0 14px 28px rgba(0,0,0,.18)';
-  flier.classList.remove('pulsing','tapped');
-  const t = flier.querySelector('.b-card-time'); if (t) t.remove();
-  flier.querySelectorAll('.tap-indicator').forEach(el => el.remove());
-  document.body.appendChild(flier);
-
-  // Trajectory: card centre → report-wrap centre
-  const startX  = cardRect.left   + cardRect.width/2;
-  const startY  = cardRect.top    + cardRect.height/2;
-  const targetX = reportRect.left + reportRect.width/2;
-  const targetY = reportRect.top  + reportRect.height/2;
-  const dx = targetX - startX;
-  const dy = targetY - startY;
-
-  // Grow to ~half the report-wrap width as it flies
-  const targetScale = Math.max(1.6, (reportRect.width * 0.55) / cardRect.width);
-
-  // Arc trajectory: up-and-over, settle, then dissolve
-  gsap.to(flier, {
-    keyframes: [
-      { x: dx*0.45, y: dy*0.40 - 80, scale: 1.18, rotation: -2,
-        duration: 0.60, ease:'power2.out' },
-      { x: dx,       y: dy,           scale: targetScale, rotation: 0,
-        duration: 0.55, ease:'power2.in' },
-      { opacity: 0, scale: targetScale * 1.08,
-        duration: 0.30, ease:'power2.out' },
-    ],
-    onComplete: () => flier.remove(),
+  document.querySelectorAll('#s4-nav .s4-nav-dot').forEach(d => {
+    if (d.dataset.bound) return;
+    d.dataset.bound = '1';
+    d.addEventListener('click', () => {
+      const i = parseInt(d.dataset.step, 10);
+      S4.autoMode = false;
+      S4.goTo(i);
+    });
   });
 
-  // Mid-flight, the right-hand report materialises FROM the phone:
-  //   eyebrow fades in, the wrap unfolds (scaleX 0→1, transform-origin left),
-  //   loading bar sweeps, then live-status pill fades in.
-  setTimeout(() => {
-    if (eye2) gsap.to(eye2, { opacity:1, duration:0.6, ease:EASE_OUT });
-    if (reportWrap){
-      gsap.to(reportWrap, {
-        opacity:1, scaleX:1, scaleY:1,
-        duration:0.95, ease:'expo.out',
-      });
-    }
-    reportFrame.classList.add('loading');
-    setTimeout(() => reportFrame.classList.remove('loading'), 1300);
-    setTimeout(() => {
-      const status = document.getElementById('s4-report-status');
-      if (status) status.classList.add('is-visible');
-    }, 1500);
-  }, 850);
+  S4.start();
 }
 
 /* ==================================================
