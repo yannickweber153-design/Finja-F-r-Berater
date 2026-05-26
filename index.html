@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Julie.ai — Finanzielle Klarheit für den Mittelstand</title>
+<title>Finja — Finanzielle Klarheit für den Mittelstand</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -57,18 +57,20 @@
   }
 
   /* Typewriter container — preserve line breaks, reserve final-state height
-     via invisible placeholder so the visible text stays anchored to the top */
-  #s1-b h2{
+     via invisible placeholder so the visible text stays anchored to the top. */
+  #s1-b h2,
+  #s4i-a h2{
     white-space: pre-line;
     position: relative;
   }
-  #s1-b h2 .tw-placeholder{
+  .tw-placeholder{
     visibility: hidden;
     pointer-events: none;
     user-select: none;
   }
   /* Typewriter overlay — text-align:left so chars don't re-center as line grows */
-  #s1-b h2 .tw-overlay{
+  #s1-b h2 .tw-overlay,
+  #s4i-a h2 .tw-overlay{
     text-align: left;
   }
 
@@ -537,21 +539,21 @@
 
   /* iPhone cage — scaled down but reserves correct layout */
   .s4-phone-cage{
-    width:calc(300px * 0.78);
-    height:calc(620px * 0.78);
+    width:calc(300px * 0.68);
+    height:calc(620px * 0.68);
     position:relative;
     display:inline-block;
   }
   .s4-phone-cage > .iphone{
     transform-origin:top left;
-    transform:scale(0.78);
+    transform:scale(0.68);
   }
-  @media (max-height:820px){
+  @media (max-height:900px){
     .s4-phone-cage{
-      width:calc(300px * 0.68);
-      height:calc(620px * 0.68);
+      width:calc(300px * 0.60);
+      height:calc(620px * 0.60);
     }
-    .s4-phone-cage > .iphone{ transform:scale(0.68); }
+    .s4-phone-cage > .iphone{ transform:scale(0.60); }
   }
 
   /* iOS push notification (Slide 4) */
@@ -611,7 +613,7 @@
   }
   .ios-push.is-alert .ios-push-meta-name{ color:#C0563F; }
 
-  /* ===== Rich link-preview bubble (Julie sends report link) ===== */
+  /* ===== Rich link-preview bubble (Finja sends report link) ===== */
   .bubble.b-card{
     padding:0; overflow:hidden;
     width:86%;
@@ -830,7 +832,7 @@
     100%{ opacity:0; transform:translate(-50%,-50%) scale(1.9); }
   }
 
-  /* ===== Inline action buttons inside Julie's bubbles ===== */
+  /* ===== Inline action buttons inside Finja's bubbles ===== */
   .bubble .b-actions{
     display:flex; gap:6px;
     margin-top:9px; margin-bottom:1px;
@@ -867,7 +869,7 @@
     transform: scale(.97);
   }
 
-  /* ===== Anomaly alert bubble (Julie raises an exception) ===== */
+  /* ===== Anomaly alert bubble (Finja raises an exception) ===== */
   .bubble.b-them.b-alert{
     background:#FFF7F4;
     border-left:3px solid #E47B65;
@@ -1123,22 +1125,45 @@
     .s4-phone-cage{ display:block; margin:0 auto; }
   }
 
+  /* Slide 6 — Sicher-Badge under the headline (green so it pops) */
+  .s4u-sec-badge{
+    display:inline-flex; align-items:center; gap: 9px;
+    margin-top: 18px;
+    padding: 8px 16px;
+    background: #ECF5EE;
+    border: 1px solid rgba(47,125,63,.22);
+    color: #1F6B33;
+    border-radius: 9999px;
+    font-family:'JetBrains Mono', monospace;
+    font-size: 11.5px; letter-spacing: .18em; text-transform: uppercase;
+    font-weight: 500;
+    line-height: 1;
+  }
+  .s4u-sec-badge svg{ flex-shrink:0; }
+
+  /* ===== Slide 5 — Intro: Autopilot statt Blindflug =====
+     Caret + typewriter intentionally inherit slide 1's `.caret` styles —
+     no overrides here so both slides feel identical. */
+
   /* ===== Slide 5 — Skill grid (right column) ===== */
   .s4-skills{
     display:grid;
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    grid-auto-rows: 1fr;
+    gap: 10px;
     width: 100%;
+    max-height: 70vh;
+    align-content: start;
   }
   .s4-skill{
     background:#fff;
     border:1px solid var(--line);
     border-radius:14px;
-    padding: 14px 16px 12px;
+    padding: 10px 12px 8px;
     display:flex; flex-direction:column;
-    gap: 10px;
+    gap: 6px;
     position:relative;
-    min-height: 152px;
+    min-height: 112px;
     opacity:0;
     transform: translateY(14px) scale(.96);
     transition: opacity .65s cubic-bezier(.16,1,.3,1),
@@ -1190,7 +1215,7 @@
   }
   .s4-skill-title{
     font-family:'Inter', sans-serif;
-    font-weight:600; font-size:14.5px;
+    font-weight:600; font-size:13.5px;
     letter-spacing:-0.012em;
     line-height:1.2;
     color: var(--ink);
@@ -1198,15 +1223,15 @@
   .s4-skill-body{
     flex:1;
     display:flex; flex-direction:column; justify-content:center;
-    gap: 7px;
+    gap: 6px;
     min-height:0;
   }
   .s4-skill-foot{
     display:flex; align-items:center; gap:7px;
     font-family:'JetBrains Mono', monospace;
-    font-size: 9.5px; letter-spacing:.16em; text-transform:uppercase;
+    font-size: 9px; letter-spacing:.16em; text-transform:uppercase;
     color: var(--ink-muted);
-    padding-top: 9px;
+    padding-top: 6px;
     border-top: 1px solid var(--line-soft);
   }
   .s4-skill-dot{
@@ -1415,8 +1440,8 @@
 
   /* Card · 06 Empfehlungen */
   .s4-rec-row{
-    display:flex; align-items:flex-start; gap:9px;
-    font-size: 12px; line-height: 1.4;
+    display:flex; align-items:flex-start; gap:8px;
+    font-size: 11.5px; line-height: 1.35;
     color: var(--ink);
     letter-spacing: -0.005em;
   }
@@ -1463,16 +1488,16 @@
 
   /* Card · Fokus — hero number + list */
   .s4-fo-hero{
-    display:flex; align-items:center; gap:14px;
-    padding: 10px 12px;
+    display:flex; align-items:center; gap:12px;
+    padding: 8px 11px;
     background: #0A0A0A;
     color: #fff;
     border-radius: 8px;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
   }
   .s4-fo-num{
     font-family:'Inter', sans-serif;
-    font-weight: 600; font-size: 28px;
+    font-weight: 600; font-size: 24px;
     letter-spacing: -0.04em;
     line-height: 1;
   }
@@ -1485,8 +1510,8 @@
   .s4-fo-list{ display:flex; flex-direction:column; }
   .s4-fo-li{
     display:flex; align-items:center; gap:10px;
-    padding: 5px 0;
-    font-size: 11.5px;
+    padding: 4px 0;
+    font-size: 11px;
     border-bottom: 1px dashed var(--line-soft);
   }
   .s4-fo-li:last-child{ border-bottom: 0; }
@@ -1504,7 +1529,7 @@
 
   /* Card · Handlungsempfehlungen — impact strip */
   .s4-rec-impact{
-    margin-top: 10px;
+    margin-top: 8px;
     display:flex; justify-content:space-between; align-items:center;
     padding: 9px 12px;
     background: #F7F1E3;
@@ -1519,7 +1544,7 @@
   }
   .s4-rec-impact-val{
     font-family:'Inter', sans-serif;
-    font-weight: 600; font-size: 18px;
+    font-weight: 600; font-size: 16px;
     color: var(--ink); letter-spacing: -0.028em;
     line-height: 1;
   }
@@ -1539,26 +1564,19 @@
 
   /* ===== Slide 5 — Monitor scene (Steuerberater · DATEV upload) ===== */
   .s4-monitor-stage{
-    position:absolute;
-    inset: 0;
-    z-index: 30;
+    position:relative;
     display:flex; flex-direction:column;
-    align-items:center; justify-content:center;
+    align-items:center; justify-content:flex-start;
     gap: 14px;
-    pointer-events: none;
+    width: 100%;
     opacity: 0;
     transition: opacity .8s cubic-bezier(.16,1,.3,1);
   }
   .s4-monitor-stage.in{
     opacity: 1;
-    pointer-events: auto;
   }
   .s4-monitor-stage.out{
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(-6px);
-    transition: opacity .9s cubic-bezier(.16,1,.3,1),
-                transform 1.1s cubic-bezier(.16,1,.3,1);
+    opacity: 1; /* stays visible — upload slide is its only home */
   }
   .s4-monitor-eyebrow{
     font-family:'JetBrains Mono', monospace;
@@ -3252,7 +3270,7 @@
     100% { box-shadow: 0 0 0 0 rgba(47,125,63,0);    }
   }
 
-  /* ===== Slide 6 — Tease (Julie wird zum Team) ===== */
+  /* ===== Slide 6 — Tease (Finja wird zum Team) ===== */
   #s5{ background: var(--bg); }
   #s5 .s5-stage{
     width:100%;
@@ -3260,7 +3278,7 @@
     margin: 8px auto 0;
     position:relative;
   }
-  /* Connection SVG — sits behind the cards, edges drawn from Julie hub */
+  /* Connection SVG — sits behind the cards, edges drawn from Finja hub */
   .s5-edges{
     position:absolute;
     inset:0;
@@ -3287,7 +3305,7 @@
     opacity:.55;
     stroke-width:2;
   }
-  /* Stronger highlight when Julie delegates a user request to an agent */
+  /* Stronger highlight when Finja delegates a user request to an agent */
   .s5-edges path.delegate{
     opacity:.85;
     stroke-width:2.5;
@@ -3309,16 +3327,16 @@
     opacity:0;
   }
 
-  /* Julie orchestrator hub — top centre */
+  /* Finja orchestrator hub — top centre */
   .s5-hub-wrap{
     display:flex; flex-direction:column; justify-content:center; align-items:center;
     position:relative; z-index:2;
     margin-bottom:48px;
   }
 
-  /* User prompt above the hub — sits between the lede and Julie, visualising
-     the "Du → Julie" half of the orchestration loop. The bubble fades in,
-     a hairline drops to Julie's hub, target agent cycles immediately. */
+  /* User prompt above the hub — sits between the lede and Finja, visualising
+     the "Du → Finja" half of the orchestration loop. The bubble fades in,
+     a hairline drops to Finja's hub, target agent cycles immediately. */
   .s5-user-prompt{
     display:flex; justify-content:center; align-items:center;
     min-height:34px;
@@ -3598,7 +3616,7 @@
     font-size:9.5px; color:#8d8a85;
     text-align:right; margin-top:3px; line-height:1;
   }
-  /* Unread "1" badge on the Julie hub avatar when a new agent message lands */
+  /* Unread "1" badge on the Finja hub avatar when a new agent message lands */
   .s5-hub-avatar .hub-badge{
     position:absolute;
     top:-3px; right:-3px;
@@ -3737,7 +3755,7 @@
   #s5 .s5-hub-wrap{ display:none; }
   #s5 .s5-left, #s5 .s5-right{ display:none; }
 
-  /* Hub stack — user prompt + Julie hub, centered above the agent grid */
+  /* Hub stack — user prompt + Finja hub, centered above the agent grid */
   #s5 .s5-hub-stack{
     display:flex; flex-direction:column;
     align-items:center;
@@ -3820,6 +3838,8 @@
   <span class="nav-dot" data-go="4"></span>
   <span class="nav-dot" data-go="5"></span>
   <span class="nav-dot" data-go="6"></span>
+  <span class="nav-dot" data-go="7"></span>
+  <span class="nav-dot" data-go="8"></span>
 </nav>
 
 <main class="deck" id="deck">
@@ -3829,8 +3849,8 @@
 <!-- ==================================================== -->
 <section class="slide" id="s1" data-idx="0">
   <div class="chrome">
-    <span class="chrome-label">001 &nbsp;—&nbsp; Eine Idee</span>
-    <span class="chrome-mark">Julie<span class="fade-soft">.ai</span></span>
+    <span class="chrome-label">001 &nbsp;—&nbsp; Die Idee</span>
+    <span class="chrome-mark">Finja</span>
   </div>
 
   <!-- Stage -->
@@ -3841,7 +3861,7 @@
       <h1 class="font-display text-center leading-[1.05] reveal"
           style="font-size:clamp(2rem,4.6vw,4.5rem); max-width:18ch;">
         <span class="block">Die meisten KMUs steuern</span>
-        <span class="block quiet" style="color:var(--ink-muted)">ihre Zahlen im Blindflug.</span>
+        <span class="block quiet" style="color:var(--ink-muted)">ihr Geschäft im Blindflug.</span>
       </h1>
     </div>
 
@@ -3851,7 +3871,7 @@
         <p class="label-eyebrow mb-4" style="opacity:0" id="s1b-eye">Drei Fragen</p>
         <h2 class="font-display leading-[1.08]" style="font-size:clamp(2rem,4.4vw,4.2rem); position:relative;">
           <!-- Invisible placeholder reserves the final 2-line height -->
-          <span class="tw-placeholder" aria-hidden="true">Was wäre wenn jede Abweichung<br>einen Finanzchef hätte?</span>
+          <span class="tw-placeholder" aria-hidden="true">Was wäre wenn jede Abweichung<br>jederzeit im Blick wären?</span>
           <!-- Visible typewriter overlays from the top -->
           <span style="position:absolute; top:0; left:0; right:0;">
             <span id="typewriter"></span><span class="caret" id="caret"></span>
@@ -3866,7 +3886,7 @@
       </div>
     </div>
 
-    <!-- Phase C — Julie + iPhone with editorial dark right backdrop -->
+    <!-- Phase C — Finja + iPhone with editorial dark right backdrop -->
     <div id="s1-c" class="absolute inset-0 opacity-0">
       <!-- Dark backdrop on right half -->
       <div class="hero-dark-band" id="s1c-band"></div>
@@ -3876,17 +3896,17 @@
         <p class="label-eyebrow mb-7" id="s1c-eye" style="opacity:0">Was wäre wenn</p>
         <h2 class="font-display leading-[0.92]" id="s1c-h2"
             style="font-size:clamp(3.8rem,9vw,8.5rem); opacity:0">
-          Julie<span class="fade-soft">.ai</span>
+          Finja
         </h2>
         <div class="mt-8 md:mt-10" id="s1c-sub" style="opacity:0">
           <p class="font-display" style="font-size:clamp(1.05rem,1.6vw,1.5rem); color:var(--ink-soft); max-width:24ch; line-height:1.35;">
             Der Finanzchef für jedes&nbsp;KMU.
           </p>
-          <p class="mt-3 text-sm quiet" style="letter-spacing:.01em;">Erreichbar über WhatsApp.</p>
+          <p class="mt-3 text-sm quiet" style="letter-spacing:.01em;">Erreichbar über den Kanal deiner Wahl.</p>
           <div class="hero-chips">
-            <span class="lc-pill"><span class="pdot"></span>DATEV</span>
             <span class="lc-pill"><span class="pdot"></span>WhatsApp</span>
-            <span class="lc-pill"><span class="pdot"></span>Echtzeit</span>
+            <span class="lc-pill"><span class="pdot"></span>Email</span>
+            <span class="lc-pill"><span class="pdot"></span>etc.</span>
           </div>
         </div>
       </div>
@@ -3907,7 +3927,7 @@
               <span class="wa-back">‹</span>
               <div class="wa-avatar"></div>
               <div class="wa-meta">
-                <span class="wa-name">Julie</span>
+                <span class="wa-name">Finja</span>
                 <span class="wa-status"><span class="online">●</span> online</span>
               </div>
             </div>
@@ -3916,10 +3936,7 @@
               <div class="wa-enc">
                 <span class="lock">🔒</span>Ende-zu-Ende-verschlüsselt
               </div>
-              <div class="bubble b-me" data-msg="1">
-                Wie sehen meine Zahlen für dieses Quartal aus?
-                <span class="time">14:23 <span class="read">✓✓</span></span>
-              </div>
+              <div class="bubble b-me" data-msg="1">Wie sehen meine Zahlen für März aus? <span class="time">14:23 <span class="read">✓✓</span></span></div>
               <div class="bubble b-them thinking" data-msg="2" style="width:fit-content;">
                 <span></span><span></span><span></span>
               </div>
@@ -3950,7 +3967,7 @@
 <section class="slide" id="s3" data-idx="1" style="background:var(--bg-paper);">
   <div class="chrome">
     <span class="chrome-label">002 &nbsp;—&nbsp; Ursprung</span>
-    <span class="chrome-mark">Julie<span class="fade-soft">.ai</span></span>
+    <span class="chrome-mark">Finja</span>
   </div>
 
   <div class="slide-stage" style="justify-content:center;">
@@ -3977,7 +3994,7 @@
 
         <p class="reveal" id="s3-lede3"
            style="margin-top:30px; font-size:14px; letter-spacing:-0.003em; color:var(--ink-muted);">
-          Aus dieser Erfahrung entstand Julie<span class="fade-soft">.ai</span>
+          Aus dieser Erfahrung entstand Finja
         </p>
       </div>
 
@@ -4017,7 +4034,7 @@
           <!-- Footer pills — credibility shorthand -->
           <div id="s3-foot" style="margin-top:24px; display:flex; flex-wrap:wrap; gap:10px; opacity:0; transition:opacity .9s cubic-bezier(.16,1,.3,1);">
             <span class="lc-pill"><span class="pdot"></span>Operator-Praxis</span>
-            <span class="lc-pill"><span class="pdot"></span>Skin in the Game</span>
+            <span class="lc-pill"><span class="pdot"></span>Zahlenorientiert</span>
             <span class="lc-pill ghost"><span class="pdot"></span>3&#43; Jahre Mittelstand DACH</span>
           </div>
 
@@ -4034,7 +4051,7 @@
 <section class="slide" id="s2" data-idx="2">
   <div class="chrome">
     <span class="chrome-label">003 &nbsp;—&nbsp; Status Quo</span>
-    <span class="chrome-mark">Julie<span class="fade-soft">.ai</span></span>
+    <span class="chrome-mark">Finja</span>
   </div>
 
   <div class="s2-row">
@@ -4050,9 +4067,6 @@
       <p class="mt-7" id="s2-sub" style="opacity:0; color:rgba(255,255,255,.78); font-size:16.5px; line-height:1.6; max-width:36ch;">
         Buchhaltung nach Vorschrift. Für echte Analyse fehlt die Kapazität.
         <span style="color:#fff; font-weight:500;">Niemand kann die Abweichungen einordnen.</span>
-      </p>
-      <p class="mt-6" id="s2-status" style="opacity:0; font-family:'JetBrains Mono',monospace; font-size:12.5px; letter-spacing:.18em; text-transform:uppercase; color:rgba(255,255,255,.6); font-weight:500;">
-        Status: <span style="color:#E47B65;">gesteuert im Blindflug.</span>
       </p>
     </div>
 
@@ -4285,7 +4299,7 @@
 <section class="slide" id="s2b" data-idx="3" style="background:var(--bg-paper);">
   <div class="chrome">
     <span class="chrome-label">004 &nbsp;—&nbsp; Das Problem</span>
-    <span class="chrome-mark">Julie<span class="fade-soft">.ai</span></span>
+    <span class="chrome-mark">Finja</span>
   </div>
 
   <div class="slide-stage" style="gap:48px;">
@@ -4329,22 +4343,143 @@
 </section>
 
 <!-- ==================================================== -->
-<!-- SLIDE 5 — TRANSFORMATION (Was Julie liefert)         -->
+<!-- SLIDE 5 — INTRO: AUTOPILOT STATT BLINDFLUG          -->
 <!-- ==================================================== -->
-<section class="slide" id="s4" data-idx="4" style="background:var(--bg);">
+<section class="slide" id="s4i" data-idx="4" data-screen-label="05 Autopilot" style="background:var(--bg);">
   <div class="chrome">
-    <span class="chrome-label">005 &nbsp;—&nbsp; Was Julie liefert</span>
-    <span class="chrome-mark">Julie<span class="fade-soft">.ai</span></span>
+    <span class="chrome-label">005 &nbsp;—&nbsp; Die Lösung</span>
+    <span class="chrome-mark">Finja</span>
   </div>
 
-  <div class="slide-stage" style="gap:40px;">
+  <!-- Stage: typewriter "Autopilot statt Blindflug." → fades → "Finja" -->
+  <div class="absolute inset-0 flex items-center justify-center">
+
+    <!-- Phase A — typewriter line, identical styling to slide 1's questions -->
+    <div id="s4i-a" class="absolute inset-0 flex items-center justify-center px-10">
+      <div class="text-center">
+        <h2 class="font-display leading-[1.08]" style="font-size:clamp(2rem,4.4vw,4.2rem); position:relative;">
+          <span class="tw-placeholder" aria-hidden="true">Autopilot statt Blindflug.</span>
+          <span style="position:absolute; top:0; left:0; right:0;">
+            <span id="s4i-tw"></span><span class="caret" id="s4i-caret"></span>
+          </span>
+        </h2>
+      </div>
+    </div>
+
+    <!-- Phase B — "Finja" + finished WhatsApp chat, balanced & centred -->
+    <div id="s4i-b" class="absolute inset-0 opacity-0 flex items-center justify-center">
+      <div class="w-full px-10" style="max-width:1280px;">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+
+          <!-- Finja word -->
+          <div class="md:col-span-6 flex justify-center md:justify-end">
+            <h2 class="font-display leading-[0.92] text-center md:text-right" id="s4i-c-h2"
+                style="font-size:clamp(4rem,10vw,10rem); letter-spacing:-0.04em;">
+              Finja
+            </h2>
+          </div>
+
+          <!-- iPhone with completed chat -->
+          <div class="md:col-span-6 flex justify-center md:justify-start" id="s4i-phone-wrap">
+            <div class="iphone" style="transform:scale(.82); transform-origin:center left;">
+              <div class="iphone-island"></div>
+              <div class="iphone-screen">
+                <div class="iphone-status">
+                  <span>9:41</span>
+                  <span class="iphone-status-right">
+                    <svg width="16" height="10" viewBox="0 0 16 10"><rect x="0" y="6" width="3" height="4" rx=".5" fill="#111"/><rect x="4" y="4" width="3" height="6" rx=".5" fill="#111"/><rect x="8" y="2" width="3" height="8" rx=".5" fill="#111"/><rect x="12" y="0" width="3" height="10" rx=".5" fill="#111"/></svg>
+                    <svg width="14" height="10" viewBox="0 0 14 10"><path d="M7 1.6c2 0 3.8.8 5 2.1l-1 1c-1-1-2.5-1.6-4-1.6S4 3.7 3 4.7l-1-1C3.2 2.4 5 1.6 7 1.6Zm0 2.5c1.3 0 2.5.5 3.3 1.4l-1 1c-.6-.6-1.4-1-2.3-1s-1.7.4-2.3 1l-1-1C4.5 4.6 5.7 4.1 7 4.1Zm0 2.5c.7 0 1.3.3 1.7.8l-1 1c-.2-.2-.4-.3-.7-.3s-.5.1-.7.3l-1-1C5.7 6.9 6.3 6.6 7 6.6Z" fill="#111"/></svg>
+                    <svg width="22" height="10" viewBox="0 0 22 10"><rect x="0" y="1" width="18" height="8" rx="2" fill="none" stroke="#111" stroke-width="1"/><rect x="19" y="3.5" width="1.5" height="3" rx=".5" fill="#111"/><rect x="2" y="3" width="14" height="4" rx="1" fill="#111"/></svg>
+                  </span>
+                </div>
+                <div class="wa-header">
+                  <span class="wa-back">‹</span>
+                  <div class="wa-avatar"></div>
+                  <div class="wa-meta">
+                    <span class="wa-name">Finja</span>
+                    <span class="wa-status"><span class="online">●</span> online</span>
+                  </div>
+                </div>
+                <div class="wa-body">
+                  <span class="wa-date">Heute</span>
+                  <div class="bubble b-me in">Wie sehen meine Zahlen für März aus?
+14:23 ✓✓</div>
+                  <div class="bubble b-them in">
+                    Hallo 👋 Q1 schließt solide - Umsatz <strong style="font-weight:600">391&nbsp;K&nbsp;€</strong>,
+                    EBITDA <strong style="font-weight:600">45&nbsp;K&nbsp;€</strong>. Liquidität ist gegenüber Februar
+                    um <strong style="font-weight:600">22&nbsp;%</strong> gefallen - Hauptursache ist Lieferant&nbsp;X.
+                    <span class="time">14:24</span>
+                  </div>
+                  <div class="bubble b-me in">Sollen wir die Neueinstellungen verschieben? <span class="time">14:25 <span class="read">✓✓</span></span></div>
+                  <div class="bubble b-them in">
+                    Mein Vorschlag: 2 Stellen um 6 Wochen schieben - das reduziert den Liquiditätsdruck um <strong style="font-weight:600">~38&nbsp;K&nbsp;€</strong>.
+                    <span class="time">14:25</span>
+                  </div>
+                </div>
+                <div class="wa-input">
+                  <span class="wa-input-plus">+</span>
+                  <div class="wa-input-field"></div>
+                  <span class="wa-input-cam">📷</span>
+                  <span class="wa-input-mic">🎤</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ==================================================== -->
+<!-- SLIDE 6 — VOM STEUERBERATER ZU FINJA (Upload)         -->
+<!-- ==================================================== -->
+<section class="slide" id="s4u" data-idx="5" data-screen-label="06 Upload" style="background:var(--bg);">
+  <div class="chrome">
+    <span class="chrome-label">006 &nbsp;—&nbsp; Der Upload</span>
+    <span class="chrome-mark">Finja</span>
+  </div>
+
+  <div class="slide-stage" style="gap:32px; justify-content:flex-start; padding-top:72px; padding-bottom:48px;">
+
+    <div class="text-center" style="max-width:1080px; margin:0 auto;">
+      <h2 class="font-display" id="s4u-h2"
+          style="opacity:0; font-size:clamp(2rem,3.6vw,3.6rem); line-height:1.04; letter-spacing:-0.038em;">
+        Vom Steuerberater <span style="color:var(--ink-muted)">zu&nbsp;Finja.</span>
+      </h2>
+      <div class="s4u-sec-badge" id="s4u-eye" style="opacity:0;">
+        <svg width="11" height="13" viewBox="0 0 11 13" fill="none" aria-hidden="true">
+          <path d="M5.5 1C3.6 1 2 2.6 2 4.5V6H1.5C1.2 6 1 6.2 1 6.5v5c0 .3.2.5.5.5h8c.3 0 .5-.2.5-.5v-5c0-.3-.2-.5-.5-.5H9V4.5C9 2.6 7.4 1 5.5 1Zm0 1c1.4 0 2.5 1.1 2.5 2.5V6h-5V4.5C3 3.1 4.1 2 5.5 2Z" fill="currentColor"/>
+        </svg>
+        <span>Sicherer Upload &nbsp;·&nbsp; Ende-zu-Ende-verschlüsselt</span>
+      </div>
+    </div>
+
+    <!-- Holds the monitor scene — the actual stage is moved here from old slide 5 -->
+    <div id="s4u-stage-host" style="display:flex; justify-content:center; width:100%;"></div>
+
+  </div>
+</section>
+
+<!-- ==================================================== -->
+<!-- SLIDE 7 — TRANSFORMATION (Was Finja liefert)         -->
+<!-- ==================================================== -->
+<section class="slide" id="s4" data-idx="6" data-screen-label="07 Was Finja liefert" style="background:var(--bg);">
+  <div class="chrome">
+    <span class="chrome-label">007 &nbsp;—&nbsp; Was Finja liefert</span>
+    <span class="chrome-mark">Finja</span>
+  </div>
+
+  <div class="slide-stage" style="gap:80px; justify-content:flex-start; padding-top:72px; padding-bottom:32px;">
 
     <!-- One pithy headline with breathing room -->
     <div class="text-center" style="max-width:1080px; margin:0 auto;">
       <p class="label-eyebrow" id="s4-eye" style="opacity:0">Der proaktive Finanzchef</p>
       <h2 class="font-display mt-3" id="s4-h2"
-          style="opacity:0; font-size:clamp(2rem,3.4vw,3.4rem); line-height:1.06; letter-spacing:-0.038em;">
-        Julie meldet sich. <span style="color:var(--ink-muted)">Du fragst nach.</span>
+          style="opacity:0; font-size:clamp(2rem,3.6vw,3.6rem); line-height:1.04; letter-spacing:-0.038em;">
+        Finja meldet sich. <span style="color:var(--ink-muted)">Du fragst nach.</span>
       </h2>
     </div>
 
@@ -4379,8 +4514,8 @@
                   <span class="s4-mail-from">Finanzamt</span>
                   <span class="s4-mail-sub">USt-Voranmeldung Q4</span>
                 </div>
-                <div class="s4-mail-item active" id="s4-mail-julie">
-                  <span class="s4-mail-from">Julie.ai</span>
+                <div class="s4-mail-item active" id="s4-mail-finja">
+                  <span class="s4-mail-from">Finja</span>
                   <span class="s4-mail-sub">DATEV-Upload Januar fällig</span>
                   <span class="s4-mail-dot"></span>
                 </div>
@@ -4391,16 +4526,16 @@
               </div>
               <div class="s4-mail-content">
                 <div class="s4-mail-head">
-                  <div class="s4-mail-avatar">J</div>
+                  <div class="s4-mail-avatar">F</div>
                   <div class="s4-mail-meta">
-                    <span class="s4-mail-meta-from">Julie.ai &lt;hello@julie.ai&gt;</span>
+                    <span class="s4-mail-meta-from">Finja &lt;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1a727f7676755a7c7374707b347b73">[email&#160;protected]</a>&gt;</span>
                     <span class="s4-mail-meta-to">an: Stefan Müller · Steuerberater</span>
                   </div>
                   <span class="s4-mail-time">heute · 08:12</span>
                 </div>
                 <div class="s4-mail-subject">DATEV-Upload Januar — Werkstatt Müller GmbH</div>
                 <div class="s4-mail-body">
-                  Hallo Stefan, der monatliche Datenupload für Werkstatt Müller ist fällig. Einfach den DATEV-Export hochladen — Julie analysiert automatisch und informiert den Mandanten direkt.
+                  Hallo Stefan, der monatliche Datenupload für Werkstatt Müller ist fällig. Einfach den DATEV-Export hochladen — Finja analysiert automatisch und informiert den Mandanten direkt.
                 </div>
                 <div class="s4-mail-cta-wrap">
                   <button class="s4-mail-cta" id="s4-mail-cta" type="button">
@@ -4440,7 +4575,7 @@
               </div>
               <div class="s4-upload-done" id="s4-upload-done">
                 <span class="s4-upload-done-tick">✓</span>
-                <span>Übertragen · Julie startet die Analyse automatisch</span>
+                <span>Übertragen · Finja startet die Analyse automatisch</span>
               </div>
             </div>
 
@@ -4462,7 +4597,7 @@
                   <div class="ios-push-icon">J</div>
                   <div class="ios-push-body">
                     <div class="ios-push-meta">
-                      <span class="ios-push-meta-name">Julie.ai · WhatsApp</span>
+                      <span class="ios-push-meta-name">Finja · WhatsApp</span>
                       <span class="ios-push-meta-time">jetzt</span>
                     </div>
                     <div class="ios-push-title">Dein Januar-Report ist fertig</div>
@@ -4473,7 +4608,7 @@
                   <div class="ios-push-icon">!</div>
                   <div class="ios-push-body">
                     <div class="ios-push-meta">
-                      <span class="ios-push-meta-name">Julie.ai · Frühwarnung</span>
+                      <span class="ios-push-meta-name">Finja · Frühwarnung</span>
                       <span class="ios-push-meta-time">jetzt</span>
                     </div>
                     <div class="ios-push-title">Liquidität wird in ~7 Wochen knapp</div>
@@ -4534,7 +4669,7 @@
                       <span class="wa-back">‹</span>
                       <div class="wa-avatar"></div>
                       <div class="wa-meta">
-                        <span class="wa-name">Julie</span>
+                        <span class="wa-name">Finja</span>
                         <span class="wa-status"><span class="online">●</span> online</span>
                       </div>
                     </div>
@@ -4573,7 +4708,7 @@
 
       <!-- RIGHT — Skill grid (cards materialise from the chat one by one) -->
       <div class="lg:col-span-7 flex flex-col" id="s4-report-wrap" style="opacity:0;">
-        <p class="label-eyebrow" id="s4-eye-2" style="text-align:center; margin-bottom:14px; opacity:0;">03 &nbsp;—&nbsp; Was Julie liefert</p>
+        <p class="label-eyebrow" id="s4-eye-2" style="text-align:center; margin-bottom:14px; opacity:0;">03 &nbsp;—&nbsp; Was Finja liefert</p>
         <div class="s4-skills" id="s4-skills">
 
           <!-- 01 · Transparenz über das Zahlenwerk -->
@@ -4584,20 +4719,6 @@
             </div>
             <div class="s4-skill-title">Transparenz über das Zahlenwerk</div>
             <div class="s4-skill-body">
-              <div class="s4-report-mini">
-                <div class="s4-report-mini-thumb" aria-hidden="true">
-                  <span class="rm-band"></span>
-                  <span class="rm-line rm-line-1"></span>
-                  <span class="rm-line rm-line-2"></span>
-                  <span class="rm-bars">
-                    <i></i><i></i><i></i><i></i>
-                  </span>
-                </div>
-                <div class="s4-report-mini-meta">
-                  <span class="s4-report-mini-title">Management-Bericht</span>
-                  <span class="s4-report-mini-sub">Januar 2026 · GuV · Cashflow · OPOS</span>
-                </div>
-              </div>
               <div class="s4-kpi-row">
                 <div class="s4-kpi"><span class="lbl">Umsatz</span><span class="val">391 K€</span></div>
                 <div class="s4-kpi"><span class="lbl">EBITDA</span><span class="val">45 K€</span></div>
@@ -4613,19 +4734,19 @@
               <span class="s4-skill-num">02</span>
               <span class="s4-skill-tag warn">prognose</span>
             </div>
-            <div class="s4-skill-title">Frühwarnsystem · Muster die du sonst übersiehst</div>
+            <div class="s4-skill-title">Frühwarnsystem · Muster die du übersiehst</div>
             <div class="s4-skill-body">
               <div class="s4-fr-row">
                 <span class="s4-fr-pill risk">Müller</span>
-                <span class="s4-fr-text">Große Rechnungen 2 Tage später · Stress-Signal</span>
+                <span class="s4-fr-text">Rechnungen 2 Tage später · Stress-Signal</span>
               </div>
               <div class="s4-fr-row">
-                <span class="s4-fr-pill risk">Lieferant X</span>
-                <span class="s4-fr-text">+4,2 % Stückpreise · verdeckt über Mindestabnahmen</span>
+                <span class="s4-fr-pill risk">Lieferant&nbsp;X</span>
+                <span class="s4-fr-text">+4,2 % Stückpreise · verdeckt</span>
               </div>
               <div class="s4-fr-row">
                 <span class="s4-fr-pill risk">A12 Lager</span>
-                <span class="s4-fr-text">Umschlag 8× → 5× · still gebundenes Kapital</span>
+                <span class="s4-fr-text">Umschlag 8× → 5× · gebundenes Kapital</span>
               </div>
             </div>
             <div class="s4-skill-foot"><span class="s4-skill-dot warn"></span>Proaktiv · was sonst keiner sieht</div>
@@ -4646,7 +4767,6 @@
               <div class="s4-fo-list">
                 <div class="s4-fo-li"><span class="nm">Kunde A</span><span class="vl">42 K€</span><span class="dy">48 d</span></div>
                 <div class="s4-fo-li"><span class="nm">Kunde B</span><span class="vl">28 K€</span><span class="dy">41 d</span></div>
-                <div class="s4-fo-li"><span class="nm">Kunde C</span><span class="vl">19 K€</span><span class="dy">37 d</span></div>
               </div>
             </div>
             <div class="s4-skill-foot"><span class="s4-skill-dot neutral"></span>Hebel konzentriert · adressierbar</div>
@@ -4664,11 +4784,11 @@
               <div class="s4-rec-row"><span class="s4-rec-ck">✓</span><span><strong>Zahlungsziel</strong> Kunde C nachverhandeln</span></div>
               <div class="s4-rec-row"><span class="s4-rec-ck">✓</span><span><strong>Volumen-Shift</strong> Lieferant X → Y</span></div>
               <div class="s4-rec-impact">
-                <span class="s4-rec-impact-lbl">erwarteter Hebel · 30 Tage</span>
+                <span class="s4-rec-impact-lbl">Hebel · 30 Tage</span>
                 <span class="s4-rec-impact-val">+38 K€</span>
               </div>
             </div>
-            <div class="s4-skill-foot"><span class="s4-skill-dot ok"></span>Vorlagen &amp; Anschreiben liegen bereit</div>
+            <div class="s4-skill-foot"><span class="s4-skill-dot ok"></span>Vorlagen liegen bereit</div>
           </div>
 
         </div>
@@ -4681,35 +4801,39 @@
       <button class="s4-nav-btn" id="s4-prev" type="button" aria-label="Zurück">←</button>
       <div class="s4-nav-stepper">
         <div class="s4-nav-dots">
-          <button class="s4-nav-dot" type="button" data-step="0" aria-label="Schritt 1"></button>
-          <button class="s4-nav-dot" type="button" data-step="1" aria-label="Schritt 2"></button>
-          <button class="s4-nav-dot" type="button" data-step="2" aria-label="Schritt 3"></button>
-          <button class="s4-nav-dot" type="button" data-step="3" aria-label="Schritt 4"></button>
-          <button class="s4-nav-dot" type="button" data-step="4" aria-label="Schritt 5"></button>
-          <button class="s4-nav-dot" type="button" data-step="5" aria-label="Schritt 6"></button>
-          <button class="s4-nav-dot" type="button" data-step="6" aria-label="Schritt 7"></button>
+          <button class="s4-nav-dot" type="button" data-step="2" aria-label="Schritt 1"></button>
+          <button class="s4-nav-dot" type="button" data-step="3" aria-label="Schritt 2"></button>
+          <button class="s4-nav-dot" type="button" data-step="4" aria-label="Schritt 3"></button>
+          <button class="s4-nav-dot" type="button" data-step="5" aria-label="Schritt 4"></button>
+          <button class="s4-nav-dot" type="button" data-step="6" aria-label="Schritt 5"></button>
         </div>
-        <span class="s4-nav-label" id="s4-nav-label">Monitor · Mail empfangen</span>
+        <span class="s4-nav-label" id="s4-nav-label">Handy · Benachrichtigung</span>
       </div>
       <button class="s4-nav-btn" id="s4-next" type="button" aria-label="Weiter">→</button>
     </div>
 
   </div>
+
+  <!-- Scroll hint — appears once the cards have landed, signals next slide -->
+  <div class="scroll-hint" id="s4-hint">
+    <span>scroll</span>
+    <span class="line"></span>
+  </div>
 </section>
 
 <!-- ==================================================== -->
-<!-- SLIDE 6 — TEASE (Julie wird zum Team)                -->
+<!-- SLIDE 6 — TEASE (Finja wird zum Team)                -->
 <!-- ==================================================== -->
-<section class="slide" id="s5" data-idx="5" data-screen-label="06 Roadmap" style="background:var(--bg);">
+<section class="slide" id="s5" data-idx="7" data-screen-label="08 Roadmap" style="background:var(--bg);">
   <div class="chrome">
-    <span class="chrome-label">006 &nbsp;—&nbsp; Roadmap</span>
-    <span class="chrome-mark">Julie<span class="fade-soft">.ai</span></span>
+    <span class="chrome-label">008 &nbsp;—&nbsp; Roadmap</span>
+    <span class="chrome-mark">Finja</span>
   </div>
 
   <!-- Editorial layout: slim dark band on top + light body with orchestration -->
   <div class="s5-row" id="s5-stage">
 
-    <!-- Connection edges span the full row so lines reach from Julie down to each card -->
+    <!-- Connection edges span the full row so lines reach from Finja down to each card -->
     <svg class="s5-edges" id="s5-edges" preserveAspectRatio="none" aria-hidden="true"></svg>
 
     <!-- TOP — slim dark band: eyebrow + headline -->
@@ -4718,7 +4842,7 @@
         <p class="label-eyebrow" id="s5-eye" style="opacity:0">Roadmap &nbsp;·&nbsp; Agentic Services</p>
         <h2 class="font-display" id="s5-h2"
             style="opacity:0; margin-top:14px; font-size:clamp(2rem,3.6vw,3.4rem); line-height:1.04; letter-spacing:-0.038em;">
-          Julie wird zum&nbsp;Team.
+          Finja wird zum&nbsp;Team.
         </h2>
       </div>
     </div>
@@ -4727,9 +4851,9 @@
     <div class="s5-body">
 
       <p class="lede" id="s5-sub"
-         style="opacity:0; text-align:center; max-width:64ch; margin:0 auto;">Heute der Finanzchef. Bald das gesamte Backoffice - Julie orchestriert spezialisierte Agenten für Recruiting, HR und Marketing.</p>
+         style="opacity:0; text-align:center; max-width:64ch; margin:0 auto;">Heute der Finanzchef. Bald der Wachstumstreiber - Finja orchestriert spezialisierte Agenten für Recruiting, HR und Marketing.</p>
 
-      <!-- User prompt + Julie hub stack, centered -->
+      <!-- User prompt + Finja hub stack, centered -->
       <div class="s5-hub-stack">
         <div class="s5-user-prompt" id="s5-user-prompt">
           <div class="s5-user-bubble" id="s5-user-bubble">
@@ -4742,7 +4866,7 @@
             <span class="hub-badge" id="s5-hub-badge">1</span>
           </div>
           <div class="s5-hub-text">
-            <span class="s5-hub-name">Julie</span>
+            <span class="s5-hub-name">Finja</span>
             <span class="s5-hub-role">Orchestrator &nbsp;·&nbsp; live</span>
           </div>
         </div>
@@ -4751,12 +4875,12 @@
       <!-- Agent grid (4 in a row) -->
       <div class="s5-grid" id="s5-grid">
 
-        <!-- Finja — Finance (LIVE today) -->
-        <div class="s5-agent" data-agent="finja">
+        <!-- Klara — Finance (LIVE today) -->
+        <div class="s5-agent" data-agent="klara">
           <div class="s5-agent-head">
             <div class="s5-avatar av-fin"></div>
             <div class="s5-agent-meta">
-              <span class="s5-agent-name">Finja</span>
+              <span class="s5-agent-name">Klara</span>
               <span class="s5-agent-role">Finance</span>
             </div>
             <span class="s5-status live">Live</span>
@@ -4835,7 +4959,7 @@
         <span class="sep">·</span>
         <span>Ein Team</span>
         <span class="sep">·</span>
-        <span>Das ganze Backoffice</span>
+        <span>DER WACHSTUMSTREIBER</span>
       </div>
 
     </div>
@@ -4846,22 +4970,20 @@
 <!-- ==================================================== -->
 <!-- SLIDE 7 — CTA / Pilotprogramm                        -->
 <!-- ==================================================== -->
-<section class="slide" id="s7" data-idx="6" style="background:var(--bg);">
+<section class="slide" id="s7" data-idx="8" style="background:var(--bg);">
   <div class="chrome">
-    <span class="chrome-label">007 &nbsp;—&nbsp; Pilotprogramm</span>
-    <span class="chrome-mark">Julie<span class="fade-soft">.ai</span></span>
+    <span class="chrome-label">009 &nbsp;—&nbsp; Limitiertes Angebot</span>
+    <span class="chrome-mark">Finja</span>
   </div>
 
   <div class="slide-stage" style="gap:36px; justify-content:space-between;">
 
     <!-- Header -->
     <div class="text-center" style="max-width:1080px; margin:0 auto;">
-      <p class="label-eyebrow" id="s7-eye" style="opacity:0">Pilot 2026 · für M&amp;A-Berater</p>
+      <p class="label-eyebrow" id="s7-eye" style="opacity:0">ANGEBOT FÜR M&amp;A-BERATER</p>
       <h2 class="font-display mt-4" id="s7-h2"
-          style="opacity:0; font-size:clamp(2.4rem,4.4vw,4.2rem); line-height:1.04; letter-spacing:-0.04em;">
-        Bring Julie<span class="fade-soft">.ai</span> zu deinen&nbsp;Mandanten.
-      </h2>
-      <p class="lede mt-4" id="s7-sub" style="opacity:0; margin-left:auto; margin-right:auto; max-width:64ch;">Wir öffnen Julie für die Mandanten ausgewählter M&amp;A-Berater. Keine Implementierungskosten, keine Jahresverträge - und neben den Vorteilen für deine Mandanten jeweils auch ein klarer Vorteil für dich.</p>
+          style="opacity:0; font-size:clamp(2.4rem,4.4vw,4.2rem); line-height:1.04; letter-spacing:-0.04em;">Wir bringen Finja zum Mandanten.</h2>
+      <p class="lede mt-4" id="s7-sub" style="opacity:0; margin-left:auto; margin-right:auto; max-width:64ch;">Wir öffnen Finja für Mandanten ausgewählter M&amp;A-Berater. Keine Implementierungskosten, keine Jahresverträge - und neben den Vorteilen für Mandanten jeweils auch ein klarer Vorteil für Berater.</p>
     </div>
 
     <!-- Two-column: Business Model + Berater-Hook -->
@@ -4869,10 +4991,10 @@
 
       <!-- Left: business model -->
       <div class="cta-col cta-light" data-cta="1">
-        <div class="cta-eyebrow">Für deine Mandanten</div>
+        <div class="cta-eyebrow">FÜR MANDANTEN</div>
         <div class="cta-title">Keine Eintrittsbarriere.</div>
         <div class="cta-list">
-          <div class="cta-row"><span class="cta-num">01</span><div><strong>Keine Implementierungskosten.</strong> Kein Setup-Aufwand, kein IT-Projekt.</div></div>
+          <div class="cta-row"><span class="cta-num">01</span><div>Keine Implementierungskosten. Kein Setup-Aufwand, kein IT-Projekt. Sofort verfügbar </div></div>
           <div class="cta-row"><span class="cta-num">02</span><div>100% flexibel abgerechnet. Monatlich kündbar, rein erfolgsabhängig.</div></div>
           <div class="cta-row"><span class="cta-num">03</span><div>Günstiger als eine Sonderanfrage beim Steuerbüro, viel günstiger und schneller als eine Inhouse-Einstellung.</div></div>
         </div>
@@ -4880,9 +5002,9 @@
 
       <!-- Right: Berater-Hook (dark, highlighted) -->
       <div class="cta-col cta-dark" data-cta="2">
-        <div class="cta-eyebrow" style="color:rgba(255,255,255,.55);">Dein Vorteil als Berater</div>
+        <div class="cta-eyebrow" style="color:rgba(255,255,255,.55);">VORTEIL ALS BERATER</div>
         <div class="cta-title" style="color:#fff;">Einen kostenlosen Financial DD Report - pro Mandant.</div>
-        <p style="color:rgba(255,255,255,.78); font-size:15.5px; line-height:1.55; margin-top:14px;">Jeder Mandant, der Julie nutzt, gibt dir durch eine gratis Financial DD Klarheit zu den Reizthemen, die im Deal Schwung kosten:</p>
+        <p style="color:rgba(255,255,255,.78); font-size:15.5px; line-height:1.55; margin-top:14px;">Für jeden Mandanten, der Kunde wird, erstellt Finja einen gratis Financial DD Report. Das schafft Klarheit zu den Reizthemen, die im Deal Schwung kosten:</p>
         <div class="cta-pills">
           <span class="cta-pill"><span class="cta-pill-dot"></span>Working Capital</span>
           <span class="cta-pill"><span class="cta-pill-dot"></span>Nettofinanzposition</span>
@@ -4892,28 +5014,12 @@
 
     </div>
 
-    <!-- Closing CTA bar -->
-    <div class="cta-closing" id="s7-mark" style="opacity:0;">
-      <div class="font-display" style="font-size:clamp(1.5rem,2.6vw,2rem); color:var(--ink); line-height:1; letter-spacing:-0.045em;">
-        Julie<span class="fade-soft">.ai</span>
-      </div>
-      <span class="font-mono uppercase quiet" style="margin-top:2px; font-size:12px; letter-spacing:.20em; color:var(--ink-medium); font-weight:500;">Made in Germany · For the Mittelstand</span>
-      <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
-        <a href="mailto:hello@julie.ai?subject=Pilot%202026" style="display:inline-flex; align-items:center; gap:8px; padding:11px 18px; background:#0A0A0A; color:#fff; border-radius:9999px; font-size:13px; font-weight:500; text-decoration:none; letter-spacing:-0.005em;">
-          Als Berater anmelden&nbsp;→
-        </a>
-        <a href="mailto:hello@julie.ai?subject=Demo" style="display:inline-flex; align-items:center; gap:8px; padding:11px 18px; background:transparent; color:var(--ink); border:1px solid var(--line); border-radius:9999px; font-size:13px; font-weight:500; text-decoration:none; letter-spacing:-0.005em;">
-          hello@julie.ai
-        </a>
-      </div>
-    </div>
-
   </div>
 </section>
 
 </main>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* ==================================================
    ORCHESTRATION
    ================================================== */
@@ -4930,19 +5036,26 @@ dots.forEach(d => d.addEventListener('click', () => {
 /* Keyboard navigation */
 let currentIdx = 0;
 document.addEventListener('keydown', (e) => {
-  // On slide 5 (#s4), arrow keys step through the demo narrative —
-  // unless the user has already stepped past the last beat, in which
-  // case we fall through to the normal slide navigation.
-  const onS4 = currentIdx === 4 && typeof S4 !== 'undefined' && S4.started;
-  if (onS4 && (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ')){
+  // On the upload slide (#s4u, idx 5), arrow keys auto-advance through stages 0-1.
+  // On the product slide (#s4, idx 6), they step through stages 2-6.
+  const onS4Upload  = currentIdx === 5 && typeof S4 !== 'undefined' && S4.started;
+  const onS4Product = currentIdx === 6 && typeof S4 !== 'undefined' && S4.started;
+  if (onS4Upload && (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ')){
+    if (S4.current < 1){
+      e.preventDefault();
+      S4.next(true);
+      return;
+    }
+  }
+  if (onS4Product && (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ')){
     if (S4.current < S4.total - 1){
       e.preventDefault();
       S4.next(true);
       return;
     }
   }
-  if (onS4 && (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp')){
-    if (S4.current > 0){
+  if (onS4Product && (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp')){
+    if (S4.current > 2){
       e.preventDefault();
       S4.prev(true);
       return;
@@ -5007,16 +5120,16 @@ function runTypewriter(){
   s1AdvanceArmed = false;
   const el = document.getElementById('typewriter');
   const seq = [
-    { text:'Was wäre wenn du deine\nZahlen wirklich kennst?',     hold:1200, action:'delete' },
-    { text:'Was wäre wenn jede Abweichung\nsofort erklärt ist?',  hold:1200, action:'delete' },
-    { text:'Was wäre wenn jedes KMU\neinen Finanzchef hätte?',    hold:0,    action:'finish' },
+    { text:'Was wäre wenn die Zahlen\njederzeit im Blick wären?',     hold:1200, action:'delete' },
+    { text:'Was wäre wenn jede Abweichung\nsofort erklärt wäre?',     hold:1200, action:'delete' },
+    { text:'Was wäre wenn jedes KMU einen\nFinanzchef haben könnte?', hold:0,    action:'finish' },
   ];
   let stepIdx = 0;
   const typeSpeed = 42;
   const deleteSpeed = 22;
 
   // Positions for the faded word inside the final string
-  const fadeStart = 'Was wäre wenn jedes KMU\neinen '.length;
+  const fadeStart = 'Was wäre wenn jedes KMU einen\n'.length;
   const fadeEnd = fadeStart + 'Finanzchef'.length;
 
   function render(current, isFinal){
@@ -5163,15 +5276,15 @@ function playS1Chat(){
   setTimeout(() => { me.classList.add('in'); scrollWaToBottom(wa); }, 200);
   setTimeout(() => { think.classList.add('in'); scrollWaToBottom(wa); }, 1100);
 
-  // After typing, swap in Julie's reply (compact)
+  // After typing, swap in Finja's reply (compact)
   setTimeout(() => {
     think.classList.remove('in');
     setTimeout(() => {
       think.outerHTML = `
         <div class="bubble b-them in">
-          Hallo 👋 Q1 schließt solide — Umsatz <strong style="font-weight:600">391&nbsp;K&nbsp;€</strong>,
+          Hallo 👋 Q1 schließt solide - Umsatz <strong style="font-weight:600">391&nbsp;K&nbsp;€</strong>,
           EBITDA <strong style="font-weight:600">45&nbsp;K&nbsp;€</strong>. Liquidität ist gegenüber Februar
-          um <strong style="font-weight:600">22&nbsp;%</strong> gefallen — Hauptursache ist Lieferant&nbsp;X.
+          um <strong style="font-weight:600">22&nbsp;%</strong> gefallen - Hauptursache ist Lieferant&nbsp;X.
           <span class="time">14:24</span>
         </div>
       `;
@@ -5193,7 +5306,7 @@ function addS1FollowUp(){
   wa.appendChild(me2);
   setTimeout(() => { me2.classList.add('in'); scrollWaToBottom(wa); }, 80);
 
-  // 2) Julie typing
+  // 2) Finja typing
   setTimeout(() => {
     const think2 = document.createElement('div');
     think2.className = 'bubble b-them thinking';
@@ -5202,13 +5315,13 @@ function addS1FollowUp(){
     wa.appendChild(think2);
     setTimeout(() => { think2.classList.add('in'); scrollWaToBottom(wa); }, 60);
 
-    // 3) Replace with Julie's reply
+    // 3) Replace with Finja's reply
     setTimeout(() => {
       think2.classList.remove('in');
       setTimeout(() => {
         const julie2 = document.createElement('div');
         julie2.className = 'bubble b-them in';
-        julie2.innerHTML = `Nein, der Cashflow trägt sie. Verhandle mit Lieferant&nbsp;X über die Zahlungsziele — das schafft <strong style="font-weight:600">18&nbsp;K&nbsp;€</strong> Spielraum. <span class="time">14:25</span>`;
+        julie2.innerHTML = `Nein, der Cashflow trägt sie. Verhandle mit Lieferant&nbsp;X über die Zahlungsziele - das schafft <strong style="font-weight:600">18&nbsp;K&nbsp;€</strong> Spielraum. <span class="time">14:25</span>`;
         think2.replaceWith(julie2);
         scrollWaToBottom(wa);
       }, 360);
@@ -5226,8 +5339,7 @@ function playSlide2(){
   tl.fromTo('#s2-eye', { opacity:0, y:8 }, { opacity:1, y:0, duration:1.0 })
     .fromTo('#s2-h2 [data-line="1"]', { opacity:0, y:14 }, { opacity:1, y:0, duration:1.0 }, '-=0.3')
     .fromTo('#s2-h2 [data-line="2"]', { opacity:0, y:14 }, { opacity:1, y:0, duration:1.0 }, '+=0.15')
-    .to('#s2-sub', { opacity:1, duration:1.0 }, '+=0.15')
-    .to('#s2-status', { opacity:1, duration:0.9 }, '+=0.2');
+    .to('#s2-sub', { opacity:1, duration:1.0 }, '+=0.15');
 
   // Right: chaos fragments stagger in (papers landing on desk)
   const frags = document.querySelectorAll('#s2-chaos .chaos-frag');
@@ -5273,16 +5385,17 @@ function playSlide3(){
 }
 
 /* ==================================================
-   SLIDE 5 — Was Julie liefert
+   SLIDE 5 — Was Finja liefert
    8-stage manual narrative · Pfeiltasten ↓/↑ navigieren
    Phase A: Monitor (Steuerberater · DATEV-Upload)
-   Phase B: Handy (Unternehmer · Julie meldet sich)
+   Phase B: Handy (Unternehmer · Finja meldet sich)
    Phase C: 4 themen-orientierte Cards rechts
    ================================================== */
 
 const S4 = {
   current: -1,
   total: 7,
+  maxAuto: 1, // capped at stage 1 until the product slide takes over
   timers: [],
   started: false,
   autoTimer: null,
@@ -5364,7 +5477,8 @@ const S4 = {
   /* Auto-advance unless the user has taken over */
   scheduleAuto(){
     if (!this.autoMode) return;
-    if (this.current >= this.total - 1) return;
+    const cap = (typeof this.maxAuto === 'number') ? this.maxAuto : this.total - 1;
+    if (this.current >= cap) return;
     const dwell = this.stageDwell(this.current);
     this.autoTimer = setTimeout(() => {
       if (this.autoMode) this.next(false);
@@ -5379,15 +5493,18 @@ const S4 = {
   renderNav(){
     const nav = document.getElementById('s4-nav');
     if (!nav) return;
+    // Only show the in-slide nav when we are past the upload phase
+    if (this.current < 2){ nav.classList.remove('show'); return; }
     nav.classList.add('show');
     const dots = nav.querySelectorAll('.s4-nav-dot');
-    dots.forEach((d, idx) => {
-      d.classList.toggle('is-active', idx === this.current);
-      d.classList.toggle('is-done', idx < this.current);
+    dots.forEach(d => {
+      const stage = parseInt(d.dataset.step, 10);
+      d.classList.toggle('is-active', stage === this.current);
+      d.classList.toggle('is-done',   stage < this.current);
     });
     const prevBtn = document.getElementById('s4-prev');
     const nextBtn = document.getElementById('s4-next');
-    if (prevBtn) prevBtn.disabled = this.current <= 0;
+    if (prevBtn) prevBtn.disabled = this.current <= 2;
     if (nextBtn) nextBtn.disabled = this.current >= this.total - 1;
     const label = document.getElementById('s4-nav-label');
     if (label){
@@ -5641,7 +5758,7 @@ const S4 = {
   /* ============================================================
      STAGE 3 — Chat opens + Morning Report (Transparenz)
      Tap the push → chat takes over the phone, phone slides left
-     to make room for the skill grid, and Julie delivers the
+     to make room for the skill grid, and Finja delivers the
      morning briefing with the report card flying out.
      ============================================================ */
   stageChatTransparenz(instant){
@@ -6025,7 +6142,7 @@ const S4 = {
 
   /* ============================================================
      STAGE 4 — Frühwarnsystem (proactive · subtle patterns)
-     Julie raises issues organically — no push, no alarm. She
+     Finja raises issues organically — no push, no alarm. She
      surfaces three subtle patterns a human would never spot:
      payment-timing shifts, hidden price creep, slow inventory.
      ============================================================ */
@@ -6036,12 +6153,12 @@ const S4 = {
       this.addBubble({ kind:'them', html:'<strong>Lieferant X</strong> · Stückpreise +4,2 % seit Q4 — versteckt über höhere Mindestabnahmen.', time:'11:24' }, true);
       this.addBubble({ kind:'them', html:'<strong>Komponente A12</strong> · Lagerumschlag 8× → 5× pro Jahr gefallen. Kapital bindet sich still.', time:'11:24' }, true);
       this.addSummaryCard({ kind:'frueh', title:'Frühwarnung · 3 Muster', sub:'Proaktiv erkannt · bevor es teuer wird', time:'11:24' }, true);
-      this.addBubble({ kind:'me', text:'Krass. Hätte ich nie gesehen.', time:'11:26' }, true);
+      this.addBubble({ kind:'me', text:'Hätte ich nie gesehen.', time:'11:26' }, true);
       this.addBubble({ kind:'them', html:'Dafür bin ich da.', time:'11:26' }, true);
       this.revealCard('frueh', true);
       return;
     }
-    // Julie starts typing — no prompt from user
+    // Finja starts typing — no prompt from user
     this.later(200, () => this.addThinking());
     this.later(1600, () => {
       this.removeThinking();
@@ -6057,7 +6174,7 @@ const S4 = {
       const card = this.addSummaryCard({ kind:'frueh', title:'Frühwarnung · 3 Muster', sub:'Proaktiv erkannt · bevor es teuer wird', time:'11:24' });
       this.later(2000, () => this.flyCardToSkill(card, 'frueh'));
     });
-    this.later(14600, () => this.addBubble({ kind:'me', text:'Krass. Hätte ich nie gesehen.', time:'11:26' }));
+    this.later(14600, () => this.addBubble({ kind:'me', text:'Hätte ich nie gesehen.', time:'11:26' }));
     this.later(15500, () => this.addThinking());
     this.later(16500, () => {
       this.removeThinking();
@@ -6067,7 +6184,7 @@ const S4 = {
 
   /* ============================================================
      STAGE 5 — Fokus auf das Wesentliche
-     User asks where to start → Julie names the priority,
+     User asks where to start → Finja names the priority,
      a Fokus summary card with 71 % + top-3 customers flies out.
      ============================================================ */
   stageFokus(instant){
@@ -6095,7 +6212,7 @@ const S4 = {
 
   /* ============================================================
      STAGE 6 — Handlungsempfehlungen (Vorschlag + Freigabe)
-     Julie pitches three concrete actions with an inline approve
+     Finja pitches three concrete actions with an inline approve
      button. User presses Freigeben → a Handlung summary card
      flies out as the "Konkrete Handlung" capability.
      ============================================================ */
@@ -6135,13 +6252,99 @@ const S4 = {
 };
 
 /* Slide 5 entry-point — called by the orchestrator */
+function playSlide4i(){
+  // Make sure the monitor stage is in the upload slide before that slide gets reached.
+  const monStage = document.getElementById('s4-monitor-stage');
+  const monHost = document.getElementById('s4u-stage-host');
+  if (monStage && monHost && monStage.parentElement !== monHost) monHost.appendChild(monStage);
+
+  // Phase A — typewriter (same pacing/feel as slide 1's first question)
+  const tl = gsap.timeline({ defaults:{ ease:EASE } });
+  tl.add(() => runS4iTypewriter(), 0.2);
+
+  // After typing completes, slide the line UP-LEFT — it settles into the
+  // top-left as a small persistent header. "Finja" + chat reveal centred below.
+  tl.to('#s4i-caret', { opacity:0, duration:0.4 }, '+=4.0')
+    .to('#s4i-a', {
+        x: '-32vw',
+        y: '-34vh',
+        scale: 0.48,
+        duration: 1.5,
+        ease: 'expo.inOut'
+      }, '<')
+    .fromTo('#s4i-b',
+            { opacity:0 },
+            { opacity:1, duration:0.9 }, '-=0.6')
+    .fromTo('#s4i-c-h2',
+            { y:24, scale:.95, opacity:0 },
+            { y:0, scale:1, opacity:1, duration:1.4, ease:'expo.out' }, '<')
+    .fromTo('#s4i-phone-wrap',
+            { y:40, opacity:0 },
+            { y:0, opacity:1, duration:1.4, ease:'expo.out' }, '<+0.15');
+}
+
+function runS4iTypewriter(){
+  const el = document.getElementById('s4i-tw');
+  if (!el) return;
+  const target = 'Autopilot statt Blindflug.';
+  const typeSpeed = 42;          // matches slide 1's runTypewriter()
+  let i = 0;
+  const t = setInterval(() => {
+    el.textContent = target.slice(0, ++i);
+    if (i >= target.length){
+      clearInterval(t);
+      // Caret stops blinking but stays in place until phase B fades it out.
+      const caret = document.getElementById('s4i-caret');
+      if (caret){
+        caret.style.animation = 'none';
+        gsap.to(caret, { opacity:0.45, duration:0.4, ease:EASE });
+      }
+    }
+  }, typeSpeed);
+}
+
+function playSlide4u(){
+  // Make sure the monitor stage is hosted in the upload slide
+  const monStage = document.getElementById('s4-monitor-stage');
+  const monHost = document.getElementById('s4u-stage-host');
+  if (monStage && monHost && monStage.parentElement !== monHost) monHost.appendChild(monStage);
+
+  // Hide its in-slide eyebrow + handoff (those belonged to the old combined slide)
+  const oldEye = monStage && monStage.querySelector('.s4-monitor-eyebrow');
+  if (oldEye) oldEye.style.display = 'none';
+  const oldHand = monStage && monStage.querySelector('.s4-monitor-handoff');
+  if (oldHand) oldHand.style.display = 'none';
+
+  // Fade in headline + eyebrow
+  const tl = gsap.timeline({ defaults:{ ease:EASE } });
+  tl.fromTo('#s4u-eye', { opacity:0, y:8 },  { opacity:1, y:0, duration:1.0 })
+    .fromTo('#s4u-h2',  { opacity:0, y:14 }, { opacity:1, y:0, duration:1.3 }, '-=0.3');
+
+  // Run S4 stages 0-1 (mail → upload → done)
+  S4.autoMode = true;
+  S4.maxAuto = 1;
+  if (!S4.started){
+    S4.start();             // handles started=true + reset + goTo(0)
+  } else if (S4.current > 1){
+    S4.goTo(0);             // re-entry after passing through product slide
+  } else {
+    S4.scheduleAuto();      // pick up where we left off
+  }
+}
+
+/* Slide 7 entry-point — fully automatic:
+   (1) Phone arrives from centre with push notification
+   (2) Chat opens, phone slides left, morning briefing plays
+   (3) Each chat stage reveals its skill card one after the other
+   No clicks required — the slide plays end-to-end on its own.
+*/
 function playSlide4(){
-  // Headline fade in (once, not part of stage machine)
+  // Headline fade in
   const tl = gsap.timeline({ defaults:{ ease:EASE } });
   tl.fromTo('#s4-eye', { opacity:0, y:8  }, { opacity:1, y:0, duration:1.0 })
     .fromTo('#s4-h2',  { opacity:0, y:14 }, { opacity:1, y:0, duration:1.3 }, '-=0.3');
 
-  // Wire up the inline nav buttons + dots (idempotent)
+  // Wire up the inline nav buttons + dots (idempotent — kept for legacy)
   const prevBtn = document.getElementById('s4-prev');
   const nextBtn = document.getElementById('s4-next');
   if (prevBtn && !prevBtn.dataset.bound){
@@ -6162,18 +6365,36 @@ function playSlide4(){
     });
   });
 
-  S4.start();
+  // Restore original revealCard / flyCardToSkill in case an earlier
+  // visit replaced them — we want the natural per-stage reveal back.
+  if (S4._origReveal){ S4.revealCard = S4._origReveal; }
+  if (S4._origFly){    S4.flyCardToSkill = S4._origFly; }
+
+  // Fresh slate, then auto-advance through all chat stages.
+  // Each stage will reveal its skill card naturally as the chat references it.
+  S4.started  = true;
+  S4.autoMode = true;
+  S4.maxAuto  = S4.total - 1;   // auto-advance through every stage
+  S4.clearTimers();
+  S4.reset();
+  S4.current = 1;          // so the next() call below moves us into stage 2
+  S4.next(false);          // → stage 2: phone arrives, push appears
+
+  // Hide the inline step nav entirely — slide 7 plays automatically,
+  // nothing for the viewer to click.
+  const nav = document.getElementById('s4-nav');
+  if (nav){ nav.classList.remove('show'); nav.style.display = 'none'; }
 }
 
 /* ==================================================
-   SLIDE 6 — TEASE (Julie wird zum Team / Agentic Services)
+   SLIDE 6 — TEASE (Finja wird zum Team / Agentic Services)
    ================================================== */
 
 /* Message queues per agent — they cycle through these like a live feed.
-   Mix of inbound updates and Julie-orchestrated outcomes — all sourced
+   Mix of inbound updates and Finja-orchestrated outcomes — all sourced
    from the product PRD examples (translated/localised). */
 const S5_MESSAGES = {
-  finja: [
+  klara: [
     { t: "Kunde X zahlt seit Q3 verspätet — Mahnstufe 2 vorbereitet.", ts: "07:42", s: "Analysiert Forderungen…" },
     { t: "Wareneinsatz Mai +3,2 %. Auffälligkeit bei Lieferant DURENA.",  ts: "08:11", s: "Prüft Wareneinsatz…" },
     { t: "Liquidität in 8 Wochen knapp — Vorschlag: Kontokorrent +50k.",  ts: "08:34", s: "Berechnet Liquidität…" },
@@ -6204,18 +6425,18 @@ const S5_MESSAGES = {
 };
 
 /* User prompts that get delegated to specific agents — closes the
-   orchestration loop visually: Du → Julie → Agent → Antwort */
+   orchestration loop visually: Du → Finja → Agent → Antwort */
 const S5_DELEGATIONS = [
-  { prompt: "Wie ist die Liquidität?",          target: "finja"   },
+  { prompt: "Wie ist die Liquidität?",          target: "klara"   },
   { prompt: "Wer hat sich beworben?",           target: "rebecca" },
   { prompt: "Wann endet Rainers Probezeit?",    target: "hannah"  },
   { prompt: "Wie laufen unsere Ads?",           target: "marco"   },
-  { prompt: "Sind Eingangsrechnungen offen?",   target: "finja"   },
+  { prompt: "Sind Eingangsrechnungen offen?",   target: "klara"   },
   { prompt: "Geburtstage diese Woche?",         target: "hannah"  }
 ];
 
 /* Per-agent index pointer + cycle timer handles */
-const S5_STATE = { finja:0, rebecca:0, hannah:0, marco:0, timers:[], stopped:false };
+const S5_STATE = { klara:0, rebecca:0, hannah:0, marco:0, timers:[], stopped:false };
 
 function playSlide5(){
   const tl = gsap.timeline({ defaults:{ ease:EASE } });
@@ -6231,7 +6452,7 @@ function playSlide5(){
   // Draw connection edges from hub bottom to each agent card top-centre
   tl.add(() => { drawS5Edges(); }, '+=0.25');
 
-  const order = ['finja', 'rebecca', 'hannah', 'marco'];
+  const order = ['klara', 'rebecca', 'hannah', 'marco'];
 
   // Stagger card reveal — agents all appear at the same time
   tl.add(() => {
@@ -6273,10 +6494,10 @@ function startS5Feed(){
   if (S5_STATE.started) return;
   S5_STATE.started = true;
 
-  const agents = ['finja', 'rebecca', 'hannah', 'marco'];
+  const agents = ['klara', 'rebecca', 'hannah', 'marco'];
   // Per-agent intervals slightly out of phase so messages don't sync up
-  const cadence = { finja: 5200, rebecca: 5800, hannah: 5500, marco: 6100 };
-  const startOffset = { finja: 4200, rebecca: 5400, hannah: 6600, marco: 7800 };
+  const cadence = { klara: 5200, rebecca: 5800, hannah: 5500, marco: 6100 };
+  const startOffset = { klara: 4200, rebecca: 5400, hannah: 6600, marco: 7800 };
 
   agents.forEach(name => {
     const tick = () => {
@@ -6288,13 +6509,13 @@ function startS5Feed(){
     S5_STATE.timers.push(id);
   });
 
-  // Kick off the user → Julie delegation loop a bit later
+  // Kick off the user → Finja delegation loop a bit later
   const id = setTimeout(runS5Delegations, 3500);
   S5_STATE.timers.push(id);
 }
 
 /* Rotate through user prompts. Each prompt:
-   1) bubble fades in above Julie
+   1) bubble fades in above Finja
    2) ~900ms later: edge to target agent pulses strongly
    3) ~200ms later: target agent immediately cycles to its next message
    4) ~3.6s after appearing: bubble fades out
@@ -6315,7 +6536,7 @@ function runS5Delegations(){
     wrap.classList.add('show');
     bubble.classList.add('show');
 
-    // Julie "delegates" — line to target agent flares
+    // Finja "delegates" — line to target agent flares
     const t1 = setTimeout(() => delegateEdge(d.target), 900);
 
     // Target agent cycles to next message right after the delegation flash
@@ -6334,9 +6555,9 @@ function runS5Delegations(){
   tick();
 }
 
-/* Stronger pulse on the edge that Julie delegated to */
+/* Stronger pulse on the edge that Finja delegated to */
 function delegateEdge(name){
-  const idx = ['finja','rebecca','hannah','marco'].indexOf(name);
+  const idx = ['klara','rebecca','hannah','marco'].indexOf(name);
   const path = document.querySelector(`#s5-edges path[data-edge="${idx}"]`);
   if (!path) return;
   path.classList.add('delegate');
@@ -6347,8 +6568,8 @@ function delegateEdge(name){
    1) old bubble fades up & out
    2) typing status shows "Analysiert…" / "Plant Interview…" etc
    3) new bubble text written, status hides, bubble fades in
-   4) connection line briefly pulses (data sent up to Julie)
-   5) Julie hub avatar shows a "1" badge for ~1.5s */
+   4) connection line briefly pulses (data sent up to Finja)
+   5) Finja hub avatar shows a "1" badge for ~1.5s */
 function cycleAgent(name){
   const card = document.querySelector(`.s5-agent[data-agent="${name}"]`);
   if (!card || !card.classList.contains('show')) return;
@@ -6388,14 +6609,14 @@ function cycleAgent(name){
 
 /* Briefly highlight the connection line for this agent */
 function pulseEdge(name){
-  const idx = ['finja','rebecca','hannah','marco'].indexOf(name);
+  const idx = ['klara','rebecca','hannah','marco'].indexOf(name);
   const path = document.querySelector(`#s5-edges path[data-edge="${idx}"]`);
   if (!path) return;
   path.classList.add('pulse');
   setTimeout(() => path.classList.remove('pulse'), 950);
 }
 
-/* Show a small "1" notification badge on the Julie hub avatar */
+/* Show a small "1" notification badge on the Finja hub avatar */
 let _hubBadgeTimer = null;
 function showHubBadge(){
   const badge = document.getElementById('s5-hub-badge');
@@ -6412,7 +6633,7 @@ function escapeHtml(s){
     .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 }
 
-/* Draw connection edges from Julie hub down to each agent card.
+/* Draw connection edges from Finja hub down to each agent card.
    v3: Hub sits at the top of the light body (just below the dark band);
    the 4 cards sit in a row below. Lines emerge from hub-bottom and fan
    out to each card-top with a soft S-curve. A simple dark stroke works
@@ -6429,7 +6650,7 @@ function drawS5Edges(){
   svg.innerHTML = '';
 
   const hubR = hub.getBoundingClientRect();
-  // Anchor: bottom-center of the Julie hub
+  // Anchor: bottom-center of the Finja hub
   const hx = hubR.left + hubR.width / 2 - sb.left;
   const hy = hubR.bottom - sb.top;
 
@@ -6518,10 +6739,6 @@ function playSlide7(){
     setTimeout(() => c.classList.add('show'), 1200 + i*250);
   });
 
-  // Closing CTA bar
-  gsap.fromTo('#s7-mark',
-    { opacity:0, y:14 },
-    { opacity:1, y:0, duration:1.4, delay:2.4, ease:EASE_OUT });
 }
 
 /* ==================================================
@@ -6534,6 +6751,8 @@ function playSlide(id){
     case 's2':  playSlide2();  break;
     case 's2b': playSlide2b(); break;
     case 's3':  playSlide3();  break;
+    case 's4i': playSlide4i(); break;
+    case 's4u': playSlide4u(); break;
     case 's4':  playSlide4();  break;
     case 's5':  playSlide5();  break;
     case 's7':  playSlide7();  break;
