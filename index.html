@@ -2329,9 +2329,9 @@
   }
   .dp-head{
     display:grid;
-    grid-template-columns: 1.05fr 0.95fr;
-    gap:48px;
-    align-items:end;
+    grid-template-columns: 1fr 268px;
+    gap:56px;
+    align-items:center;
     max-width:1180px; margin:0 auto; width:100%;
   }
   .dp-h2{
@@ -2342,13 +2342,55 @@
   }
   .dp-loc{
     opacity:0;
-    display:flex; flex-direction:column; gap:12px;
+    display:flex; flex-direction:column; gap:14px;
     align-items:flex-start;
-    padding-bottom:6px;
+    margin-top:26px;
   }
   .dp-loc-line{
     font-size:16px; line-height:1.55; color:var(--ink-medium);
-    max-width:40ch; text-wrap:pretty;
+    max-width:46ch; text-wrap:pretty;
+  }
+  /* Animated DSGVO seal */
+  .dp-seal{
+    opacity:0; transform:scale(.92);
+    width:268px; height:268px; justify-self:end;
+    position:relative;
+    filter:drop-shadow(0 18px 40px rgba(10,10,10,.10));
+  }
+  .dp-seal svg{ width:100%; height:100%; display:block; overflow:visible; }
+  .dp-seal-rot{
+    transform-box:fill-box; transform-origin:center;
+    animation:dpSpin 40s linear infinite;
+  }
+  @keyframes dpSpin{ to{ transform:rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce){
+    .dp-seal-rot{ animation:none; }
+  }
+  /* EU-blue accent — scoped to the Datenschutz slide only */
+  #s6{
+    --dp-blue:#1B45D8;
+    --dp-blue-deep:#1536B0;
+    --dp-blue-tint:#ECF0FF;
+    --dp-gold:#F2B21F;
+  }
+  #s6 .dp-h2 .eu{ color:var(--dp-blue); }
+  #s6 .dp-chip{
+    background:#fff;
+    color:var(--dp-blue);
+    border:1px solid var(--line);
+    box-shadow:0 3px 14px rgba(27,69,216,.08);
+  }
+  #s6 .dp-chip-pin{ width:14px; height:14px; color:var(--dp-blue); flex-shrink:0; }
+  #s6 .dp-chip-sep{ color:var(--ink-muted); }
+  #s6 .dp-chip-loc{ color:var(--ink-soft); }
+  #s6 .dp-ico{ background:var(--dp-blue-tint); color:var(--dp-blue); }
+  #s6 .dp-card-body strong{ color:var(--dp-blue); }
+  #s6 .dp-foot{ background:#0B1020; }
+  #s6 .dp-foot-ico{ width:20px; height:20px; color:#5B7BF0; flex-shrink:0; }
+  #s6 .dp-seal::before{
+    content:""; position:absolute; inset:-16%;
+    background:radial-gradient(circle at 50% 46%, rgba(27,69,216,.12), rgba(27,69,216,0) 62%);
+    border-radius:50%; z-index:-1;
   }
   .dp-chip{
     display:inline-flex; align-items:center; gap:10px;
@@ -2418,7 +2460,8 @@
   .dp-foot-text .quiet{ color:rgba(255,255,255,.6); font-weight:400; }
 
   @media (max-width:900px){
-    .dp-head{ grid-template-columns:1fr; gap:20px; align-items:start; }
+    .dp-head{ grid-template-columns:1fr; gap:28px; align-items:start; justify-items:center; text-align:left; }
+    .dp-seal{ justify-self:center; width:220px; height:220px; }
     .dp-grid{ grid-template-columns:1fr; }
   }
 
@@ -5175,29 +5218,79 @@
 
   <div class="dp-stage">
 
-    <!-- Header: headline + EU location -->
+    <!-- Header: headline + animated DSGVO seal -->
     <div class="dp-head">
-      <div>
-        <p class="label-eyebrow" id="s6-eye" style="opacity:0">
-</p>
-        <h2 class="font-display dp-h2" id="s6-h2">Verarbeitung ausschließlich in der&nbsp;EU.</h2>
+      <div class="dp-head-text">
+        <p class="label-eyebrow" id="s6-eye" style="opacity:0">Datenschutz &nbsp;·&nbsp; DSGVO</p>
+        <h2 class="font-display dp-h2" id="s6-h2">Verarbeitung ausschließlich in der&nbsp;<span class="eu">EU.</span></h2>
+        <div class="dp-loc" id="s6-loc">
+          <span class="dp-chip">
+            <svg class="dp-chip-pin" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7Z"/>
+              <circle cx="12" cy="9" r="2.5" fill="#fff"/>
+            </svg>
+            Frankfurt <span class="dp-chip-sep">&nbsp;·&nbsp;</span> <span class="dp-chip-loc">europe-west3</span>
+          </span>
+          <p class="dp-loc-line">Daten verlassen die Europäische Union nicht — von der Speicherung bis zur KI-Analyse.</p>
+        </div>
       </div>
-      <div class="dp-loc" id="s6-loc">
-        <span class="dp-chip">
-          <svg class="dp-chip-stars" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.4"/>
-            <circle cx="12" cy="4.8" r="1" fill="currentColor"/>
-            <circle cx="17.1" cy="6.9" r="1" fill="currentColor"/>
-            <circle cx="19.2" cy="12" r="1" fill="currentColor"/>
-            <circle cx="17.1" cy="17.1" r="1" fill="currentColor"/>
-            <circle cx="12" cy="19.2" r="1" fill="currentColor"/>
-            <circle cx="6.9" cy="17.1" r="1" fill="currentColor"/>
-            <circle cx="4.8" cy="12" r="1" fill="currentColor"/>
-            <circle cx="6.9" cy="6.9" r="1" fill="currentColor"/>
-          </svg>
-          Frankfurt &nbsp;·&nbsp; europe-west3
-        </span>
-        <p class="dp-loc-line">Daten verlassen die Europäische Union nicht - von der Speicherung bis zur KI-Analyse.</p>
+
+      <!-- Animated DSGVO compliance seal -->
+      <div class="dp-seal" id="s6-seal">
+        <svg viewBox="0 0 240 240" aria-label="DSGVO-konform nach Art. 17 DSGVO">
+          <defs>
+            <symbol id="dp-star" viewBox="-8 -8 16 16">
+              <path d="M0,-6.5 L1.53,-2.10 L6.18,-2.01 L2.47,0.80 L3.82,5.26 L0,2.6 L-3.82,5.26 L-2.47,0.80 L-6.18,-2.01 L-1.53,-2.10 Z"/>
+            </symbol>
+            <path id="dp-arc-top" d="M 22,120 A 98,98 0 0 1 218,120" fill="none"/>
+            <path id="dp-arc-bot" d="M 226,120 A 106,106 0 0 1 14,120" fill="none"/>
+          </defs>
+
+          <!-- blue ring band -->
+          <circle cx="120" cy="120" r="118" fill="none" stroke="#1B45D8" stroke-width="2"/>
+          <circle cx="120" cy="120" r="104" fill="none" stroke="#1B45D8" stroke-width="26"/>
+          <circle cx="120" cy="120" r="90" fill="#FFFFFF"/>
+          <circle cx="120" cy="120" r="90" fill="none" stroke="#1B45D8" stroke-width="1.2"/>
+
+          <!-- rotating text band -->
+          <g class="dp-seal-rot">
+            <text font-family="'JetBrains Mono',monospace" font-size="13.5" font-weight="600" letter-spacing="3.4" fill="#FFFFFF">
+              <textPath href="#dp-arc-top" startOffset="50%" text-anchor="middle">DSGVO-KONFORM</textPath>
+            </text>
+            <text font-family="'JetBrains Mono',monospace" font-size="11.5" font-weight="500" letter-spacing="3" fill="#FFFFFF">
+              <textPath href="#dp-arc-bot" startOffset="50%" text-anchor="middle">NACH ART. 17 DSGVO</textPath>
+            </text>
+            <rect x="11.5" y="115.5" width="9" height="9" transform="rotate(45 16 120)" fill="#FFFFFF"/>
+            <rect x="219.5" y="115.5" width="9" height="9" transform="rotate(45 224 120)" fill="#FFFFFF"/>
+          </g>
+
+          <!-- EU star ring -->
+          <g fill="#F2B21F">
+            <use href="#dp-star" x="112"   y="54"   width="16" height="16"/>
+            <use href="#dp-star" x="141"   y="61.8" width="16" height="16"/>
+            <use href="#dp-star" x="162.2" y="83"   width="16" height="16"/>
+            <use href="#dp-star" x="170"   y="112"  width="16" height="16"/>
+            <use href="#dp-star" x="162.2" y="141"  width="16" height="16"/>
+            <use href="#dp-star" x="141"   y="162.2" width="16" height="16"/>
+            <use href="#dp-star" x="112"   y="170"  width="16" height="16"/>
+            <use href="#dp-star" x="83"    y="162.2" width="16" height="16"/>
+            <use href="#dp-star" x="61.8"  y="141"  width="16" height="16"/>
+            <use href="#dp-star" x="54"    y="112"  width="16" height="16"/>
+            <use href="#dp-star" x="61.8"  y="83"   width="16" height="16"/>
+            <use href="#dp-star" x="83"    y="61.8" width="16" height="16"/>
+          </g>
+
+          <!-- shield + lock -->
+          <path d="M120,82 L143,90 L143,112 Q143,132 120,141 Q97,132 97,112 L97,90 Z" fill="#1B45D8"/>
+          <path d="M114,107 v-4 a6,6 0 0 1 12,0 v4" fill="none" stroke="#FFFFFF" stroke-width="3.2" stroke-linecap="round"/>
+          <rect x="110" y="106" width="20" height="16" rx="2.6" fill="#FFFFFF"/>
+          <circle cx="120" cy="113" r="2.2" fill="#1B45D8"/>
+          <rect x="118.8" y="114" width="2.4" height="5.5" rx="1.2" fill="#1B45D8"/>
+
+          <!-- guarantee caption -->
+          <text x="120" y="151" text-anchor="middle" font-family="'Inter',sans-serif" font-size="9" font-weight="700" letter-spacing="1" fill="#1B45D8">DATENSCHUTZ</text>
+          <text x="120" y="162" text-anchor="middle" font-family="'Inter',sans-serif" font-size="9" font-weight="700" letter-spacing="1" fill="#1B45D8">GARANTIERT</text>
+        </svg>
       </div>
     </div>
 
@@ -5263,7 +5356,10 @@
 
     <!-- Footer band: AVV -->
     <div class="dp-foot" id="s6-foot">
-      <span class="dp-foot-dot"></span>
+      <svg class="dp-foot-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 3 4 6v6c0 4.5 3.2 7.5 8 9 4.8-1.5 8-4.5 8-9V6l-8-3Z"/>
+        <path d="M9 12.5l2 2 4-4"/>
+      </svg>
       <span class="dp-foot-text">DSGVO-konforme Verarbeitung in der EU <span class="dp-foot-sep">·</span> <span class="quiet">inkl. Auftragsverarbeitungsvertrag (AVV)</span></span>
     </div>
 
@@ -7036,8 +7132,9 @@ function playSlide6(){
   const tl = gsap.timeline({ defaults:{ ease:EASE } });
   tl.fromTo('#s6-eye', { opacity:0, y:8 }, { opacity:1, y:0, duration:1.0 })
     .fromTo('#s6-h2', { opacity:0, y:14 }, { opacity:1, y:0, duration:1.1 }, '-=0.7')
-    .fromTo('#s6-loc', { opacity:0, y:10 }, { opacity:1, y:0, duration:0.9 }, '-=0.6')
-    .to('.dp-card', { opacity:1, y:0, duration:0.85, stagger:0.1 }, '-=0.4')
+    .fromTo('#s6-seal', { opacity:0, scale:0.9, rotate:-8 }, { opacity:1, scale:1, rotate:0, duration:1.2, ease:'back.out(1.4)' }, '-=0.9')
+    .fromTo('#s6-loc', { opacity:0, y:10 }, { opacity:1, y:0, duration:0.9 }, '-=0.7')
+    .to('.dp-card', { opacity:1, y:0, duration:0.85, stagger:0.1 }, '-=0.5')
     .fromTo('#s6-foot', { opacity:0, y:10 }, { opacity:1, y:0, duration:0.9 }, '-=0.2');
 }
 
