@@ -2,13 +2,82 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8" />
+<template id="__bundler_thumbnail" data-bg-color="#0A0A0A">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#0A0A0A"/>
+    <circle cx="600" cy="360" r="150" fill="none" stroke="#ffffff" stroke-width="10"/>
+    <g fill="#ffffff">
+      <circle cx="600" cy="244" r="13"/>
+      <circle cx="682" cy="278" r="13"/>
+      <circle cx="716" cy="360" r="13"/>
+      <circle cx="682" cy="442" r="13"/>
+      <circle cx="600" cy="476" r="13"/>
+      <circle cx="518" cy="442" r="13"/>
+      <circle cx="484" cy="360" r="13"/>
+      <circle cx="518" cy="278" r="13"/>
+    </g>
+    <text x="600" y="600" fill="#ffffff" font-family="monospace" font-size="46" letter-spacing="8" text-anchor="middle">DSGVO · EU</text>
+  </svg>
+</template>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Finja — Finanzielle Klarheit für den Mittelstand</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
-<script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<style id="tw-static">
+  /* --- Tailwind preflight subset (deck was authored with it active) --- */
+  *,::before,::after{ box-sizing:border-box; }
+  h1,h2,h3,h4,h5,h6{ font-size:inherit; font-weight:inherit; margin:0; }
+  p,figure,blockquote,dl,dd{ margin:0; }
+  /* --- Utilities actually used in this deck --- */
+  .block{ display:block; }
+  .flex{ display:flex; }
+  .grid{ display:grid; }
+  .flex-col{ flex-direction:column; }
+  .items-center{ align-items:center; }
+  .items-start{ align-items:flex-start; }
+  .justify-center{ justify-content:center; }
+  .absolute{ position:absolute; }
+  .inset-0{ inset:0; }
+  .w-full{ width:100%; }
+  .opacity-0{ opacity:0; }
+  .text-center{ text-align:center; }
+  .text-sm{ font-size:0.875rem; line-height:1.25rem; }
+  .grid-cols-1{ grid-template-columns:repeat(1, minmax(0,1fr)); }
+  .gap-6{ gap:1.5rem; }
+  .gap-10{ gap:2.5rem; }
+  .gap-12{ gap:3rem; }
+  .px-10{ padding-left:2.5rem; padding-right:2.5rem; }
+  .mb-4{ margin-bottom:1rem; }
+  .mb-7{ margin-bottom:1.75rem; }
+  .mt-3{ margin-top:0.75rem; }
+  .mt-4{ margin-top:1rem; }
+  .mt-5{ margin-top:1.25rem; }
+  .mt-7{ margin-top:1.75rem; }
+  .mt-8{ margin-top:2rem; }
+  .leading-\[0\.92\]{ line-height:0.92; }
+  .leading-\[1\.05\]{ line-height:1.05; }
+  .leading-\[1\.08\]{ line-height:1.08; }
+  @media (min-width:768px){
+    .md\:grid-cols-12{ grid-template-columns:repeat(12, minmax(0,1fr)); }
+    .md\:col-span-5{ grid-column:span 5 / span 5; }
+    .md\:col-span-6{ grid-column:span 6 / span 6; }
+    .md\:col-span-7{ grid-column:span 7 / span 7; }
+    .md\:justify-end{ justify-content:flex-end; }
+    .md\:justify-start{ justify-content:flex-start; }
+    .md\:text-right{ text-align:right; }
+    .md\:pl-2{ padding-left:0.5rem; }
+    .md\:px-16{ padding-left:4rem; padding-right:4rem; }
+    .md\:mt-10{ margin-top:2.5rem; }
+  }
+  @media (min-width:1024px){
+    .lg\:grid-cols-12{ grid-template-columns:repeat(12, minmax(0,1fr)); }
+    .lg\:col-span-5{ grid-column:span 5 / span 5; }
+    .lg\:col-span-7{ grid-column:span 7 / span 7; }
+    .lg\:pl-6{ padding-left:1.5rem; }
+  }
+</style>
 <style>
   :root{
     --bg:        #FFFFFF;
@@ -299,11 +368,22 @@
   }
   .bubble.in{ opacity:1; transform:none; transition:opacity .55s ease, transform .65s cubic-bezier(.16,1,.3,1); }
   .bubble .time{
-    display:inline-block; font-size:10.5px; color:#8d8a85;
+    display:inline-block; font-size:9px; color:#8d8a85;
     margin-left:8px; float:right;
     margin-top:6px; line-height:1;
   }
   .bubble .time .read{ color:#4a89c0; margin-left:2px; font-weight:500; }
+  .wa-tick{
+    display:inline-block;
+    width:13px; height:9px;
+    margin-left:3px;
+    vertical-align:-1px;
+    fill:none;
+    stroke:#4a89c0;
+    stroke-width:1.5;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+  }
   .b-me{ align-self:flex-end; background:#DCFCC7; border-bottom-right-radius:5px; }
   .b-them{ align-self:flex-start; background:#fff; border-bottom-left-radius:5px; }
   .b-them.thinking{ display:flex; gap:4px; padding:11px 14px; }
@@ -2228,6 +2308,120 @@
     .cta-closing{ flex-direction:column; text-align:center; }
   }
 
+  /* ===== Slide — DATENSCHUTZ / DSGVO ===== */
+  .dp-bg{
+    position:absolute; inset:0;
+    z-index:0;
+    pointer-events:none;
+    opacity:0;
+    transition:opacity 1.4s ease;
+  }
+  .dp-bg.on{ opacity:1; }
+  .dp-stage{
+    position:absolute; inset:0;
+    z-index:1;
+    padding: var(--slide-top) var(--slide-x) var(--slide-bottom);
+    max-width: var(--slide-max);
+    margin:0 auto;
+    box-sizing:border-box;
+    display:flex; flex-direction:column; justify-content:center;
+    gap:34px;
+  }
+  .dp-head{
+    display:grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap:48px;
+    align-items:end;
+    max-width:1180px; margin:0 auto; width:100%;
+  }
+  .dp-h2{
+    opacity:0;
+    font-size:clamp(2.1rem,3.8vw,3.5rem);
+    line-height:1.04; letter-spacing:-0.04em;
+    margin:14px 0 0;
+  }
+  .dp-loc{
+    opacity:0;
+    display:flex; flex-direction:column; gap:12px;
+    align-items:flex-start;
+    padding-bottom:6px;
+  }
+  .dp-loc-line{
+    font-size:16px; line-height:1.55; color:var(--ink-medium);
+    max-width:40ch; text-wrap:pretty;
+  }
+  .dp-chip{
+    display:inline-flex; align-items:center; gap:10px;
+    padding:9px 15px;
+    background:var(--ink);
+    color:#fff;
+    border-radius:9999px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:11.5px; letter-spacing:.14em; text-transform:uppercase;
+    font-weight:500;
+  }
+  .dp-chip-stars{
+    width:13px; height:13px; flex-shrink:0;
+  }
+  .dp-grid{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap:14px;
+    max-width:1180px; margin:0 auto; width:100%;
+  }
+  .dp-card{
+    opacity:0; transform:translateY(14px);
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:26px 28px;
+    display:flex; flex-direction:column; gap:11px;
+  }
+  .dp-card-head{
+    display:flex; align-items:center; gap:13px;
+  }
+  .dp-ico{
+    width:40px; height:40px; border-radius:11px;
+    background:var(--bg-deep);
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+    color:var(--ink);
+  }
+  .dp-ico svg{ width:21px; height:21px; display:block; }
+  .dp-card-title{
+    font-family:'Inter',sans-serif;
+    font-weight:600; font-size:18.5px; letter-spacing:-0.02em;
+    line-height:1.2; color:var(--ink);
+  }
+  .dp-card-body{
+    font-size:14.5px; line-height:1.55; color:var(--ink-muted);
+    text-wrap:pretty;
+  }
+  .dp-card-body strong{ color:var(--ink-soft); font-weight:600; }
+  .dp-foot{
+    opacity:0;
+    display:flex; align-items:center; justify-content:center; gap:14px;
+    flex-wrap:wrap;
+    max-width:1180px; margin:0 auto; width:100%;
+    padding:16px 26px;
+    border-radius:14px;
+    background:var(--ink);
+    color:#fff;
+  }
+  .dp-foot-dot{
+    width:7px; height:7px; border-radius:9999px; background:#fff; flex-shrink:0;
+  }
+  .dp-foot-text{
+    font-size:15px; line-height:1.4; font-weight:500; letter-spacing:-0.01em;
+  }
+  .dp-foot-sep{ color:rgba(255,255,255,.32); }
+  .dp-foot-text .quiet{ color:rgba(255,255,255,.6); font-weight:400; }
+
+  @media (max-width:900px){
+    .dp-head{ grid-template-columns:1fr; gap:20px; align-items:start; }
+    .dp-grid{ grid-template-columns:1fr; }
+  }
+
   /* ===== Slide 2 — ORIGIN STORY (Dealflow + Operator-Authority) =====
      Editorial split: large headline on the left, Eterniteam header pill +
      dealflow credibility card on the right. No portfolio is shown — the
@@ -3840,6 +4034,7 @@
   <span class="nav-dot" data-go="6"></span>
   <span class="nav-dot" data-go="7"></span>
   <span class="nav-dot" data-go="8"></span>
+  <span class="nav-dot" data-go="9"></span>
 </nav>
 
 <main class="deck" id="deck">
@@ -3891,7 +4086,7 @@
       <!-- Dark backdrop on right half -->
       <div class="hero-dark-band" id="s1c-band"></div>
       <!-- Content grid -->
-      <div class="absolute inset-0 grid grid-cols-1 md:grid-cols-12 items-center max-content px-10 md:px-16 gap-6" style="z-index:1;">
+      <div class="absolute inset-0 grid grid-cols-1 md:grid-cols-12 items-center max-content px-10 md:px-16 gap-6" style="z-index:1;" data-comment-anchor="52995055bb-div">
       <div class="md:col-span-5">
         <p class="label-eyebrow mb-7" id="s1c-eye" style="opacity:0">Was wäre wenn</p>
         <h2 class="font-display leading-[0.92]" id="s1c-h2"
@@ -3936,7 +4131,7 @@
               <div class="wa-enc">
                 <span class="lock">🔒</span>Ende-zu-Ende-verschlüsselt
               </div>
-              <div class="bubble b-me" data-msg="1">Wie sehen meine Zahlen für März aus? <span class="time">14:23 <span class="read">✓✓</span></span></div>
+              <div class="bubble b-me" data-msg="1" data-comment-anchor="ad2929ce89-div">Wie sehen meine Zahlen für März aus? <span class="time">14:23 <span class="read"><svg class="wa-tick" viewBox="0 0 14 10" aria-hidden="true"><path d="M1 5 L3.4 8 L7.7 2 M5.2 5 L7.6 8 L11.9 2"/></svg></span></span></div>
               <div class="bubble b-them thinking" data-msg="2" style="width:fit-content;">
                 <span></span><span></span><span></span>
               </div>
@@ -4403,14 +4598,14 @@
                 <div class="wa-body">
                   <span class="wa-date">Heute</span>
                   <div class="bubble b-me in">Wie sehen meine Zahlen für März aus?
-14:23 ✓✓</div>
+14:23 <svg class="wa-tick" viewBox="0 0 14 10" aria-hidden="true"><path d="M1 5 L3.4 8 L7.7 2 M5.2 5 L7.6 8 L11.9 2"/></svg></div>
                   <div class="bubble b-them in">
                     Hallo 👋 Q1 schließt solide - Umsatz <strong style="font-weight:600">391&nbsp;K&nbsp;€</strong>,
                     EBITDA <strong style="font-weight:600">45&nbsp;K&nbsp;€</strong>. Liquidität ist gegenüber Februar
                     um <strong style="font-weight:600">22&nbsp;%</strong> gefallen - Hauptursache ist Lieferant&nbsp;X.
                     <span class="time">14:24</span>
                   </div>
-                  <div class="bubble b-me in">Sollen wir die Neueinstellungen verschieben? <span class="time">14:25 <span class="read">✓✓</span></span></div>
+                  <div class="bubble b-me in">Sollen wir die Neueinstellungen verschieben? <span class="time">14:25 <span class="read"><svg class="wa-tick" viewBox="0 0 14 10" aria-hidden="true"><path d="M1 5 L3.4 8 L7.7 2 M5.2 5 L7.6 8 L11.9 2"/></svg></span></span></div>
                   <div class="bubble b-them in">
                     Mein Vorschlag: 2 Stellen um 6 Wochen schieben - das reduziert den Liquiditätsdruck um <strong style="font-weight:600">~38&nbsp;K&nbsp;€</strong>.
                     <span class="time">14:25</span>
@@ -4528,7 +4723,7 @@
                 <div class="s4-mail-head">
                   <div class="s4-mail-avatar">F</div>
                   <div class="s4-mail-meta">
-                    <span class="s4-mail-meta-from">Finja &lt;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ed8588818182ad8b8483878cc38c84">[email&#160;protected]</a>&gt;</span>
+                    <span class="s4-mail-meta-from">Finja &lt;hello@finja.ai&gt;</span>
                     <span class="s4-mail-meta-to">an: Stefan Müller · Steuerberater</span>
                   </div>
                   <span class="s4-mail-time">heute · 08:12</span>
@@ -4968,11 +5163,119 @@
 </section>
 
 <!-- ==================================================== -->
+<!-- SLIDE 9 — DATENSCHUTZ / DSGVO                        -->
+<!-- ==================================================== -->
+<section class="slide" id="s6" data-idx="8" data-screen-label="09 Datenschutz" style="background:var(--bg-paper);">
+  <div class="chrome">
+    <span class="chrome-label">009 &nbsp;—&nbsp; Datenschutz</span>
+    <span class="chrome-mark">Finja</span>
+  </div>
+
+  <canvas class="dp-bg" id="s6-bg" aria-hidden="true"></canvas>
+
+  <div class="dp-stage">
+
+    <!-- Header: headline + EU location -->
+    <div class="dp-head">
+      <div>
+        <p class="label-eyebrow" id="s6-eye" style="opacity:0">
+</p>
+        <h2 class="font-display dp-h2" id="s6-h2">Verarbeitung ausschließlich in der&nbsp;EU.</h2>
+      </div>
+      <div class="dp-loc" id="s6-loc">
+        <span class="dp-chip">
+          <svg class="dp-chip-stars" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.4"/>
+            <circle cx="12" cy="4.8" r="1" fill="currentColor"/>
+            <circle cx="17.1" cy="6.9" r="1" fill="currentColor"/>
+            <circle cx="19.2" cy="12" r="1" fill="currentColor"/>
+            <circle cx="17.1" cy="17.1" r="1" fill="currentColor"/>
+            <circle cx="12" cy="19.2" r="1" fill="currentColor"/>
+            <circle cx="6.9" cy="17.1" r="1" fill="currentColor"/>
+            <circle cx="4.8" cy="12" r="1" fill="currentColor"/>
+            <circle cx="6.9" cy="6.9" r="1" fill="currentColor"/>
+          </svg>
+          Frankfurt &nbsp;·&nbsp; europe-west3
+        </span>
+        <p class="dp-loc-line">Daten verlassen die Europäische Union nicht - von der Speicherung bis zur KI-Analyse.</p>
+      </div>
+    </div>
+
+    <!-- 2×2 guarantee grid -->
+    <div class="dp-grid">
+
+      <div class="dp-card" data-dp="1">
+        <div class="dp-card-head">
+          <span class="dp-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="9" width="18" height="11" rx="2"/>
+              <path d="M7 9V6.5a5 5 0 0 1 10 0V9" opacity="0"/>
+              <path d="M12 2v3M5.5 4.5 7 6M18.5 4.5 17 6M3 13h18"/>
+            </svg>
+          </span>
+          <span class="dp-card-title">Hosting &amp; Verarbeitung in der EU</span>
+        </div>
+        <p class="dp-card-body">Anwendung, Datenbank und Dokumente in <strong>Frankfurt</strong> (Google Cloud <strong>europe-west3</strong>). KI-Analyse über <strong>Google Vertex AI</strong> innerhalb der EU.</p>
+      </div>
+
+      <div class="dp-card" data-dp="2">
+        <div class="dp-card-head">
+          <span class="dp-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 3 4 6v6c0 4.5 3.2 7.5 8 9 4.8-1.5 8-4.5 8-9V6l-8-3Z"/>
+              <path d="M9 12.5l2 2 4-4"/>
+            </svg>
+          </span>
+          <span class="dp-card-title">Keine KI-Trainingsnutzung</span>
+        </div>
+        <p class="dp-card-body">Ihre Daten trainieren <strong>keine KI-Modelle</strong>. Inhalte werden ausschließlich zur Beantwortung Ihrer Anfragen verarbeitet.</p>
+      </div>
+
+      <div class="dp-card" data-dp="3">
+        <div class="dp-card-head">
+          <span class="dp-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="4" y="10" width="16" height="11" rx="2"/>
+              <path d="M8 10V7a4 4 0 0 1 8 0v3"/>
+              <circle cx="12" cy="15.5" r="1.4"/>
+            </svg>
+          </span>
+          <span class="dp-card-title">Sicherheit nach Stand der Technik</span>
+        </div>
+        <p class="dp-card-body">Verschlüsselung bei <strong>Übertragung und Speicherung</strong>, strikte <strong>Mandantentrennung</strong> auf Datenbankebene.</p>
+      </div>
+
+      <div class="dp-card" data-dp="4">
+        <div class="dp-card-head">
+          <span class="dp-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 7h16M9 7V5.5A1.5 1.5 0 0 1 10.5 4h3A1.5 1.5 0 0 1 15 5.5V7"/>
+              <path d="M6 7l1 12.5A1.5 1.5 0 0 0 8.5 21h7a1.5 1.5 0 0 0 1.5-1.5L18 7"/>
+              <path d="M10 11v6M14 11v6"/>
+            </svg>
+          </span>
+          <span class="dp-card-title">Vollständige Löschung auf Anfrage</span>
+        </div>
+        <p class="dp-card-body">Auf Wunsch entfernen wir sämtliche Daten eines Mandanten - Recht auf Löschung nach Art. 17 DSGVO.</p>
+      </div>
+
+    </div>
+
+    <!-- Footer band: AVV -->
+    <div class="dp-foot" id="s6-foot">
+      <span class="dp-foot-dot"></span>
+      <span class="dp-foot-text">DSGVO-konforme Verarbeitung in der EU <span class="dp-foot-sep">·</span> <span class="quiet">inkl. Auftragsverarbeitungsvertrag (AVV)</span></span>
+    </div>
+
+  </div>
+</section>
+
+<!-- ==================================================== -->
 <!-- SLIDE 7 — CTA / Pilotprogramm                        -->
 <!-- ==================================================== -->
-<section class="slide" id="s7" data-idx="8" style="background:var(--bg);">
+<section class="slide" id="s7" data-idx="9" style="background:var(--bg);">
   <div class="chrome">
-    <span class="chrome-label">009 &nbsp;—&nbsp; Limitiertes Angebot</span>
+    <span class="chrome-label">010 &nbsp;—&nbsp; Limitiertes Angebot</span>
     <span class="chrome-mark">Finja</span>
   </div>
 
@@ -5019,7 +5322,7 @@
 
 </main>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 /* ==================================================
    ORCHESTRATION
    ================================================== */
@@ -5302,7 +5605,7 @@ function addS1FollowUp(){
   // 1) User follow-up question slides in
   const me2 = document.createElement('div');
   me2.className = 'bubble b-me';
-  me2.innerHTML = `Sollen wir die Neueinstellungen verschieben? <span class="time">14:25 <span class="read">✓✓</span></span>`;
+  me2.innerHTML = `Sollen wir die Neueinstellungen verschieben? <span class="time">14:25 <span class="read"><svg class="wa-tick" viewBox="0 0 14 10" aria-hidden="true"><path d="M1 5 L3.4 8 L7.7 2 M5.2 5 L7.6 8 L11.9 2"/></svg></span></span>`;
   wa.appendChild(me2);
   setTimeout(() => { me2.classList.add('in'); scrollWaToBottom(wa); }, 80);
 
@@ -5846,7 +6149,7 @@ const S4 = {
     const el = document.createElement('div');
     if (opts.kind === 'me'){
       el.className = 'bubble b-me';
-      el.innerHTML = `${opts.text} <span class="time">${opts.time} <span class="read">✓✓</span></span>`;
+      el.innerHTML = `${opts.text} <span class="time">${opts.time} <span class="read"><svg class="wa-tick" viewBox="0 0 14 10" aria-hidden="true"><path d="M1 5 L3.4 8 L7.7 2 M5.2 5 L7.6 8 L11.9 2"/></svg></span></span>`;
     } else if (opts.kind === 'them'){
       el.className = 'bubble b-them';
       el.innerHTML = `${opts.html} <span class="time">${opts.time}</span>`;
@@ -6726,6 +7029,89 @@ window.addEventListener('resize', () => {
 });
 
 /* ==================================================
+   SLIDE — DATENSCHUTZ / DSGVO
+   ================================================== */
+function playSlide6(){
+  startS6Field();
+  const tl = gsap.timeline({ defaults:{ ease:EASE } });
+  tl.fromTo('#s6-eye', { opacity:0, y:8 }, { opacity:1, y:0, duration:1.0 })
+    .fromTo('#s6-h2', { opacity:0, y:14 }, { opacity:1, y:0, duration:1.1 }, '-=0.7')
+    .fromTo('#s6-loc', { opacity:0, y:10 }, { opacity:1, y:0, duration:0.9 }, '-=0.6')
+    .to('.dp-card', { opacity:1, y:0, duration:0.85, stagger:0.1 }, '-=0.4')
+    .fromTo('#s6-foot', { opacity:0, y:10 }, { opacity:1, y:0, duration:0.9 }, '-=0.2');
+}
+
+/* Filigree drifting data-point field behind the cards */
+let S6_field = null;
+function startS6Field(){
+  if (S6_field) return;
+  const canvas = document.getElementById('s6-bg');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const slide = document.getElementById('s6');
+  let w = 0, h = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
+  let pts = [];
+  const COUNT = 64;
+  const LINK = 132;          // max distance for a connecting line
+  const INK = '10,10,10';    // monochrome ink
+
+  function resize(){
+    w = slide.clientWidth; h = slide.clientHeight;
+    canvas.width = w * dpr; canvas.height = h * dpr;
+    canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  function seed(){
+    pts = Array.from({ length: COUNT }, () => ({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      vx: (Math.random() - 0.5) * 0.18,
+      vy: (Math.random() - 0.5) * 0.18,
+      r: Math.random() * 1.3 + 0.5,
+      tw: Math.random() * Math.PI * 2          // twinkle phase
+    }));
+  }
+  resize(); seed();
+  window.addEventListener('resize', () => { resize(); seed(); });
+  requestAnimationFrame(() => canvas.classList.add('on'));
+
+  function frame(){
+    ctx.clearRect(0, 0, w, h);
+    for (const p of pts){
+      p.x += p.vx; p.y += p.vy; p.tw += 0.012;
+      if (p.x < -20) p.x = w + 20; else if (p.x > w + 20) p.x = -20;
+      if (p.y < -20) p.y = h + 20; else if (p.y > h + 20) p.y = -20;
+    }
+    // faint links
+    for (let i = 0; i < pts.length; i++){
+      for (let j = i + 1; j < pts.length; j++){
+        const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y;
+        const d = Math.hypot(dx, dy);
+        if (d < LINK){
+          const a = (1 - d / LINK) * 0.07;
+          ctx.strokeStyle = 'rgba(' + INK + ',' + a.toFixed(3) + ')';
+          ctx.lineWidth = 0.5;
+          ctx.beginPath();
+          ctx.moveTo(pts[i].x, pts[i].y);
+          ctx.lineTo(pts[j].x, pts[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+    // points
+    for (const p of pts){
+      const a = 0.18 + Math.sin(p.tw) * 0.12;
+      ctx.fillStyle = 'rgba(' + INK + ',' + Math.max(0.04, a).toFixed(3) + ')';
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    S6_field = requestAnimationFrame(frame);
+  }
+  S6_field = requestAnimationFrame(frame);
+}
+
+/* ==================================================
    SLIDE 5 — CTA / Pilotprogramm
    ================================================== */
 function playSlide7(){
@@ -6755,6 +7141,7 @@ function playSlide(id){
     case 's4u': playSlide4u(); break;
     case 's4':  playSlide4();  break;
     case 's5':  playSlide5();  break;
+    case 's6':  playSlide6();  break;
     case 's7':  playSlide7();  break;
   }
 }
